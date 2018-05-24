@@ -1,0 +1,52 @@
+<div class="main-content dashboard-background" style="background-image: url(../assets/img/healthCheck2.jpg);background-repeat:no-repeat;background-size: 100%;">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats" title="No of Surveys">
+                  <div class="card-header card-header-icon" [ngClass]="class">
+                      <div class="card-icon">
+                          <i class="material-icons">info_outline</i>
+                      </div>
+                      <p class="card-category">No Of Surveys</p>
+                      <h3 class="card-title">{{surveys.length}}</h3>
+                  </div>
+
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">info</i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+     <!-- <div class="card">
+          <div class="card-header" [ngClass]="class">
+              <h4 class="card-title">Surveys</h4>
+              <p class="card-category">Listing all Surveys</p>
+          </div>
+          <div class="card-content table-responsive">
+              <table class="table">
+                  <thead class="text-primary">
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Participate</th>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let survey of surveys">
+                          <td>{{survey.surveyInfo.name}}</td>
+                          <td>{{survey.surveyInfo.description}}</td>
+                          <td>{{survey.surveyInfo.startDate}}</td>
+                          <td>{{survey.surveyInfo.endDate}}</td>
+                          <td>
+                              <button mat-raised-button type="submit" class="btn btn-sm" (click)="participateSurvey(survey)">Participate</button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>-->
+  </div>
+</div>

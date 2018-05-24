@@ -1,0 +1,26 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="danger" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+        <app-sidebar></app-sidebar>
+        <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+    </div>
+    <div class="main-panel">
+        <app-topbar></app-topbar>
+
+        
+          <div class="main-content">
+              <div class="container-fluid">                  
+                  <div class="">
+                      Welcome to the Survey.
+                  </div>
+                  <div>
+                    <button mat-raised-button type="submit" class="btn btn-info" style="width:140px;" (click)="buttonClick(healthCheck)">Start Survey</button>
+                  </div>
+              </div>
+          </div>
+
+
+    <div> <!--*ngIf="isMaps('maps')"-->
+      <app-footer></app-footer>
+  </div>
+  </div>
+</div>

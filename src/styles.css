@@ -1,0 +1,5 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('assets/vendor/bootstrap/css/bootstrap.min.css');
+@import url('assets/css/sb-admin.css');
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import '@https://fonts.googleapis.com/icon?family=Material+Icons';  */

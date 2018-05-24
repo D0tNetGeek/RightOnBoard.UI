@@ -1,0 +1,142 @@
+<div class="container">
+  <!-- Card -->
+  <div class="card">
+  
+      <!-- Card body -->
+      <div class="card-body">
+  
+          <!-- Material form register -->
+          <form>
+              <p class="h4 text-center py-4">Register User</p>
+  
+              <!-- Material input text -->
+              <div class="md-form">
+                  <i class="fa fa-envelope prefix grey-text"></i>
+                  <input type="email" matInput placeholder="Email Address as User Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.email"  (change)="change()" required class="form-control">
+                  <!-- <label for="materialFormCardNameEx" class="font-weight-light">Your name</label> -->
+              </div>
+  
+              <div class="md-form">
+                  <i class="fa fa-lock prefix grey-text"></i>
+                  <input type="password" matInput placeholder="Password" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.password" (change)="change()" required class="form-control">
+                  <!-- <label for="materialFormCardNameEx" class="font-weight-light">Your name</label> -->
+              </div>
+  
+              <div class="md-form">
+                  <i class="fa fa-exclamation-triangle prefix grey-text"></i>
+                  <input type="password" matInput placeholder="Confirm Password" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="confirmPassword" (change)="change()" required class="form-control">
+                  <!-- <label for="materialFormCardNameEx" class="font-weight-light">Your name</label> -->
+              </div>
+  
+              <div class="md-form">
+                  <i class="fa fa-exclamation-triangle prefix grey-text"></i>
+                  <input type="password" matInput placeholder="First Name" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="confirmPassword" (change)="change()" required class="form-control">
+                  <!-- <label for="materialFormCardNameEx" class="font-weight-light">Your name</label> -->
+              </div>
+  
+              <div class="md-form">
+                  <i class="fa fa-exclamation-triangle prefix grey-text"></i>
+                  <input type="password" matInput placeholder="Last Name" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="confirmPassword" (change)="change()" required class="form-control">
+                  <!-- <label for="materialFormCardNameEx" class="font-weight-light">Your name</label> -->
+              </div>
+  
+             
+              <div class="text-center py-4 mt-3">
+                  <button class="btn btn-cyan" type="submit">Register</button>
+              </div>
+          </form>
+          <!-- Material form register -->
+  
+      </div>
+      <!-- Card body -->
+  
+  </div>
+  <!-- Card -->
+  </div>
+                
+  
+  
+  
+  <div class="limiter">
+    <section id="loginform" class="outer-wrapper">
+  
+      <div class="inner-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-3 col-sm-offset-3">&nbsp;</div>
+            <div class="col-sm-6 col-sm-offset-6" style="border:1px solid grey;border-radius: 7px;">
+              <u>
+                <h2 class="text-center">Register User</h2>
+              </u>
+              <form role="form">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width" >
+                    <input type="email" matInput placeholder="Email Address as User Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.email"  (change)="change()"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input type="password" matInput placeholder="Password" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.password" (change)="change()"
+                      required>
+                  </mat-form-field>
+                </div>
+  
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input type="password" matInput placeholder="Confirm Password" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="confirmPassword" (change)="change()"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Department" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.department" (change)="change()" required>
+                       <mat-option value={{department.value}} *ngFor="let department of departments">{{department.label}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Time in Job"  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.timeInJob" (change)="change()" required>
+                      <mat-option value={{timeForJob.value}} *ngFor="let timeForJob of timeForJobs">{{timeForJob.label}}</mat-option>
+                     
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group" *ngIf="errorMesssage!=''">
+                  <div class="row" style="margin:1%">
+                    <div class="col-md-12 alert alert-danger">
+                      <strong>Error! </strong>
+                      {{errorMesssage}}
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-info pull-right" (click)="submitForm()">Register</button>
+              </form>
+            </div>
+            <div class="col-sm-3 col-sm-offset-3">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+  
+    </section>
+  </div>
+  
+  <!--===============================================================================================-->
+  <script src="./assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="./assets/vendor/bootstrap/js/popper.js"></script>
+  <script src="./assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="./assets/vendor/select2/select2.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="http://localhost:4200/assets/vendor/tilt/tilt.jquery.min.js"></script>
+  <script type="text/javascript" src="./node-modules/crypto-js/crypto-js.js"></script>
+     
+  <script>
+    $('.js-tilt').tilt({
+      scale: 1.1
+    })
+  </script>
+  <!--===============================================================================================-->
+  <script src="./assets/js/main.js"></script>

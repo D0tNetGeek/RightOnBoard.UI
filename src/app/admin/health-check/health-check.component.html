@@ -1,0 +1,64 @@
+<div class="wrapper">
+  <div class="sidebar" data-color="danger" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+      <app-sidebar></app-sidebar>
+      <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+  </div>
+  <div class="main-panel">
+      <app-topbar></app-topbar>
+
+      <div class="main-content">
+        <div class="container-fluid">
+          <div class="container-fluid">
+              <div class="card">
+                  <div class="card-header" [ngClass]="class">
+                      <h4 class="card-title">Important Details</h4>
+                      <p class="card-category">Health check has now opened, click here to start</p>
+                  </div>
+                  <div class="card-content table-responsive">
+                      <table class="table">
+                          <thead class="card-header card-content">
+                            <th>Health Check Schedule</th>
+                          </thead>
+                          <thead class="text-primary">
+                              <th>#</th>
+                              <th>Health Check</th>
+                              <th>Start Date</th>
+                              <th>Completed Date</th>
+                              <th>Status</th>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let healthCheck of healthChecks; let i = index ">
+                                  <td>{{i+1}}</td>
+                                  <td>{{healthCheck.iterationName}}</td>
+                                  <td>{{healthCheck.startDate}}</td>
+                                  <td>{{healthCheck.completedDate}}</td>
+                                  <td>
+                                      <button mat-raised-button type="submit" class="btn btn-info" style="width:140px;" 
+                                        (click)="buttonClick(healthCheck)">{{healthCheck.surveyStatus}}
+                                      </button>
+                                    <!-- <button mat-raised-button type="submit" class="btn btn-info" style="width:140px;" [ngClass]="{'darkBackground':isDisabled(healthCheck)}" [disabled]="isDisabled(healthCheck)" 
+                                            (click)="buttonClick(healthCheck)">{{healthCheck.surveyStatus}}
+                                    </button> -->
+                                  </td>
+                              </tr>
+                              <tr *ngIf="healthChecks.length==0">
+                                  <td colspan=100%>No Data to Display</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay-box" *ngIf="loading"><div class="loader" ></div></div>
+
+      <div class="loader-wrapper" id="loader-1" *ngIf="loading">
+          <div id="loader"></div>
+      </div>
+
+<div> <!--*ngIf="isMaps('maps')"-->
+  <app-footer></app-footer>
+</div>
+</div>
+</div>

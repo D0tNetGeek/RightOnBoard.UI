@@ -1,0 +1,8 @@
+<div class="row">
+    <div class="col-md-6 col-sm-3">
+        <p>{{homeDetails?.message}}</p>
+        <p><strong>Name:</strong>{{homeDetails?.firstName}} {{homeDetails?.lastName}}</p>
+        <p *ngIf="homeDetails?.location"><strong>Location: </strong>{{homeDetails?.location}}</p>
+        
+    </div>
+</div>

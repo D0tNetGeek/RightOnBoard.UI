@@ -1,0 +1,67 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="container">
+        <h4>Questionnaire Iterations</h4>
+        <table class="table table-hover table-bordered ">
+          <thead class="thead-dark">
+            <tr>
+              <th>#</th>
+              <th>Iteration Name</th>
+              <th>Start Date</th>
+              <th>Completed Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let iteration of healthChecks; let i = index ">
+              <td>{{i+1}}</td>
+              <td>{{iteration.iterationName}}</td>
+              <td>{{iteration.startDate|date }}</td>
+              <td>{{iteration.completedDate|date}}</td>
+              <td>
+                <ng-container *ngIf="checkActive(iteration)=='Active'">
+                  <button mat-raised-button type="submit" class="btn btn-sm btn-info" style="width:140px;" (click)="buttonClick(template, iteration)">Awaiting To Start</button>
+                </ng-container>
+                <ng-container *ngIf="checkActive(iteration)=='Expired'">
+                  <button mat-raised-button type="submit" class="btn btn-sm btn-info" style="width:140px;background-color: grey;">Review Status</button>
+                </ng-container>
+                <ng-container *ngIf="checkActive(iteration)=='Pending'">
+                  <button mat-raised-button type="submit" class="btn btn-sm btn-info" style="width:140px;background-color: grey;">Pending</button>
+                </ng-container>
+              </td>
+            </tr>
+            <tr *ngIf="healthChecks.length==0">
+              <td colspan=100%>No Iterations to Display</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-box" *ngIf="loading">
+    <div class="loader"></div>
+  </div>
+
+  <ng-template #template>
+      <div class="modal-header">
+          <h4 class="modal-title pull-left">Start HealthCheck</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <div class="main-content">
+          <div class="container-fluid">
+              <div class="row">
+              <div class="col-md-12">
+                  Are you sue you want to initiate Survey for this HealthCheck : {{iterationName}}
+              </div>
+              </div>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="OnYes()">Yes</button>
+        <button type="button" class="btn btn-default" (click)="OnNo()">No</button>
+      </div>
+  </ng-template>

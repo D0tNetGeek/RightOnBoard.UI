@@ -30,31 +30,31 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.errorMesssage = "";
-    this.loadDepartments();
-    this.loadTimeForJobs();
+    // this.loadDepartments();
+    // this.loadTimeForJobs();
   }
 
-  loadDepartments() {
-    this.authService.getDepartments()
-      .subscribe(
-        data => {
-          if (data == undefined || data == null) {
-          } else {
-            this.departments = data;
-          }
-        })
-  }
+  // loadDepartments() {
+  //   this.authService.getDepartments()
+  //     .subscribe(
+  //       data => {
+  //         if (data == undefined || data == null) {
+  //         } else {
+  //           this.departments = data;
+  //         }
+  //       })
+  // }
 
-  loadTimeForJobs() {
-    this.authService.getTimeInJob()
-      .subscribe(
-        data => {
-          if (data == undefined || data == null) {
-          } else {
-            this.timeInJobs = data;
-          }
-        });
-  }
+  // loadTimeForJobs() {
+  //   this.authService.getTimeInJob()
+  //     .subscribe(
+  //       data => {
+  //         if (data == undefined || data == null) {
+  //         } else {
+  //           this.timeInJobs = data;
+  //         }
+  //       });
+  // }
 
   validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -63,24 +63,24 @@ export class RegistrationComponent implements OnInit {
 
   validate() {
     this.errorMesssage = "";
-    if (!this.validateEmail(this.user.email)) {
+    if (!this.validateEmail(this.registrationModel.email)) {
       this.errorMesssage = 'Invalid Email.';
       return false;
     }
-    if (this.user.password == "") {
+    if (this.registrationModel.password == "") {
       this.errorMesssage = 'Enter a password.';
       return false;
     }
-    if ((this.user.password != "" || this.confirmPassword != "") && this.user.password != this.confirmPassword) {
+    if ((this.registrationModel.password != "" || this.confirmPassword != "") && this.registrationModel.password != this.confirmPassword) {
       this.errorMesssage = 'Password does not match the confirm password.';
       this.confirmPassword = "";
       return false;
     }
-    if (this.user.department == "") {
+    if (this.registrationModel.department == "") {
       this.errorMesssage = 'Select One Department.';
       return false;
     }
-    if (this.user.timeInJob == "") {
+    if (this.registrationModel.timeInJob == "") {
       this.errorMesssage = 'Select One Time in Job Option.';
       return false;
     }
@@ -93,7 +93,7 @@ export class RegistrationComponent implements OnInit {
 
   submitForm(form:NgForm) {
     if (this.validate()) {
-      this.user.password=""+CryptoJS.MD5(this.user.password);
+      this.registrationModel.password=""+CryptoJS.MD5(this.registrationModel.password);
       this.authService.register(this.registrationModel)
         .subscribe(
           data => {

@@ -1,16 +1,11 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-// import { SidebarComponent } from './sidebar/sidebar.component';
-// import { TopbarComponent } from './topbar/topbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-// import { FooterComponent } from './footer/footer.component';
-
 import { AdminComponent } from './admin.component';
+import { SurveyListComponent } from './survey/survey-list.component';
+import { CreateSurveyComponent } from './survey/create-survey/create-survey.component';
 
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
-import { SurveyListComponent } from './survey/survey-list/survey-list.component';
-import { CreateSurveyComponent } from './survey/create-survey/create-survey.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { CreateUserComponent } from './user-management/create-user/create-user.component';
 

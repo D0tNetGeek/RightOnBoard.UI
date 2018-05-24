@@ -22,6 +22,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 //import 'rxjs/add/observable/of';
 
 import { BaseService } from './base.service';
+import { IRegistration } from '../models/register';
 //import { ConfigService } from '../utils/config.service';
 
 // Add the RxJS Observable operators we need in this app.
@@ -55,6 +56,21 @@ export class AuthenticationService extends BaseService {
         //this.baseUrl = configService.getApiUrl();
     }
 
+    register(registrationModel: IRegistration): Observable<boolean>{
+
+      console.info("Making Registration Api Call : ", `${this.appConfig.apiEndPoint}/${this.appConfig.apiRegistrationPath}`);
+
+      return this.http
+        .post(`${this.appConfig.apiEndPoint}/${this.appConfig.apiRegistrationPath}`, registrationModel)
+        .pipe(
+          map((response: any) => {
+            return "/register";
+          }
+        ),
+        catchError((error: HttpErrorResponse) => ErrorObservable.create(error))
+      );      
+    }
+    
     login(credentials: Credentials): Observable<boolean> {
         const headers = new HttpHeaders({ "Content-Type": "application/json" });
 

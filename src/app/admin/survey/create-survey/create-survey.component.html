@@ -1,3 +1,78 @@
-<p>
-  create-survey works!
-</p>
+<div class="wrapper">
+  <div class="sidebar" data-color="danger" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <app-sidebar></app-sidebar>
+    <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+  </div>
+  <div class="main-panel">
+    <app-topbar></app-topbar>
+
+    <div class="main-content">
+      <div class="container-fluid">
+        <h5 *ngIf="survey.surveyInfo.name==''">Create New Survey</h5>
+        <h5 *ngIf="survey.surveyInfo.name!=''">Edit Survey</h5>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card" id="exTab2">
+              <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                <li class="nav-item"  [ngClass]="{'nav-item-active':isTabActive('info'),'':!isTabActive('info')}" style="margin-left:3px;">
+                  <a [ngClass]="{'nav-link active':isTabActive('info'),'nav-link':!isTabActive('info')}" (click)="setActiveTab('info')" id="pills-home-tab"
+                    data-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-home" aria-selected="true">Survey Info</a>
+                </li>
+                <li class="nav-item " [ngClass]="{'nav-item-active':isTabActive('iteration'),'':!isTabActive('iteration')}">
+                  <a [ngClass]="{'nav-link active':isTabActive('iteration'),'nav-link':!isTabActive('iteration')}" (click)="setActiveTab('iteration')"
+                    id="pills-profile-tab" data-toggle="pill" href="#pills-iteration" role="tab" aria-controls="pills-profile"
+                    aria-selected="false">Iteration</a>
+                </li>
+                <li class="nav-item" [ngClass]="{'nav-item-active':isTabActive('groups'),'':!isTabActive('groups')}">
+                  <a [ngClass]="{'nav-link active':isTabActive('groups'),'nav-link':!isTabActive('groups')}" (click)="setActiveTab('groups')"
+                    id="pills-contact-tab" data-toggle="pill" href="#pills-groups" role="tab" aria-controls="pills-contact"
+                    aria-selected="false">Groups</a>
+                </li>
+                <li class="nav-item" [ngClass]="{'nav-item-active':isTabActive('drivers'),'':!isTabActive('drivers')}">
+                  <a [ngClass]="{'nav-link active':isTabActive('drivers'),'nav-link':!isTabActive('drivers')}" (click)="setActiveTab('drivers')"
+                    id="pills-contact-tab" data-toggle="pill" href="#pills-drivers" role="tab" aria-controls="pills-contact"
+                    aria-selected="false">Drivers</a>
+                </li>
+                <li class="nav-item" [ngClass]="{'nav-item-active':isTabActive('questions'),'':!isTabActive('questions')}">
+                  <a [ngClass]="{'nav-link active':isTabActive('questions'),'nav-link':!isTabActive('questions')}" (click)="setActiveTab('questions')"
+                    id="pills-contact-tab" data-toggle="pill" href="#pills-questions" role="tab" aria-controls="pills-contact"
+                    aria-selected="false">Questions</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                <div [ngClass]="{'tab-pane fade show active':isTabActive('info'),'tab-pane fade' :!isTabActive('info')}" id="pills-info"
+                  role="tabpanel" aria-labelledby="pills-home-tab">
+                  <app-survey-info [(surveyObj)]="survey"></app-survey-info>
+                </div>
+                <div [ngClass]="{'tab-pane fade show active':isTabActive('iteration'),'tab-pane fade':!isTabActive('iteration')}" id="pills-iteration"
+                  role="tabpanel" aria-labelledby="pills-profile-tab">
+                  <app-survey-iteration [(surveyObj)]="survey"></app-survey-iteration>
+                </div>
+                <div [ngClass]="{'tab-pane fade show active':isTabActive('groups'),'tab-pane fade':!isTabActive('groups')}" id="pills-groups"
+                  role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <app-question-group [(surveyObj)]="survey" (selectedGroup)="groupSelected($event)"></app-question-group>
+                </div>
+                <div [ngClass]="{'tab-pane fade show active':isTabActive('drivers'),'tab-pane fade':!isTabActive('drivers')}" id="pills-drivers"
+                  role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <app-question-driver [(surveyObj)]="survey" [group]="selectedGroup" (selectedDriver)="driverSelected($event)"></app-question-driver>
+                </div>
+                <div [ngClass]="{'tab-pane fade show active':isTabActive('questions'),'tab-pane fade':!isTabActive('questions')}" id="pills-questions"
+                  role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <app-question [(surveyObj)]="survey" [group]="selectedGroup" [driver]="selectedDriver"></app-question>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <button mat-raised-button type="submit" class="btn btn-danger pull-right" *ngIf="isEdit" (click)="saveSurvey()">Update</button>
+        <button mat-raised-button type="submit" class="btn btn-danger pull-right" *ngIf="!isEdit" (click)="saveSurvey()">Save</button>
+      </div>
+    </div>
+
+    <div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

@@ -9,10 +9,10 @@ import {
   MatInputModule,
   MatRippleModule,
   MatTooltipModule,
-  MatIconModule
+  MatIconModule,
+  MatOptionModule,
+  MatSelectModule
 } from '@angular/material';
-
-//import { adminRoutes } from './admin.routing';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TopbarComponent } from './topbar/topbar.component';
@@ -21,18 +21,19 @@ import { FooterComponent } from './footer/footer.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { TotalProgressComponent } from './total-progress/total-progress.component';
 
-import { SurveyComponent } from './survey/survey.component';
+import { DashboardService } from '../dashboard/services/dashboard.service';
 
 import { AuthGuard } from '../core/index';
-import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
-import { QuestionnaireService } from './services/questionnaire.service';
-import { HealthCheckComponent } from './health-check/health-check.component';
-import { SurveyWelcomeComponent } from './survey-welcome/survey-welcome.component';
-import { SurveyListComponent } from './survey/survey-list/survey-list.component';
+import { AdminService } from './services/admin.service';
+import { SurveyListComponent } from './survey/survey-list.component';
 import { CreateSurveyComponent } from './survey/create-survey/create-survey.component';
+import { SurveyInfoComponent } from './survey/create-survey/survey-info/survey-info.component';
+import { SurveyIterationComponent } from './survey/create-survey/survey-iteration/survey-iteration.component';
+import { QuestionGroupComponent } from './survey/create-survey/question-group/question-group.component';
+import { QuestionDriverComponent } from './survey/create-survey/question-driver/question-driver.component';
+import { QuestionComponent } from './survey/create-survey/question/question.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { CreateUserComponent } from './user-management/create-user/create-user.component';
-
 @NgModule({
 
   imports: [
@@ -44,7 +45,9 @@ import { CreateUserComponent } from './user-management/create-user/create-user.c
     MatRippleModule,
     MatInputModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatOptionModule,
+    MatSelectModule,
   //  adminRoutes
   ],
 
@@ -55,12 +58,13 @@ import { CreateUserComponent } from './user-management/create-user/create-user.c
     FooterComponent,
     AdminProfileComponent,
     TotalProgressComponent,
-    SurveyComponent,
-    QuestionnaireComponent,
-    HealthCheckComponent,
-    SurveyWelcomeComponent,
     SurveyListComponent,
     CreateSurveyComponent,
+    SurveyInfoComponent,
+    SurveyIterationComponent,
+    QuestionGroupComponent,
+    QuestionDriverComponent,
+    QuestionComponent,
     UserManagementComponent,
     CreateUserComponent
   ],
@@ -71,7 +75,7 @@ import { CreateUserComponent } from './user-management/create-user/create-user.c
     SidebarComponent,
     FooterComponent
   ],
-  providers: [AuthGuard, QuestionnaireService]
+  providers: [AuthGuard]
 })
 
 export class AdminModule { }

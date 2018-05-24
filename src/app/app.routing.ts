@@ -21,7 +21,7 @@ import { TotalProgressComponent } from './admin/total-progress/total-progress.co
 
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AccessDeniedComponent } from './authentication/access-denied/access-denied.component';
-import { SurveyListComponent } from './admin/survey/survey-list/survey-list.component';
+import { SurveyListComponent } from './admin/survey/survey-list.component';
 import { CreateSurveyComponent } from './admin/survey/create-survey/create-survey.component';
 
 import { UserDashboardComponent } from './user/dashboard/dashboard.component';

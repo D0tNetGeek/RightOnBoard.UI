@@ -1,3 +1,167 @@
-<p>
-  question works!
-</p>
+<div class="main-content">
+  <div class="container-fluid">
+    <p class="bg-primary text-justify pageHeader">Driver Questions
+      <button mat-raised-button type="submit" class="btn btn-sm btn-danger pull-right " (click)="addNewTrigger(template)">Add New Question</button>
+    </p>
+    <div class="clearfix"></div>
+    <table class="table table-hover table-bordered ">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Group Name</th>
+          <th>Driver Name</th>
+          <th>Question Name</th>
+          <th>Question Number</th>
+          <th>Question Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let gp of surveyObj.questionGroups ">
+          <ng-container *ngIf="group==gp">
+            <ng-container *ngFor="let dr of gp.drivers ">
+              <ng-container *ngIf="dr==driver">
+                <tr *ngFor="let que of dr.questions; let i = index; ">
+                  <td>{{i+1}}</td>
+                  <td>{{gp.questionGroupName}}</td>
+                  <td>{{dr.driverName}}</td>
+                  <td>{{que.questionName}}</td>
+                  <td>{{que.questionNumber}}</td>
+                  <td>{{que.questionTypeName}}</td>
+                  <td>
+                    <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="editQuestion(que,template)">Edit</button>
+                  </td>
+                </tr>
+                <tr *ngIf="dr.questions.length==0">
+                  <td colspan=100%>No Questions Yet</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+    <!--<button mat-raised-button type="submit" class="btn btn-sm btn-danger pull-lefy" (click)="previousTab('groups')">Previous</button>
+    <button mat-raised-button type="submit" class="btn btn-sm btn-danger pull-right" [disabled]="surveyObj.questionGroups.length==0"
+      [ngClass]="{'btndisabled':surveyObj.questionGroups.length==0}" (click)="nextTab('drivers')">Next</button>
+    <div class="clearfix"></div>-->
+  </div>
+</div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create New Question</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Group Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="group.questionGroupName" maxlength="100"
+                      readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Driver Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="driver.driverName" maxlength="100"
+                      readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row" *ngIf="group.questionGroupName==''">
+                <div class="col-md-12 alert alert-danger">
+                  No Group/Driver selected
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Question Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="question.questionName" maxlength="100"
+                      required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput rows=3 placeholder="Question Text" [ngModelOptions]="{standalone: true}" [(ngModel)]="question.questionText"
+                      maxlength="100" required></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Question Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="question.questionNumber"
+                      min=0 max=100 required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input type="number" matInput placeholder="Question Sequence" [ngModelOptions]="{standalone: true}" [(ngModel)]="question.questionSequence"
+                      maxlength="100" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="questionType">Question Type Name</label>
+                  <select id="questionType" [ngModelOptions]="{standalone: true}" [(ngModel)]="question.questionTypeName">
+                    <option value="yes/no">Yes/No</option>
+                    <option value="true/false">True/False</option>
+                    <option value="multipleChoice">Multiple Choice</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" *ngIf="question.questionTypeName=='multipleChoice'" style="border:1px solid grey">
+                <div class="col-md-12">
+                    <button mat-raised-button type="submit" class="btn btn-sm btn-danger pull-right" (click)="addNewOption()">New Option</button>
+                  <table class="table table-hover table-bordered ">
+                    <thead>
+                      <tr>
+                        <th>Option Name</th>
+                        <th>Option Value</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let option of question.choices; let i = index ">
+                        <td><mat-form-field class="example-full-width">
+                            <input type="text" matInput placeholder="Choice Text" [ngModelOptions]="{standalone: true}" [(ngModel)]="option.choiceText"
+                              maxlength="100" required>
+                          </mat-form-field></td>
+                        <td><mat-form-field class="example-full-width"><input type="text" matInput placeholder="Choice Value" [ngModelOptions]="{standalone: true}" [(ngModel)]="option.choiceValue"
+                          maxlength="100" required>
+                      </mat-form-field></td>
+                        <td> <button mat-raised-button type="submit" class="btn btn-sm btn-danger pull-right" (click)="deleteOption(option)">Delete</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 alert alert-danger" *ngIf="errorMesssage!=''">
+                  <strong>Error! </strong>
+                  {{errorMesssage}}
+                </div>
+              </div>
+              <button mat-raised-button type="submit" class="btn btn-danger pull-right" *ngIf="!isEdit" [disabled]="isDisabledInfo()" [ngClass]="{'btndisabled':isDisabledInfo()}"
+                (click)="addQuestion()">Add to Questions</button>
+              <button mat-raised-button type="submit" class="btn btn-danger pull-right" *ngIf="isEdit" [disabled]="isDisabledInfo()" [ngClass]="{'btndisabled':isDisabledInfo()}"
+                (click)="updateQuestion()">Update</button>
+              <div class="clearfix"></div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

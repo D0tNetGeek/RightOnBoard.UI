@@ -1,3 +1,85 @@
-<p>
-  survey-info works!
-</p>
+<div class="main-content">
+  <div class="container-fluid">
+      <p class="bg-primary text-justify pageHeader" style="margin-bottom:0px!important">Survey Info
+      </p>
+      <div class="row" style="margin-top:0px!important">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Survey Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.name" maxlength="100"
+                        required>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field class="example-full-width">
+                      <textarea matInput placeholder="Survey Description" [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.description"
+                        maxlength="200" rows=4 required></textarea>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Welcome Meassage" [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.welcomeMessage"
+                        maxlength="100" required>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Exit Message" [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.exitMessage"
+                        maxlength="100" required>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Start Date" (change)="validate()" [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.startDate"
+                        type="date" required>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="End Date" (change)="validate()" [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.endDate"
+                        type="date" required>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Publication Date" (change)="validate()" [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.publicationDate"
+                        type="date" required>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Expiration Date" (change)="validate()" [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.expirationDate"
+                        type="date" required>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 alert alert-danger" *ngIf="errorMesssage!=''">
+                    <strong>Error! </strong>
+                    {{errorMesssage}}
+                  </div>
+                </div>
+                <!--<button mat-raised-button type="submit" class="btn btn-sm btn-danger pull-right" [disabled]="isDisabledInfo()" [ngClass]="{'btndisabled':isDisabledInfo()}"
+                  (click)="nextTab('iteration')">Next</button>-->
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

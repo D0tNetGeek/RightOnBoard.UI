@@ -1,0 +1,27 @@
+.ct-chart-pie .ct-series  ct-series-a .ct-slice-pie {
+    fill: #002827!important;
+}
+.ct-chart-pie .ct-series ct-series-b .ct-slice-pie {
+    fill: #00382f!important;
+}
+.ct-chart-pie .ct-series ct-series-c .ct-slice-pie {
+    fill: #00591e!important;
+}
+.ct-chart-pie .ct-series ct-series-d .ct-slice-pie {
+    fill: #007f00!important;
+}
+.ct-chart-pie .ct-series ct-series-e .ct-slice-pie {
+    fill: #009900!important;
+}
+.ct-chart-pie .ct-series ct-series-f .ct-slice-pie {
+    fill: #00b200!important;
+}
+.ct-chart-pie .ct-series ct-series-g .ct-slice-pie {
+    fill: #51ce00!important;
+}
+.ct-chart-pie .ct-series ct-series-h .ct-slice-pie {
+    fill: #96ff00!important;
+}
+.ct-chart-pie .ct-series ct-series-i .ct-slice-pie {
+    fill: #ceff00!important;
+}

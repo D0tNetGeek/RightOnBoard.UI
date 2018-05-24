@@ -10,46 +10,57 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '../dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-    { path: '../total-progress', title: 'Total Progress',  icon:'trending_up', class: '' },
-    { path: '../admin-profile', title: 'Admin Profile',  icon:'person', class: '' },
-    { path: '../health-check', title: 'Health Check',  icon:'local_hospital', class: '' },
-    { path: '../survey', title: 'Survey',  icon:'timeline', class: '' },
-    { path: '/logout', title: 'Logout', icon:'exit_to_app', class: ''}
-    // { path: '../table-list', title: 'Table List',  icon:'content_paste', class: '' },
-    // { path: 'typography', title: 'Typography',  icon:'library_books', class: '' },
-    // { path: 'icons', title: 'Icons',  icon:'bubble_chart', class: '' },
-    // { path: 'maps', title: 'Maps',  icon:'location_on', class: '' },
-    // { path: 'notifications', title: 'Notifications',  icon:'notifications', class: '' }//,
-    //{ path: 'upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
+    { path: '../dashboard', title: 'Admin Dashboard', icon: 'dashboard', class: ' ' },
+    { path: '../total-progress', title: 'Total Progress', icon: 'trending_up', class: '' },
+    { path: '../admin-survey', title: 'Survey', icon: 'library_books', class: '' },
+    { path: '../admin-profile', title: 'Admin Profile', icon: 'person', class: '' },
+    { path: '../user-management', title: 'User Management', icon: 'person', class: '' }
 ];
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+    selector: 'app-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.css']
 })
 
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
+    menuItems: any[];
+    selectedMenu: string = "";
+    constructor() { }
 
-  constructor() { }
-  
     ngOnInit() {
-      this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.menuItems = ROUTES.filter(menuItem => menuItem);
 
-  }
+        /*if (localStorage.getItem("adminSelectedMenu") == null || localStorage.getItem("adminSelectedMenu") == undefined) {
+            localStorage.setItem("adminSelectedMenu", "dashboard");
+        }
+        this.selectedMenu = localStorage.getItem("adminSelectedMenu"))
+        */
+       this.setActiveClass(null)
+    }
+    setActiveClass(menuItem:any){
+        for(let temp of this.menuItems){
+            if(menuItem==null && temp.title=='Dashboard'){
+                //temp.class+=" active ";
+            }
+            else if(temp==menuItem){
+                temp.class+=" active ";
+            }else{
+                temp.class.replace(/ active /g,"");
+            }
+        }
+    }
 
-  isMobileMenu() {
+    isMobileMenu() {
 
-      if ($(window).width() > 991) {
+        if ($(window).width() > 991) {
 
-          return false;
+            return false;
 
-      }
+        }
 
-      return true;
+        return true;
 
-  };
+    };
 
 }

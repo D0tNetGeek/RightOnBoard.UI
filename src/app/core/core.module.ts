@@ -18,6 +18,8 @@ import { XsrfInterceptor } from './interceptors/xsrf.interceptor';
 
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
+import { AdminService } from '../admin/services/admin.service';
+import { UserService } from '../user/services/user.service';
 
 @NgModule({
     imports: [CommonModule, RouterModule],
@@ -38,6 +40,7 @@ import { RoleGuard } from './guards/role.guard';
             useValue: AppConfig
         },
         AuthenticationService, CanDeactivateGuardService,
+        AdminService,UserService,
         AuthGuard,
         {
             provide: HTTP_INTERCEPTORS,

@@ -9,6 +9,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin.component';
 
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { SurveyListComponent } from './survey/survey-list/survey-list.component';
+import { CreateSurveyComponent } from './survey/create-survey/create-survey.component';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { CreateUserComponent } from './user-management/create-user/create-user.component';
 
 export const adminRoutes: ModuleWithProviders = RouterModule.forChild([
 {

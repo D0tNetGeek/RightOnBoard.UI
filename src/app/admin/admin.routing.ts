@@ -18,6 +18,10 @@ export const adminRoutes: ModuleWithProviders = RouterModule.forChild([
     children: [
         { path: '', component: DashboardComponent },
         { path: 'admin-profile', component: AdminProfileComponent },
+        { path: 'admin-survey', component: SurveyListComponent },
+        { path: 'create-survey', component: CreateSurveyComponent },
+        { path: 'user-management', component: UserManagementComponent },
+        { path: 'create-user', component: CreateUserComponent },
       
         // { path: 'dashboard', component: DashboardComponent },
         // { path: 'topbar', component: TopbarComponent},

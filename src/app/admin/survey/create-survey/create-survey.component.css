@@ -1,0 +1,21 @@
+.tab-content{
+    padding: 1%;
+}
+#exTab2 h3 {
+    color : white;
+    background-color: #428bca; 
+    padding : 5px 15px;
+  }
+  .nav-item{
+      border-bottom: 1px solid grey;
+      border-right: 1px solid grey;
+      border-radius: 5px;
+  }
+  .disabled{
+      background-color: khaki;
+  }
+  .nav-item-active {
+    background-color: #428bca;
+    padding:1%;
+  }
+  

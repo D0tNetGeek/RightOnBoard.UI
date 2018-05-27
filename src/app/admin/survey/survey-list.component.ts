@@ -26,7 +26,7 @@ export class SurveyListComponent implements OnInit, OnDestroy {
   }
 
   createSurvey() {
-    this.router.navigate(["/admin/createSurvey"]);
+    this.router.navigate(["/admin/create-survey"]);
   }
 
   surveyList: any = [];
@@ -49,7 +49,7 @@ export class SurveyListComponent implements OnInit, OnDestroy {
             return;
           } else {
             window.sessionStorage.setItem("currentSurvey", JSON.stringify(data));
-            this.router.navigate(["/admin/createSurvey"]);
+            this.router.navigate(["/admin/create-survey"]);
           }
         })
   }

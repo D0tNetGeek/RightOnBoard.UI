@@ -50,9 +50,10 @@ export class HealthCheckComponent implements OnInit {
 
   }
   
+  healthCheck:any=null;
   buttonClick(template: TemplateRef<any>, healthCheck: any) {
     this.loading = true;
-
+    this.healthCheck=healthCheck;
     // if (healthCheck.surveyStatus != undefined && healthCheck.surveyStatus.toLowerCase() == 'awaiting start') {      
     //   this.healthCheckService.getSurveyForIteration(healthCheck.id)
     //     .subscribe(
@@ -71,7 +72,7 @@ export class HealthCheckComponent implements OnInit {
       console.info("Selected HealthCheck : ",healthCheck);
 
       this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
-
+      this.iterationName = healthCheck.iterationName;
       //this.modalRef.content.iterationName = healthCheck.iterationName;
 
       console.log("Modal Ref :",this.modalRef);
@@ -80,37 +81,32 @@ export class HealthCheckComponent implements OnInit {
       //   console.log("Results : ", result);
       // });
 
-      if(confirm("Are you sure you want to initiate Survey for this HealthCheck : " + healthCheck.iterationName)){
-        
-        this.healthCheckService.getSurveyForIteration(healthCheck.iterationId)
-        .subscribe(
-          data => {
-            if (data == undefined || data == null) {
-              alert('Error Occured');
-            } else {
-              console.log("getSurveyForIteration : ", data);
-
-              window.sessionStorage.setItem("currentSurvey", JSON.stringify(data));
-              this.loading = false;
-              //this.router.navigate(["/admin/survey-welcome/"+ this.user.userId + "/" + healthCheck.surveyInfo.surveyId + "/" + healthCheck.iterationId]);
-              this.router.navigate(["/user/survey-welcome"]);
-
-            }
-          })        
-      }
-      else{
-        this.loading = false;
-        console.log("No");
-      }
-    //}
+     
   }
 
   public OnYes(): void{
     this.onClose.next(true);
     this.modalRef.hide();
+    this.healthCheckService.getSurveyForIteration(this.healthCheck.iterationId)
+    .subscribe(
+      data => {
+        if (data == undefined || data == null) {
+          alert('Error Occured');
+        } else {
+          console.log("getSurveyForIteration : ", data);
+
+          window.sessionStorage.setItem("currentSurvey", JSON.stringify(data));
+          this.loading = false;
+          //this.router.navigate(["/admin/survey-welcome/"+ this.user.userId + "/" + healthCheck.surveyInfo.surveyId + "/" + healthCheck.iterationId]);
+          this.router.navigate(["/user/survey-welcome"]);
+
+        }
+      })  
   }
 
   public OnNo(): void{
+    this.healthCheck=null;
+    this.loading = false;
     this.onClose.next(false);
     this.modalRef.hide();
   }

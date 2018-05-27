@@ -14,7 +14,7 @@ import { IRegistration } from '../core/models/register';
 })
 export class RegistrationComponent implements OnInit {
 
-  private registrationModel : IRegistration = { "email": "", "password": "", "department": "", "timeInJob":"", "role": ""};
+  private registrationModel : IRegistration = { "email": "", "password": "", "userName": "", "firstName": "", "lastName": "", "phoneNumber": ""}; //, "timeInJob":"", "role": "" "department": "",
 
   private confirmPassword: string = "";
   private errorMesssage: string = "";
@@ -63,27 +63,33 @@ export class RegistrationComponent implements OnInit {
 
   validate() {
     this.errorMesssage = "";
+
     if (!this.validateEmail(this.registrationModel.email)) {
       this.errorMesssage = 'Invalid Email.';
       return false;
     }
+
     if (this.registrationModel.password == "") {
       this.errorMesssage = 'Enter a password.';
       return false;
     }
+
     if ((this.registrationModel.password != "" || this.confirmPassword != "") && this.registrationModel.password != this.confirmPassword) {
       this.errorMesssage = 'Password does not match the confirm password.';
       this.confirmPassword = "";
       return false;
     }
-    if (this.registrationModel.department == "") {
-      this.errorMesssage = 'Select One Department.';
-      return false;
-    }
-    if (this.registrationModel.timeInJob == "") {
-      this.errorMesssage = 'Select One Time in Job Option.';
-      return false;
-    }
+
+    // if (this.registrationModel.department == "") {
+    //   this.errorMesssage = 'Select One Department.';
+    //   return false;
+    // }
+
+    // if (this.registrationModel.timeInJob == "") {
+    //   this.errorMesssage = 'Select One Time in Job Option.';
+    //   return false;
+    // }
+
     return true;
   }
 

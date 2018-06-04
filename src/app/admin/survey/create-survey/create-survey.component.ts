@@ -10,14 +10,24 @@ export class CreateSurveyComponent implements OnInit {
 
   constructor(private adminService: AdminService) { }
   survey: any = JSON.parse(window.sessionStorage.getItem("currentSurvey"))
+ 
   isEdit: boolean = false;
+
+  selectedGroup: any = null;//{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [] };
+  selectedDriver: any = null;
+
+  activeTab: string = 'info';
+
   ngOnInit() {
+    this.setActiveTab("info");
+
     if (this.survey.surveyInfo.surveyId == "") {
       this.isEdit = false;
     } else {
       this.isEdit = true;
     }
   }
+
   ngOnDestroy() {
     let survey: any = {
       surveyInfo: { "surveyId": "", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": "", "endDate": "", "publicationDate": "", "expirationDate": "" },
@@ -25,23 +35,102 @@ export class CreateSurveyComponent implements OnInit {
     };
     window.sessionStorage.setItem("currentSurvey", JSON.stringify(survey));
   }
-  selectedGroup: any = { "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [] };
-  selectedDriver: any = { "id": "", "driverName": "", "questions": [] };
+
   groupSelected(event) {
     this.selectedGroup = event;
+    this.selectedDriver=null;
     this.activeTab = 'drivers';
   }
+
   driverSelected(event) {
     this.selectedDriver = event;
     this.activeTab = 'questions';
   }
-  activeTab: string = 'info';
+
   isTabActive(tabName) {
     return this.activeTab == tabName;
   }
+
   setActiveTab(tab) {
+    console.log("Active Tab : ", tab);
+
+    if(this.activeTab=="info" || this.activeTab=="iteration" || this.activeTab=="groups"){
+      this.selectedGroup = null;
+      this.selectedDriver =null;
+    }
+
+    if(this.activeTab=="driver"){
+      this.selectedDriver=null;
+    }
+
     this.activeTab = tab;
   }
+
+  isDisabledTab(tab) {
+    this.activeTab == tab;
+    if(tab=="info"){
+
+    }
+    return false;
+  }
+
+  isIterationTabDisabled(){
+    let returnValue:boolean=false;
+
+    if(this.activeTab=="info"){
+      return !this.validate();
+    }
+    
+    return returnValue;
+  }
+
+  isGroupTabDisabled(){
+    let returnValue:boolean=false;
+
+    if(this.activeTab=="info" || this.activeTab=="iteration"){
+      return !this.validate();
+    }
+    return returnValue;
+  }
+
+  isDriverTabDisabled(){
+    let returnValue:boolean=false;
+
+    if(this.activeTab=="info"|| this.activeTab=="iteration"){
+      return true;
+    }
+
+    if(this.activeTab=="groups"){
+      if(this.selectedGroup==null){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
+    return returnValue;
+  }
+
+  isQuestionTabDisabled(){
+    let returnValue:boolean=false;
+
+    if(this.activeTab=="info" || this.activeTab=="iteration" || this.activeTab=="groups"){
+      return true;
+    }
+
+    if(this.activeTab=="drivers"){
+      if(this.selectedDriver==null){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
+    return returnValue;
+  }
+
   saveSurvey() {
     if (this.validate()) {
       alert('Submit Survey Data');

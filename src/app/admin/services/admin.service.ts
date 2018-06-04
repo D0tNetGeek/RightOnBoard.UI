@@ -74,4 +74,42 @@ export class AdminService extends BaseService{
             return response;
         });
     }
+
+    public getDepartments(): Observable<any> {
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiEndPoint}`;
+        return http.get(url + `/getDepartmentsForRegisteration`)
+          .map(response => {
+            return response;
+          })
+    }
+
+    public getTimeInJob(): Observable<any> {
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiEndPoint}`;
+        return http.get(url + `/getTimeInJobForRegisteration`)
+          .map(response => {
+            return response;
+          })
+    }
+    
+    public registerNewUser(user: any): Observable<any> {
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiEndPoint}`;
+        return http.post(url + `/userRegisteration`, user)
+          .map(response => {
+            return response;
+          })
+    
+    }
+    
+    public getUserList(): Observable<any> {
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiEndPoint}/${this.appConfig.apiUserServicePath}`;
+        return http.get(url)
+          .map(response => {
+            return response;
+          })
+    
+    }
 }

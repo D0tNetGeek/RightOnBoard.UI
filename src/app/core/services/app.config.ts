@@ -6,6 +6,7 @@ export interface IAppConfig {
     apiEndPoint: string;
     apiSettingsPath: string;
     apiRegistrationPath: string;
+    apiUserServicePath: string;
 
     apiSurveyEndPoint: string;
 
@@ -24,6 +25,7 @@ export const AppConfig: IAppConfig = {
     apiEndPoint: "http://localhost:64278/api",
     apiSettingsPath: "ApiSettings",
     apiRegistrationPath: "accounts",
+    apiUserServicePath: "user",
 
     apiSurveyEndPoint: "http://localhost:59153/api",
 

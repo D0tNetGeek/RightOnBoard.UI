@@ -1,3 +1,63 @@
-<p>
-  user-management works!
-</p>
+<div class="wrapper">
+  <div class="sidebar" data-color="danger" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <app-sidebar></app-sidebar>
+    <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+  </div>
+  <div class="main-panel">
+    <app-topbar></app-topbar>
+
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <h4 class="card-title">Users</h4>
+                <p class="card-category">Listing all Users</p>
+              </div>
+
+              <div class="card-body">
+                <form>
+                  <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createUser()">Create New</button>
+                  <div class="clearfix"></div>
+                  <table class="table table-hover table-bordered ">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>User Email</th>
+                        <th>Departmant</th>
+                        <th>Time In Job</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let user of userList; let i = index; ">
+                        <td>{{i+1}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{getDepartmentName(user.department)}}</td>
+                        <td>{{getTimeInJobLabel(user.timeInJob)}}</td>
+                      </tr>
+                      <tr *ngIf="userList.length==0">
+                        <td colspan=100%>No Users Yet</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>
+
+<div class="overlay-box" *ngIf="loading"><div class="loader" ></div></div>
+
+<div class="loader-wrapper" id="loader-1" *ngIf="loading">
+    <div id="loader"></div>
+</div>

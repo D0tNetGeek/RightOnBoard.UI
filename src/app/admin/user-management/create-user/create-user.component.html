@@ -1,3 +1,81 @@
-<p>
-  create-user works!
-</p>
+<div class="wrapper">
+  <div class="sidebar" data-color="danger" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <app-sidebar></app-sidebar>
+    <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+  </div>
+  <div class="main-panel">
+    <app-topbar></app-topbar>
+
+    <div class="main-content">
+      <div class="container-fluid">
+        
+          <div class="row">
+            <div class="col-sm-3 col-sm-offset-3">&nbsp;</div>
+            <div class="col-sm-6 col-sm-offset-6" style="border:1px solid grey;border-radius: 7px;">
+              <u>
+                <h2 class="text-center">Register User</h2>
+              </u>
+              <form role="form">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width" >
+                    <input type="email" matInput placeholder="Email Address as User Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.email"  (change)="change()"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input type="password" matInput placeholder="Password" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.password" (change)="change()"
+                      required>
+                  </mat-form-field>
+                </div>
+  
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input type="password" matInput placeholder="Confirm Password" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="confirmPassword" (change)="change()"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Department" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.department" (change)="change()" required>
+                       <mat-option value={{department.value}} *ngFor="let department of departments">{{department.label}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Time in Job"  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.timeInJob" (change)="change()" required>
+                      <mat-option value={{timeForJob.value}} *ngFor="let timeForJob of timeForJobs">{{timeForJob.label}}</mat-option>
+                     
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Role"  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.role"  required>
+                      <mat-option value="User" >User</mat-option>
+                      <mat-option value="Admin" >Admin</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group" *ngIf="errorMesssage!=''">
+                  <div class="row" style="margin:1%">
+                    <div class="col-md-12 alert alert-danger">
+                      <strong>Error! </strong>
+                      {{errorMesssage}}
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-info pull-right" (click)="submitForm()">Register</button>
+              </form>
+            </div>
+            <div class="col-sm-3 col-sm-offset-3">&nbsp;</div>
+          </div>
+       
+      </div>
+    </div>
+    <div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

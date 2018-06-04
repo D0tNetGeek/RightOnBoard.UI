@@ -27,6 +27,8 @@ export class UserSurveyComponent implements OnInit, OnDestroy {
     questionGroups: [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [{ "id": "", "driverName": "", "questions": [{ "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": null, "questionNumber": "", "questionSequence": 0, "questionTypeName": "" }] }] }]
   };
 
+  pageNo: any = 1;
+
   currentQuestionGroup: string = "";
   currentQuestionGroupDriver: string = "";
   firstQuestionId: string = "";
@@ -193,15 +195,67 @@ export class UserSurveyComponent implements OnInit, OnDestroy {
     }
   }
 
-  getNumberOfQuestions(questionGroup: any) {
+  goBackQuiz() {
+    this.surveyAnswers = [];
 
+    if (this.firstQuestion && this.firstQuestion.userSelection.value!=undefined) {
+      this.surveyAnswers.push({ "questionId": `${this.firstQuestion.id}`, "optionId": `${this.firstQuestion.userSelection.id}`, "optionValue": `${this.firstQuestion.userSelection.value}` })
+    }
+
+    if (this.secondQuestion && this.secondQuestion.userSelection.value!=undefined) {
+      this.surveyAnswers.push({ "questionId": `${this.secondQuestion.id}`, "optionId": `${this.secondQuestion.userSelection.id}`, "optionValue": `${this.secondQuestion.userSelection.value}` })
+    }
+
+    if (this.surveyAnswers.length > 0) {
+      this.submitSurvey();
+    }
+
+    this.pageNo = parseInt('' + this.pageNo) - 1;
+
+    let queGroupIndex = -1;
+
+    let tempPageNo = 0;
+
+    for (let questionGroup of this.survey.questionGroups) {
+      queGroupIndex++;
+      let driverIndex = -1;
+      for (let driver of questionGroup.drivers) {
+        driverIndex++;
+        let questionIndex = -1;
+        for (let count = 0; count < driver.questions.length; count++) {
+          tempPageNo++;
+          questionIndex++;
+          this.currentQuestionGroupDriver = this.survey.questionGroups[queGroupIndex].drivers[driverIndex].id;
+          if (this.survey.questionGroups[queGroupIndex].drivers[driverIndex].questions[questionIndex]) {
+            this.firstQuestionId = this.survey.questionGroups[queGroupIndex].drivers[driverIndex].questions[questionIndex].id;
+            this.firstQuestion = this.survey.questionGroups[queGroupIndex].drivers[driverIndex].questions[questionIndex];
+          }
+          questionIndex++;
+          if (this.survey.questionGroups[queGroupIndex].drivers[driverIndex].questions[questionIndex]) {
+            count++;
+            this.secondQuestionId = this.survey.questionGroups[queGroupIndex].drivers[driverIndex].questions[questionIndex].id;
+            this.secondQuestion = this.survey.questionGroups[queGroupIndex].drivers[driverIndex].questions[questionIndex];
+          } else {
+            this.secondQuestionId = "-1";
+            this.secondQuestion = null;;
+          }
+
+          if (parseInt(this.pageNo) == tempPageNo) {
+            this.currentQuestionGroup = questionGroup.questionGroupId;
+            this.currentQuestionGroupDriver = driver.id;
+            return;
+          }
+        }
+      }
+    }
+  }
+
+  getNumberOfQuestions(questionGroup: any) {
     questionGroup.questionsToBeAnswered = 0;
     let count = 0;
-
     for (let driver of questionGroup.drivers) {
       count += driver.questions.length;
     }
-
     questionGroup.questionsToBeAnswered = count;
   }
 
@@ -215,13 +269,13 @@ export class UserSurveyComponent implements OnInit, OnDestroy {
 
   submitSurvey() {
     //this.submissionMessage = "Saving your responses!!!..";
-   /* for (let questionGroup of this.survey.questionGroups) {
-      for (let driver of questionGroup.drivers) {
-        for (let question of driver.questions) {
-          this.surveyAnswers.push({ "questionId": `${question.id}`, "optionId": `${question.userSelection.id}`, "optionValue": `${question.userSelection.value}` })
-        }
-      }
-    }*/
+    /* for (let questionGroup of this.survey.questionGroups) {
+       for (let driver of questionGroup.drivers) {
+         for (let question of driver.questions) {
+           this.surveyAnswers.push({ "questionId": `${question.id}`, "optionId": `${question.userSelection.id}`, "optionValue": `${question.userSelection.value}` })
+         }
+       }
+     }*/
     this.healthCheckService.submitSurvey('101', this.survey.surveyInfo.surveyId, this.surveyAnswers)
       .subscribe(
         data => {
@@ -233,16 +287,27 @@ export class UserSurveyComponent implements OnInit, OnDestroy {
         })
   }
 
-  chooseAnswer(questionGroup: any, question: any, option: string, quePosition: number) {
-    if (!this.isDefined(question.userSelection)) {
+  chooseAnswer(questionGroup: any, question: any, option: any, quePosition: number) {
+    if (this.isDefined(question.userSelection)) {
+      if ((option.value == 'True' || option.value == 'Yes') && (question.userSelection.value == 'False' || question.userSelection.value == 'No')) {
+        questionGroup.questionsToBeAnswered--;
+        question.userSelection = option;
+        //this.numberOfAnswered++;
+      } else if ((option.value == 'False' || option.value == 'No') && (question.userSelection.value == 'True' || question.userSelection.value == 'Yes')) {
+        questionGroup.questionsToBeAnswered++;
+        question.userSelection = option;
+        //this.numberOfAnswered++;
+      }
 
-      console.info("Choose Answer : ", question, option);
-      
-      questionGroup.questionsToBeAnswered--;
-     
-      question.userSelection = option;
-      
-      this.numberOfAnswered++;
+    } else if (!this.isDefined(question.userSelection)) {
+      if (option.value == 'False' || option.value == 'No') {
+        question.userSelection = option;
+        this.numberOfAnswered++;
+      } else {
+        questionGroup.questionsToBeAnswered--;
+        question.userSelection = option;
+        this.numberOfAnswered++;
+      }
       /*if (this.numberOfAnswered == this.totalNumberOfQuestions) {
         this.surveyCompleted = true;
         this.submitSurvey();
@@ -251,11 +316,9 @@ export class UserSurveyComponent implements OnInit, OnDestroy {
     }
 
     question.userSelection = option;
-
     if (quePosition == 1) {
       this.firstQuestion.userSelection = option;
     }
-
     if (quePosition == 2) {
       this.secondQuestion.userSelection = option;
     }
@@ -271,21 +334,17 @@ export class UserSurveyComponent implements OnInit, OnDestroy {
     if (userSelection == null || userSelection.value == null) { return false }
     if (userSelection.value == option.value) { return true } else { return false }
   }
-
   answeredQuestions() {
     if ((this.firstQuestion.userSelection == undefined || this.firstQuestion.userSelection == "") || (this.secondQuestion != null && (this.secondQuestion.userSelection == undefined || this.secondQuestion.userSelection == ""))) { return true }
     else { return false }
   }
-
   ngOnDestroy() {
     window.sessionStorage.removeItem("currentSurvey");
   }
-
   canDeactivate(): Observable<boolean> | boolean {
     if (this.numberOfAnswered == 0 || this.surveyCompleted) {
       return true;
     }
-
     return confirm('You are about to leave the page without completing the Survey. Do you want to continue?');
   }
 

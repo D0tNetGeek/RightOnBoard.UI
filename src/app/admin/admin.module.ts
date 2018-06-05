@@ -34,6 +34,9 @@ import { QuestionDriverComponent } from './survey/create-survey/question-driver/
 import { QuestionComponent } from './survey/create-survey/question/question.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { CreateUserComponent } from './user-management/create-user/create-user.component';
+import { CompanyManagementComponent } from './company-management/company-management.component';
+import { EditCompanyComponent } from './company-management/edit-company/edit-company.component';
+import { CreateCompanyComponent } from './company-management/create-company/create-company.component';
 @NgModule({
 
   imports: [
@@ -66,7 +69,10 @@ import { CreateUserComponent } from './user-management/create-user/create-user.c
     QuestionDriverComponent,
     QuestionComponent,
     UserManagementComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    CompanyManagementComponent,
+    EditCompanyComponent,
+    CreateCompanyComponent
   ],
 
   exports: [

@@ -1,0 +1,47 @@
+<div class="wrapper">
+  <div class="sidebar" data-color="danger" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <app-sidebar></app-sidebar>
+    <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+  </div>
+  <div class="main-panel">
+    <app-topbar></app-topbar>
+
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <h4 class="card-title">Create Company</h4>
+                <p class="card-category">Add Company Information</p>
+              </div>
+
+              <div class="card-body">
+                <form class=”form-horizontal”> 
+                  <!-- Note that there is an form-inline class in the <form> element, 
+                  making it an inline form -->
+                    <div class="form-group">
+                      <label for="companyName">Company Name</label>
+                      <input type="text" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="companyInfo.companyName" required class="form-control">
+                    </div>
+                                      
+                    <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="editCompany(companyInfo)">Edit Company</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay-box" *ngIf="loading"><div class="loader" ></div></div>
+
+    <div class="loader-wrapper" id="loader-1" *ngIf="loading">
+        <div id="loader"></div>
+    </div>
+    
+    <div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

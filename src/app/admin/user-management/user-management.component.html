@@ -25,16 +25,16 @@
                       <tr>
                         <th>#</th>
                         <th>User Email</th>
-                        <th>Departmant</th>
-                        <th>Time In Job</th>
+                        <th>User Name</th>
+                        <th>Company Name</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr *ngFor="let user of userList; let i = index; ">
                         <td>{{i+1}}</td>
                         <td>{{user.email}}</td>
-                        <td>{{getDepartmentName(user.department)}}</td>
-                        <td>{{getTimeInJobLabel(user.timeInJob)}}</td>
+                        <td>{{user.firstName}} {{user.lastName}}</td>
+                        <td>{{user.companyName}}</td>
                       </tr>
                       <tr *ngIf="userList.length==0">
                         <td colspan=100%>No Users Yet</td>

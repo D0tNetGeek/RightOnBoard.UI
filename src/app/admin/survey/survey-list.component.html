@@ -27,17 +27,19 @@
                           <th>Survey Name</th>
                           <th>Start Date</th>
                           <th>End Date</th>
-                          <th># Question Groups</th>
+                          <!-- <th># Question Groups</th> -->
+                          <th>Company Name</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let survey of surveyList; let i = index; ">
                           <td>{{i+1}}</td>
-                          <td>{{survey.surveyInfo.name}}</td>
-                          <td>{{survey.surveyInfo.startDate}}</td>
-                          <td>{{survey.surveyInfo.endDate}}</td>
-                          <td>{{survey.questionGroups.length}}</td>
+                          <td>{{survey.name}}</td>
+                          <td>{{survey.startDate}}</td>
+                          <td>{{survey.endDate}}</td>
+                          <td>{{survey.companyName}}</td>
+                          <!-- <td>{{survey.length}}</td> -->
                           <td>
                             <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="editSurvey(survey)">Edit</button>
                           </td>
@@ -58,4 +60,8 @@
         <app-footer></app-footer>
       </div>
     </div>
+  </div>
+
+  <div class="overlay-box" *ngIf="loading">
+    <div class="loader"></div>
   </div>

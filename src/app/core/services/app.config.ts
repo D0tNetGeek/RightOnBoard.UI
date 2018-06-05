@@ -18,7 +18,10 @@ export interface IAppConfig {
     apiGetSurveysForAdminPath: string;
 
     apiCompanyPath: string;
+    apiGetCompaniesList: string;
     apiGetCompanyInfoPath: string;
+    apiGetCompanyInfoByCompanyIdPath: string;
+    apiSaveCompanyInfoPath: string;
 }
 
 export const AppConfig: IAppConfig = {
@@ -37,5 +40,8 @@ export const AppConfig: IAppConfig = {
     apiGetSurveysForAdminPath: "getSurveysListForAdmin",
 
     apiCompanyPath: "company",
-    apiGetCompanyInfoPath: "getCompanyInfo"
+    apiGetCompaniesList: "getcompanieslist",
+    apiGetCompanyInfoPath: "getcompanyinfo",
+    apiGetCompanyInfoByCompanyIdPath: "getcompanyinfobycompanyid",
+    apiSaveCompanyInfoPath: "savecompanyinfo"
 }

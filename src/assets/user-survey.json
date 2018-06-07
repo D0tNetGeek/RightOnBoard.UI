@@ -1,0 +1,540 @@
+   {
+        "surveyInfo": {
+            "surveyId": "CF4252A6-073C-4824-9619-F24B13FC3ED8",
+            "name": "First Questionnaire",
+            "description": "This is first questionnaire",
+            "welcomeMessage": "Welcome to the Questionnaire",
+            "exitMessage": "Thanks for taking part in the questionnaire",
+            "startDate": null,
+            "endDate": null,
+            "publicationDate": null,
+            "expirationDate": null
+        },
+        "questionGroups": [
+            {
+                "questionGroupId": "4C47DC55-BA02-4DB6-AEB5-78D29975DFA2",
+                "questionGroupName": "Confidence",
+                "questionGroupDescription": "Are you able to indentify who the relevant people are or know someone that you can ask?",
+                "drivers": [
+                    {
+                        "id": "551B3033-260A-4EE0-9A83-C0E486478E75",
+                        "driverName": "Objective and Short term Goal Setting",
+                        "questions": [
+                            {
+                                "id": "1E693D2B-A713-4BAC-AD20-90A5C11E5651",
+                                "questionName": "Question 7",
+                                "questionText": "Do you have an objectives document broken down into shorter term goals?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "7",
+                                "questionSequence": 7,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "DC8CD5B2-DDC8-4061-828E-C691A685513E",
+                                "questionName": "Question 8",
+                                "questionText": "Have you had a meeting with your manager to discuss objectives and role expectations?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "8",
+                                "questionSequence": 8,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "32449134-2FE0-431A-8C3D-D72CBCE9D0EE",
+                                "questionName": "Question 9",
+                                "questionText": "Are your objectives and short term goals clear to you?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "9",
+                                "questionSequence": 9,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "0DF0B619-0905-44FE-BF3A-425A63838067",
+                        "driverName": "Career Development",
+                        "questions": [
+                            {
+                                "id": "A8CBB644-4153-450A-9D59-39BC01A242F2",
+                                "questionName": "Question 13",
+                                "questionText": "Do you have a personal development plan in place and a clear understanding of your career / promotion pathway?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "13",
+                                "questionSequence": 13,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "67D63563-3C37-446C-82E6-532E121C1568",
+                                "questionName": "Question 14",
+                                "questionText": "Have you had a PDP discussion with your line manager since the organisational change?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "14",
+                                "questionSequence": 14,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "77207EA3-64BA-4B3A-9312-59F9BF4D6A36",
+                                "questionName": "Question 15",
+                                "questionText": "Do you feel you have the opportunity for personal development and growth following the organisational change?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "15",
+                                "questionSequence": 15,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "30260E49-D8FB-46F7-BF2B-A0E113A73848",
+                        "driverName": "Resillience following change",
+                        "questions": [
+                            {
+                                "id": "D7A55176-8D7E-4422-A484-6063E9B441A9",
+                                "questionName": "Question 4",
+                                "questionText": "Do you have a personal change plan to help you deal effectively with the change?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "4",
+                                "questionSequence": 4,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "A2AE74C8-D2C0-4CA3-A622-6D3271C758F1",
+                                "questionName": "Question 5",
+                                "questionText": "Have you had a discussion with a line manager since the reorganisation to acknowledge and discuss the impact of the change on you and support you with a personal change plan?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "5",
+                                "questionSequence": 5,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "59A9DD57-D2DE-43E6-A1F9-6D3B3B055610",
+                                "questionName": "Question 6",
+                                "questionText": "Do you feel confident to manage the impact of change?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "6",
+                                "questionSequence": 6,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3AA35C12-3A6B-4AC4-AC4E-B6465A72A857",
+                        "driverName": "Knowledge and Skills",
+                        "questions": [
+                            {
+                                "id": "58148731-BACA-43E9-953E-DBF383388D19",
+                                "questionName": "Question 10",
+                                "questionText": "Do you have the knowledge and skills to do your job effectively?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "10",
+                                "questionSequence": 10,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "CEECC801-E487-4081-B0EB-EFB8FDC46F39",
+                                "questionName": "Question 11",
+                                "questionText": "Have you received adequate Knowledge /  skills training to do your job effectively?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "11",
+                                "questionSequence": 11,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "839208F3-B19F-428C-8242-380CFF1E1711",
+                                "questionName": "Question 12",
+                                "questionText": "Do you feel confident you have the neccesary knowledge and skills to do your job effectively?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "12",
+                                "questionSequence": 12,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            }
+                        ]
+                    },
+                    {
+                        "id": "A6796813-56E7-46EA-9861-71DFA9FC02D9",
+                        "driverName": "Coaching/Mentoring/ Buddying",
+                        "questions": [
+                            {
+                                "id": "864AC11A-1517-496C-B4E8-6DC765EBF7CE",
+                                "questionName": "Question 16",
+                                "questionText": "Do you have a designated coach / mentor /buddy within your organisation?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "16",
+                                "questionSequence": 16,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "0D959CD6-ED06-467E-95E8-89E01CAC4613",
+                                "questionName": "Question 17",
+                                "questionText": "Have you had / booked a coaching / mentoring/ buddying session since the change has taken place?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "17",
+                                "questionSequence": 17,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "A79A0DF2-67C7-4F58-8272-B571A6FF7BEF",
+                                "questionName": "Question 18",
+                                "questionText": "Have you got regular coaching / mentoring / buddying sessions booked in advance ",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "18",
+                                "questionSequence": 18,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            }
+                        ]
+                    },
+                    {
+                        "id": "777657E9-F3B6-4DD5-9E74-7AF43D8C1FC1",
+                        "driverName": "Manager Change Training",
+                        "questions": [
+                            {
+                                "id": "36FAE347-AC62-4DFF-8A84-132FF1A1DD31",
+                                "questionName": "Question 1",
+                                "questionText": "Do you know how to diffuse your own stress and lead your team effectively?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "1",
+                                "questionSequence": 1,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "66AB3A50-A029-4B9F-9D9A-317064775A78",
+                                "questionName": "Question 2",
+                                "questionText": "Have you received training to address the impact of change with your team?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "2",
+                                "questionSequence": 2,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "F76E66D4-367F-49BB-A217-48658E13BC26",
+                                "questionName": "Question 3",
+                                "questionText": "Do you feel confident to support your team members with a personal change plan strategy?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "3",
+                                "questionSequence": 3,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "questionGroupId": "4F079C33-FFBC-4DD4-AF3A-7869A998984C",
+                "questionGroupName": "Culture",
+                "questionGroupDescription": "Culture description",
+                "drivers": [
+                    {
+                        "id": "ECDC14AA-D77A-424A-8EC7-D225731559E7",
+                        "driverName": "Innovation",
+                        "questions": [
+                            {
+                                "id": "F8B4FED8-D618-4628-8CAB-748F77B231AB6",
+                                "questionName": "Question 40",
+                                "questionText": "Do you have the opportunity to be innovative?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "40",
+                                "questionSequence": 40,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "F8B4FED8-D612-4628-8CAB-748F77B71AB6",
+                                "questionName": "Question 41",
+                                "questionText": "Are you empowered to find a solution to a problem?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "41",
+                                "questionSequence": 41,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "F8B4FED8-D618-4628-8CAB-748F12371AB6",
+                                "questionName": "Question 42",
+                                "questionText": "Does the company constantly seek ways to improve products and services?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "42",
+                                "questionSequence": 42,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            }
+                        ]
+                    },
+                    {
+                        "id": "C8385A3F-187B-42D6-AFBC-4AE8D2B504B9",
+                        "driverName": "Values",
+                        "questions": [
+                            {
+                                "id": "B12BD9F2-420C-441C-A07F-05B1F8380A9C",
+                                "questionName": "Question 34",
+                                "questionText": "Do you know what the company’s stated values are?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "34",
+                                "questionSequence": 34,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "C42B1BC7-2258-43FC-B4B3-0FC24C33785F",
+                                "questionName": "Question 35",
+                                "questionText": "Do you apply the company’s values in your everyday work?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "35",
+                                "questionSequence": 35,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "8DC1D928-F984-4B62-87F7-421B5A0D4D31",
+                                "questionName": "Question 36",
+                                "questionText": "Do you see the company's values applied on a daily basis?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "36",
+                                "questionSequence": 36,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "C6D61319-E50C-49BD-B93A-405B0172FCC8",
+                        "driverName": "Leadership Behaviours",
+                        "questions": [
+                            {
+                                "id": "8B5B2BE9-9033-4B06-9872-6208DE178AE7",
+                                "questionName": "Question 37",
+                                "questionText": "Does the Leadership team contribute to a positive work cuture?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "37",
+                                "questionSequence": 37,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "7A118B6A-820A-4BA0-BC45-689AD6CECD8B",
+                                "questionName": "Question 38",
+                                "questionText": "Do you see the leaders living the stated values of the culture in the organisation?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "38",
+                                "questionSequence": 38,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "F8B4FED8-D618-4628-8CAB-748F77B71AB6",
+                                "questionName": "Question 39",
+                                "questionText": "Do you believe your company has a promising future?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "39",
+                                "questionSequence": 39,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "questionGroupId": "85B47983-E718-4945-9DCF-0C3BFA3253C3",
+                "questionGroupName": "Connection",
+                "questionGroupDescription": "Connection description.",
+                "drivers": [
+                    {
+                        "id": "100F966A-1120-405D-845D-8B1994320E59",
+                        "driverName": "Knowing your network",
+                        "questions": [
+                            {
+                                "id": "53BD7FEB-9297-43AE-9B2A-F8987BA6CEAE",
+                                "questionName": "Question 28",
+                                "questionText": "Do you know the key people in the organisation to turm to when you need something?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "28",
+                                "questionSequence": 28,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "DB3FD408-BDA5-462E-B747-FCEC46FDE789",
+                                "questionName": "Question 29",
+                                "questionText": "Have you been given/shown a \"Who's Who?\" for the key people in your network?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "29",
+                                "questionSequence": 29,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "26A7CEA1-A7A9-4C4D-84DE-0233663DABFC",
+                                "questionName": "Question 30",
+                                "questionText": "Are you able to identify who the relevant people are or know someone that you can ask?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "30",
+                                "questionSequence": 30,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            }
+                        ]
+                    },
+                    {
+                        "id": "24BAE054-E711-4BBC-B016-650E3DA5196C",
+                        "driverName": "Milestone recognition",
+                        "questions": [
+                            {
+                                "id": "320E13F9-709C-4D0B-AA84-D6DAFC36ECDC",
+                                "questionName": "Question 25",
+                                "questionText": "Do you know what milestones you have been set by your manager?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "25",
+                                "questionSequence": 25,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "34CA975E-C102-4695-81C1-D7AEFD31CE40",
+                                "questionName": "Question 26",
+                                "questionText": "Are you aware of what milestones have been met by other members of your team?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "26",
+                                "questionSequence": 26,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "8D15CE6A-E05C-4D8E-AD29-E7F46F14CDDF",
+                                "questionName": "Question 27",
+                                "questionText": "Have you been recognised for the work you've been doing? (Companies using strategic recognition are 48% more likey to report high engagement)",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "27",
+                                "questionSequence": 27,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            }
+                        ]
+                    },
+                    {
+                        "id": "9B165AEA-9AD6-4280-A21D-E98DFBD06F37",
+                        "driverName": "Workplace socialisation",
+                        "questions": [
+                            {
+                                "id": "C1C02167-8291-4601-8B6B-19AB1479DB2D",
+                                "questionName": "Question 31",
+                                "questionText": "Have you got a way of connecting socially with people within your organisation?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "31",
+                                "questionSequence": 31,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "E2D8B16A-53DA-41CB-8B0F-3DEBB50CAF3D",
+                                "questionName": "Question 32",
+                                "questionText": "Is there platform to connect with the wider organisation?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "32",
+                                "questionSequence": 32,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "173D5063-7DDB-489F-8628-427FB21125ED",
+                                "questionName": "Question 33",
+                                "questionText": "Do you use the social network platform?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "33",
+                                "questionSequence": 33,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "A4540C38-3485-4E63-9A82-27D9B2194AC9",
+                        "driverName": "Touchpoint with teams",
+                        "questions": [
+                            {
+                                "id": "A066234B-F6F7-484C-82F0-9C352FB0EBBF",
+                                "questionName": "Question 22",
+                                "questionText": "Do you have regular contact with your immediate team?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "22",
+                                "questionSequence": 22,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "1FF397FD-5D3E-4E36-A3E0-A3599038D168",
+                                "questionName": "Question 23",
+                                "questionText": "Is there good teamwork / cooperation between departments",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "23",
+                                "questionSequence": 23,
+                                "questionTypeName": "yes/no",
+								"userSelection":""
+                            },
+                            {
+                                "id": "8B3A8FB8-FB19-4C09-A201-CAB1546DA8D1",
+                                "questionName": "Question 24",
+                                "questionText": "Do you have regular contact with other departments?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "24",
+                                "questionSequence": 24,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "12BF278E-FA75-40C6-AAB4-29C9FA946ABA",
+                        "driverName": "Meaningful Leadership Communication",
+                        "questions": [
+                            {
+                                "id": "C7E82D3C-AFDF-43AE-BFF6-44FAE6A1E418",
+                                "questionName": "Question 19",
+                                "questionText": "Do you have regular communication with your manager?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "19",
+                                "questionSequence": 19,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "384F8E49-F591-44D6-A1BE-51874E229941",
+                                "questionName": "Question 20",
+                                "questionText": "Have you agreed the best way to work with your manager?",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "20",
+                                "questionSequence": 20,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            },
+                            {
+                                "id": "DDE09D8A-B723-47D5-A684-91A00D247083",
+                                "questionName": "Question 21",
+                                "questionText": "Is the frequency of communication with your manager appropriate? ",
+                                "questionAnswerRequired": true,
+                                "questionNumber": "21",
+                                "questionSequence": 21,
+                                "questionTypeName": "yes/no",
+								"userSelection":"yes"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }

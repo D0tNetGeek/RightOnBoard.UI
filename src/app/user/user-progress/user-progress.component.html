@@ -1,0 +1,50 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row marginBottom" style="margin-top:1px">
+      <div class="col-md-4" style="background-color:#311a41;">
+        <img src="/assets/images/ROB_logo.png" style="height:50px!important;background-color:#311a41;" />
+      </div>
+      <div class="col-md-5" style="background-color:#311a41;">
+        
+      </div>
+      <div class="col-md-3" style="display: inline;background-color:#311a41;">
+        <div style="background-color:ivory!important;border-radius: 6px;margin:2%" *ngIf="selectedQuestion!=null">
+          <div class="selectedQueHeader"> Selected Question</div>
+          <div class="selectedQueText"> {{selectedQuestion!.questionText}}</div>
+          <div>
+            <span class="selectedQueAnswer">Answered </span>
+            <span class="selectedQueAnsText">{{selectedQuestion!.userSelection}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row marginBottom" style="margin-top:1px;height:300px;">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+        <img src="/assets/images/RoB_people_circle.png" style="height:320px;opacity: .1;" />
+        <div class="centered">75%</div>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+    <div class="row marginBottom" style="margin-top:25px">
+      <div class="col-md-12 text-center">
+        <ng-container *ngFor="let questionGroup of currentSurvey.questionGroups">
+          <ng-container *ngFor="let driver of questionGroup.drivers">
+            <ng-container *ngFor="let question of driver.questions">
+              <ng-container *ngIf="question.userSelection==undefined||question.userSelection=='no'||question.userSelection=='false'||question.userSelection==''">
+                <span class="vl noAnswer" [ngClass]="getClass(questionGroup)" [title]="getTitle(driver,question)" (click)="selectQuestion(question)">
+                </span>
+              </ng-container>
+              <ng-container *ngIf="question.userSelection!='no'&&question.userSelection!='false'&&question.userSelection!=''">
+                <span class="vl" [ngClass]="getClass(questionGroup)" [title]="getTitle(driver,question)" (click)="selectQuestion(question)">
+                </span>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

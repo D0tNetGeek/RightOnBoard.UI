@@ -13,11 +13,12 @@ import { HealthCheckComponent } from './health-check/health-check.component';
 import { UserComponent } from './user.component';
 import { SurveyWelcomeComponent } from './survey-welcome/survey-welcome.component';
 import { UserService } from './services/user.service';
-
+import { UserProgressComponent } from './user-progress/user-progress.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
     imports: [
         CommonModule,
-        UserRoutingModule
+        UserRoutingModule,HttpClientModule
     ],
     declarations: [
         UserDashboardComponent,
@@ -27,7 +28,8 @@ import { UserService } from './services/user.service';
         UserComponent,
         UserSurveyComponent,
         HealthCheckComponent,
-        SurveyWelcomeComponent
+        SurveyWelcomeComponent,
+        UserProgressComponent
     ],
     providers:[
         AuthGuard,

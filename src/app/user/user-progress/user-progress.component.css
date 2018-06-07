@@ -1,0 +1,63 @@
+.header{
+    background-image: '../../../asset/images/ROB_logo.png'
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5em;
+    color: rebeccapurple;
+}
+.vl {
+    border-left: 14px solid green;
+    height: 100px;
+    display: inline-block;
+    margin-left: 3px;   
+}
+.vl:hover{
+    box-shadow: 3px 3px;
+}
+
+.Confidence{
+    border-left: 14px solid rgb(187, 187, 21);
+}
+.Culture{
+    border-left: 14px solid rgb(77, 77, 218);
+}
+.Connection{
+    border-left: 14px solid  rgb(167, 106, 14);
+}
+.noAnswer{
+    opacity: .2;   
+}
+.selectedQueHeader{
+    font-weight: bold;
+    font-size: .8em;
+    color: rgb(146, 146, 25);
+    line-height: 100%;
+    text-align: center
+}
+.selectedQueText{
+    font-size: .7em;
+    color: grey;
+    line-height: 100%;
+    text-align: justify;
+    padding:1.5px;
+}
+.selectedQueAnswer{
+    font-weight: bold;
+    font-size: .8em;
+    color: rgb(146, 146, 25);
+    line-height: 100%;
+    text-align: left;
+    float:left;
+}
+.selectedQueAnsText{
+    font-size: .7em;
+    color: grey;
+    line-height: 100%;
+    text-align: justify;
+    padding:1.5px;
+    float:left;
+}

@@ -8,6 +8,7 @@ import { HealthCheckComponent } from './health-check/health-check.component';
 import { UserSurveyComponent } from './survey/survey.component';
 import { CanDeactivateGuardService } from '../core/services/can-deactivate-guard.service';
 import { SurveyWelcomeComponent } from './survey-welcome/survey-welcome.component';
+import { UserProgressComponent } from './user-progress/user-progress.component';
 
 const routes: Routes = [
     {
@@ -31,6 +32,10 @@ const routes: Routes = [
                     {
                         path: 'user-health-check',
                         component: HealthCheckComponent
+                    },
+                    {
+                        path: 'user-progress',
+                        component: UserProgressComponent
                     },
                     {
                         path: 'survey-welcome', // /:userId/:surveyId/:surveyIterationId', 

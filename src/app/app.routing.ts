@@ -29,6 +29,9 @@ import { UserSurveyComponent } from './user/survey/survey.component';
 import { RegistrationComponent} from './registration/registration.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { CreateUserComponent } from './admin/user-management/create-user/create-user.component';
+import { CompanyManagementComponent } from './admin/company-management/company-management.component';
+import { EditCompanyComponent } from './admin/company-management/edit-company/edit-company.component';
+import { CreateCompanyComponent } from './admin/company-management/create-company/create-company.component';
 
 //import { HealthCheckComponent } from './admin/health-check/health-check.component';
 //import { SurveyWelcomeComponent } from './admin/survey-welcome/survey-welcome.component';
@@ -99,6 +102,18 @@ const appRoutes: Routes = [
                 path: 'create-survey',
                 component: CreateSurveyComponent,
                 pathMatch: 'full'
+            },
+            {
+                path: 'company-management',
+                component: CompanyManagementComponent
+            },
+            {
+                path: 'create-company',
+                component: CreateCompanyComponent
+            },
+            {
+                path: 'edit-company',
+                component: EditCompanyComponent
             }
         ]
     },

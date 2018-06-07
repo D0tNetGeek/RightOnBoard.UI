@@ -63,6 +63,19 @@ export class AdminService extends BaseService{
         });
     }
 
+    public getCompaniesListForAdmin(): Observable<any>{
+
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiCompanyPath}/${this.appConfig.apiGetCompaniesList}`;
+
+        console.log("getCompaniesListForAdmin :",url);
+
+        return http.get(url)
+        .map(response => {
+            return response;
+        });
+    }
+
     public getCompanyInfo(): Observable<any>{
 
         const http = this.injector.get<HttpClient>(HttpClient);
@@ -71,6 +84,29 @@ export class AdminService extends BaseService{
         return http.get(url)
         .map(response => {
             console.info("Company Info : ", url, response);
+            return response;
+        });
+    }
+
+    public getCompanyInfoByCompanyId(companyId): Observable<any>{
+
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiCompanyPath}/${this.appConfig.apiGetCompanyInfoByCompanyIdPath}?CompanyId=${companyId}`;        
+      
+        return http.get(url)
+        .map(response => {
+            console.info("getCompanyInfoByCompanyId : ", url, response);
+            return response;
+        });
+    }
+
+    public saveCompanyInfo(company): Observable<any>{
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiCompanyPath}/${this.appConfig.apiSaveCompanyInfoPath}`;
+      
+        return http.post(url, company)
+        .map(response => {
+            console.info("saveCompanyInfo : ", url, response);
             return response;
         });
     }

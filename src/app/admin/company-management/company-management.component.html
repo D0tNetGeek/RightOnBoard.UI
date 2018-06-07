@@ -1,0 +1,75 @@
+<div class="wrapper">
+  <div class="sidebar" data-color="danger" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <app-sidebar></app-sidebar>
+    <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+  </div>
+  <div class="main-panel">
+    <app-topbar></app-topbar>
+
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <h4 class="card-title">Company Information</h4>
+                <p class="card-category">Listing Company Information</p>
+              </div>
+
+              <div class="card-body">
+                <form>
+                  <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="createCompany()">Set Up New</button>
+                  <div class="clearfix"></div>
+                  <table class="table table-hover table-bordered ">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Company Name</th>
+                        <!-- <th>Start Date</th>
+                        <th>End Date</th>
+                        <th># Question Groups</th> -->
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let company of companyList; let i = index; ">
+                        <td>{{i+1}}</td>
+                        <!-- <td>{{survey.surveyInfo.name}}</td>
+                        <td>{{survey.surveyInfo.startDate}}</td>
+                        <td>{{survey.surveyInfo.endDate}}</td>
+                        <td>{{survey.questionGroups.length}}</td> -->
+
+                        <td>{{company.companyName}}</td>
+                        <!-- <td>{{survey.startDate}}</td>
+                        <td>{{survey.endDate}}</td> -->
+                        <!-- <td>&nbsp;</td> -->
+                        <!-- <td>{{survey.questionGroups.length}}</td> -->
+
+                        <td>
+                          <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="editCompany(company.companyId)">Edit</button>
+                        </td>
+                      </tr>
+                      <tr *ngIf="companyList.length==0">
+                        <td colspan=100%>No Companies Yet</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay-box" *ngIf="loading"><div class="loader" ></div></div>
+
+    <div class="loader-wrapper" id="loader-1" *ngIf="loading">
+        <div id="loader"></div>
+    </div>
+    
+    <div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

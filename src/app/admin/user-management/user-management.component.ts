@@ -9,30 +9,39 @@ import { AdminService } from '../services/admin.service'
 })
 export class UserManagementComponent implements OnInit, OnDestroy {
 
+  loading: boolean = false;
+  departments = [];
+  timeForJobs = [];
+  userList: any = [];
+
   constructor(private router: Router, private route: ActivatedRoute, private adminService: AdminService) { }
+  
   ngOnInit() {
-    this.loadDepartments();
-    this.loadTimeForJobs();
+    this.loading = false;
+
+    //this.loadDepartments();
+    //this.loadTimeForJobs();
     this.getUserList();
   }
+  
   ngOnDestroy() {
-    
     
   }
 
-  userList: any = [];
   getUserList() {
+    this.loading = true;
+
     this.adminService.getUserList()
       .subscribe(
         data => {
           if (data == undefined || data == null) {
           } else {
             this.userList = data;
+            this.loading = false;
           }
         })
   }
-  departments = [];
-  timeForJobs = [];
+
   loadDepartments() {
     this.adminService.getDepartments()
       .subscribe(
@@ -43,18 +52,21 @@ export class UserManagementComponent implements OnInit, OnDestroy {
           }
         })
   }
+
   getDepartmentName(deptId){
     for(let dept of this.departments){
       if(dept.value==deptId){return dept.label};
     }
     return "";
   }
+
   getTimeInJobLabel(timeId){
     for(let time of this.timeForJobs){
       if(time.value==timeId)return time.label;
     }
     return "";
   }
+  
   loadTimeForJobs() {
     this.adminService.getTimeInJob()
       .subscribe(
@@ -65,6 +77,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
           }
         })
   }
+
   createUser(){
     this.router.navigate(["/admin/create-user"]);
   }

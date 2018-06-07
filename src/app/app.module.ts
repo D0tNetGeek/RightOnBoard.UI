@@ -10,6 +10,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { ToastrModule } from 'ngx-toastr';
+
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CoreModule } from './core/core.module';
 
@@ -58,7 +61,9 @@ import{
     MatRippleModule,
     MatOptionModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    //BrowserAnimationsModule, // required animations module
+    //ToastrModule.forRoot(), // ToastrModule added
   ],
   declarations: [
     AppComponent,

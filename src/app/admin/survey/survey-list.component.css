@@ -1,3 +1,7 @@
+th {
+    background-color: #4CAF50;
+    color: white;
+}
 .center{
     text-align:center!important;
 }
@@ -58,4 +62,27 @@
     .alert{
        padding: 5px 5px; 
     }
- 
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        margin-left: 380px;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        
+      }
+      .overlay-box {
+        background-color: transparent;   
+        text-align:center;
+        height: 200px;/*height needs to be set*/
+        width: 750px;
+        margin: auto;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }

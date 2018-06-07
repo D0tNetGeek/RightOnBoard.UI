@@ -9,9 +9,14 @@ import { AdminService } from '../services/admin.service'
 })
 export class SurveyListComponent implements OnInit, OnDestroy {
 
+  loading: boolean = false;
+  surveyList: any = [];
+
   constructor(private router: Router, private route: ActivatedRoute, private adminService: AdminService) { }
 
   ngOnInit() {
+    this.loading = false;
+
     let survey: any = {
       surveyInfo: { "surveyId": "", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": "", "endDate": "", "publicationDate": "", "expirationDate": "" },
       questionGroups: [],
@@ -20,26 +25,29 @@ export class SurveyListComponent implements OnInit, OnDestroy {
     window.sessionStorage.setItem("currentSurvey", JSON.stringify(survey));
     this.getSurveysListForAdmin();
   }
-  ngOnDestroy() {
-    
-    
+  
+  ngOnDestroy() {  
   }
 
   createSurvey() {
     this.router.navigate(["/admin/create-survey"]);
   }
 
-  surveyList: any = [];
   getSurveysListForAdmin() {
+    this.loading = true;
+
     this.adminService.getSurveyListForAdmin()
       .subscribe(
         data => {
           if (data == undefined || data == null) {
           } else {
             this.surveyList = data;
+            console.log("Survey List:", this.surveyList);
+            this.loading = false;
           }
         })
   }
+
   editSurvey(survey) {
     this.adminService.getSurveyInfo(survey.surveyInfo.surveyId)
       .subscribe(

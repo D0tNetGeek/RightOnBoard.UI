@@ -5,50 +5,96 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../../admin/services/admin.service';
 
 import * as CryptoJS from 'crypto-js';
+import { _MatButtonToggleGroupMixinBase } from '@angular/material';
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css']
 })
+
 export class CreateUserComponent implements OnInit {
-  constructor(private adminService: AdminService, private router: Router,
+  errorMesssage: string = "";
+
+  constructor(
+    private adminService: AdminService, 
+    private router: Router,
     private route: ActivatedRoute) { }
-  user = { "email": "", "password": "", "department": "", "timeInJob": "", "role": "User" }
+
+  loading: boolean = false;
+
+  user = { "email": "", "password": "", "department": "", "timeInJob": "", "roleName": "" };
+  company = {"companyId": "", "companyName": ""};
+
   confirmPassword: String = ""
-  departments = [];
-  timeForJobs = [];
+  companies = [];
+  roles = [];
+  regOptions = [];
 
   ngOnInit() {
+    this.loading = false;
+
     this.errorMesssage = "";
-    this.loadDepartments();
-    this.loadTimeForJobs();
+
+    this.loadCompanies();
+    this.loadRoles();
   }
-  loadDepartments() {
-    this.adminService.getDepartments()
+
+  loadCompanies(){
+    this.loading = true;
+
+    this.adminService.getCompaniesListForAdmin()
+    .subscribe(
+      data => {
+        this.companies = data;
+
+        this.loading = false;
+      }
+    )
+  }
+
+  loadRoles() {
+    this.loading = true;
+
+    this.adminService.getRolesList()
       .subscribe(
         data => {
           if (data == undefined || data == null) {
           } else {
-            this.departments = data;
+            this.roles = data;
+            
+            this.loading = false;
           }
         })
   }
-  loadTimeForJobs() {
-    this.adminService.getTimeInJob()
-      .subscribe(
-        data => {
-          if (data == undefined || data == null) {
-          } else {
-            this.timeForJobs = data;
-          }
-        })
+
+  // getRegOptions(){
+  //   this.errorMesssage = "";
+  //   console.log("Company : ", this.company);
+
+  //   this.loadRegistrationOptions(this.company);
+  // }
+
+  loadRegistrationOptions(companyId: string){
+    this.loading = true;
+
+    console.log("Company : ", companyId);
+
+    this.adminService.getRegistrationOptionsList(companyId)
+    .subscribe(
+      data => {
+        this.regOptions = data;
+        
+        this.loading = false;
+      }
+    )
   }
-  errorMesssage: string = "";
+
   validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
+  
   validate() {
     this.errorMesssage = "";
     if (!this.validateEmail(this.user.email)) {
@@ -74,9 +120,11 @@ export class CreateUserComponent implements OnInit {
     }
     return true;
   }
+  
   change() {
     this.errorMesssage = "";
   }
+
   submitForm() {
     if (this.validate()) {
       this.user.password = "" + CryptoJS.MD5(this.user.password);
@@ -84,7 +132,7 @@ export class CreateUserComponent implements OnInit {
         .subscribe(
           data => {
             if (data == false) {
-              this.errorMesssage = 'User Registeratin Failed.';
+              this.errorMesssage = 'User Registration Failed.';
             } else {
               this.router.navigate(["/admin/userManagement"]);
             }

@@ -21,11 +21,21 @@
                   <!-- Note that there is an form-inline class in the <form> element, 
                   making it an inline form -->
                     <div class="form-group">
-                      <label for="companyName">Company Name</label>
-                      <input type="text" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="companyInfo.companyName" required class="form-control">
+                      <mat-form-field class="example-full-width" >
+                        <input type="text" matInput placeholder="Company Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="company.companyName"  (change)="change()" required>
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="form-group" *ngIf="errorMesssage!=''">
+                      <div class="row" style="margin:1%">
+                        <div class="col-md-12 alert alert-danger">
+                          <strong>Error! </strong>
+                          {{errorMesssage}}
+                        </div>
+                      </div>
                     </div>
                                       
-                    <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="editCompany(companyInfo)">Edit Company</button>
+                    <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="createCompany()">Add Company</button>
                 </form>
               </div>
             </div>

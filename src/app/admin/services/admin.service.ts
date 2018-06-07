@@ -17,6 +17,8 @@ export class AdminService extends BaseService{
                     super();                    
                 }
 
+    ////////////// Chart Methods Starts Here
+
     public getCardHeaderData(headerType): Observable<any>{
 
         const http = this.injector.get<HttpClient>(HttpClient);
@@ -38,6 +40,10 @@ export class AdminService extends BaseService{
             return response;
         })
     }
+
+    /////////////// Chart Methods Ends Here
+
+    ///////////// Survey Methods Starts Here
 
     public getSurveyInfo(surveyId: string): Observable<any>{
 
@@ -63,10 +69,24 @@ export class AdminService extends BaseService{
         });
     }
 
+    //////////////// Survey Methods Ends Here
+
+    ///////////////// Company Methods Starts Here
+
+    public createCompany(company) : Observable<any>{
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiCompanyPath}/${this.appConfig.apiCreateCompanyPath}`;
+
+        return http.put(url, company)
+        .map(response => {
+            console.info("create company : ", url, response);
+        })
+    }
+        
     public getCompaniesListForAdmin(): Observable<any>{
 
         const http = this.injector.get<HttpClient>(HttpClient);
-        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiCompanyPath}/${this.appConfig.apiGetCompaniesList}`;
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiCompanyPath}/${this.appConfig.apiGetCompaniesListForAdmin}`;
 
         console.log("getCompaniesListForAdmin :",url);
 
@@ -111,6 +131,9 @@ export class AdminService extends BaseService{
         });
     }
 
+    ///////// Company Methods Ends Here
+
+
     public getDepartments(): Observable<any> {
         const http = this.injector.get<HttpClient>(HttpClient);
         const url = `${this.appConfig.apiEndPoint}`;
@@ -128,6 +151,8 @@ export class AdminService extends BaseService{
             return response;
           })
     }
+
+    ///////// User Methods Starts Here //////////
     
     public registerNewUser(user: any): Observable<any> {
         const http = this.injector.get<HttpClient>(HttpClient);
@@ -136,16 +161,41 @@ export class AdminService extends BaseService{
           .map(response => {
             return response;
           })
-    
     }
     
     public getUserList(): Observable<any> {
         const http = this.injector.get<HttpClient>(HttpClient);
         const url = `${this.appConfig.apiEndPoint}/${this.appConfig.apiUserServicePath}`;
+
+        console.log("Get Users List : ",url);
+
         return http.get(url)
           .map(response => {
             return response;
           })
-    
     }
+
+    public getRolesList(): Observable<any> {
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiEndPoint}/${this.appConfig.apiUserServicePath}/${this.appConfig.apiGetRolesForAdminPath}`;
+
+        console.log("Get Roles List : ",url);
+        return http.get(url)
+          .map(response => {
+            return response;
+          })
+    }
+
+    public getRegistrationOptionsList(companyId: string): Observable<any> {
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiEndPoint}/${this.appConfig.apiUserServicePath}/${this.appConfig.apiGetRegistrationOptionsPath}?CompanyId=${companyId}`;
+
+        console.log("Get Registration Options List : ",url);
+        return http.get(url)
+          .map(response => {
+            return response;
+          })
+    }
+
+    //////////////// User Methods Ends Here
 }

@@ -27,6 +27,7 @@
                         <th>User Email</th>
                         <th>User Name</th>
                         <th>Company Name</th>
+                        <th>Role</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,7 @@
                         <td>{{user.email}}</td>
                         <td>{{user.firstName}} {{user.lastName}}</td>
                         <td>{{user.companyName}}</td>
+                        <td>{{user.roleName}}</td>
                       </tr>
                       <tr *ngIf="userList.length==0">
                         <td colspan=100%>No Users Yet</td>

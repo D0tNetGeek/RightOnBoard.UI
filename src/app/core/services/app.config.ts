@@ -7,6 +7,10 @@ export interface IAppConfig {
     apiSettingsPath: string;
     apiRegistrationPath: string;
     apiUserServicePath: string;
+    apiGetRolesForAdminPath: string;
+    apiCreateUserForAdminPath: string;
+
+    apiGetRegistrationOptionsPath: string;
 
     apiSurveyEndPoint: string;
 
@@ -18,10 +22,11 @@ export interface IAppConfig {
     apiGetSurveysForAdminPath: string;
 
     apiCompanyPath: string;
-    apiGetCompaniesList: string;
+    apiGetCompaniesListForAdmin: string;
     apiGetCompanyInfoPath: string;
     apiGetCompanyInfoByCompanyIdPath: string;
     apiSaveCompanyInfoPath: string;
+    apiCreateCompanyPath: string;
 }
 
 export const AppConfig: IAppConfig = {
@@ -29,6 +34,10 @@ export const AppConfig: IAppConfig = {
     apiSettingsPath: "ApiSettings",
     apiRegistrationPath: "accounts",
     apiUserServicePath: "user",
+
+    apiGetRolesForAdminPath: "getrolesforadmin",
+    apiCreateUserForAdminPath: "createuserbyadmin",
+    apiGetRegistrationOptionsPath: "getregistrationoptions",
 
     apiSurveyEndPoint: "http://localhost:59153/api",
 
@@ -40,8 +49,9 @@ export const AppConfig: IAppConfig = {
     apiGetSurveysForAdminPath: "getSurveysListForAdmin",
 
     apiCompanyPath: "company",
-    apiGetCompaniesList: "getcompanieslist",
+    apiGetCompaniesListForAdmin: "getcompanieslistforadmin",
     apiGetCompanyInfoPath: "getcompanyinfo",
     apiGetCompanyInfoByCompanyIdPath: "getcompanyinfobycompanyid",
-    apiSaveCompanyInfoPath: "savecompanyinfo"
+    apiSaveCompanyInfoPath: "savecompanyinfo",
+    apiCreateCompanyPath: "createCompany"
 }

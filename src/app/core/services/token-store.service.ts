@@ -23,9 +23,11 @@ export class TokenStoreService {
         }
         else
         {
-            //console.info("Token Store Service : Get Session : ", tokenType);
+            var getrawtoken = this.browserStorageService.getSession(AuthTokenType[tokenType]);
 
-            return this.browserStorageService.getSession(AuthTokenType[tokenType]);
+            //console.info("Token Store Service : Get Session : ", getrawtoken);
+
+            return getrawtoken;
         }
     }
 

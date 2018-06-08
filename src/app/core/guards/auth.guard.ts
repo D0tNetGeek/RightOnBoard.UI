@@ -15,6 +15,7 @@ import { AuthGuardPermission } from '../models/auth-guard-permission';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
+
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
     private permissionObjectKey = "permission";
@@ -40,7 +41,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         //     return false;
         // }
 
-        return true;
+        //return true;
+        return this.hasAuthUserAccessToThisRoute(permissionData, returnUrl);
     }
 
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

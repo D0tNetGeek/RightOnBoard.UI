@@ -20,6 +20,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { AdminService } from '../admin/services/admin.service';
 import { UserService } from '../user/services/user.service';
+import { HealthCheckService } from '../user/services/healthcheck.service';
 
 @NgModule({
     imports: [CommonModule, RouterModule],
@@ -40,7 +41,7 @@ import { UserService } from '../user/services/user.service';
             useValue: AppConfig
         },
         AuthenticationService, CanDeactivateGuardService,
-        AdminService,UserService,
+        AdminService,UserService,HealthCheckService,
         AuthGuard,
         {
             provide: HTTP_INTERCEPTORS,

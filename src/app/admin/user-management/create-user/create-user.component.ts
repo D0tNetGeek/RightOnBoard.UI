@@ -23,7 +23,7 @@ export class CreateUserComponent implements OnInit {
 
   loading: boolean = false;
 
-  user = { "email": "", "password": "", "department": "", "timeInJob": "", "roleName": "" };
+  user = { "companyId": "", "email": "", "password": "", "firstName": "", "lastName": "", "location":"", "regOptions": [], "roleId": "" };
   company = {"companyId": "", "companyName": ""};
 
   confirmPassword: String = ""
@@ -68,15 +68,10 @@ export class CreateUserComponent implements OnInit {
         })
   }
 
-  // getRegOptions(){
-  //   this.errorMesssage = "";
-  //   console.log("Company : ", this.company);
-
-  //   this.loadRegistrationOptions(this.company);
-  // }
-
   loadRegistrationOptions(companyId: string){
     this.loading = true;
+
+    this.errorMesssage = "";    
 
     console.log("Company : ", companyId);
 
@@ -86,6 +81,8 @@ export class CreateUserComponent implements OnInit {
         this.regOptions = data;
         
         this.loading = false;
+
+        console.log("REG OPTIONS : ",this.regOptions);
       }
     )
   }
@@ -97,27 +94,42 @@ export class CreateUserComponent implements OnInit {
   
   validate() {
     this.errorMesssage = "";
+
+    //console.log("USER OBJECT : ", this.user);
+
+    if (this.user.companyId == "") {
+      this.errorMesssage = 'Enter a valid company.';
+      return false;
+    }
+
     if (!this.validateEmail(this.user.email)) {
       this.errorMesssage = 'Invalid Email.';
       return false;
     }
+
     if (this.user.password == "") {
       this.errorMesssage = 'Enter a password.';
       return false;
     }
+
     if ((this.user.password != "" || this.confirmPassword != "") && this.user.password != this.confirmPassword) {
       this.errorMesssage = 'Password does not match the confirm password.';
       this.confirmPassword = "";
       return false;
     }
-    if (this.user.department == "") {
-      this.errorMesssage = 'Select One Department.';
+
+    console.log("VALIDATION : ",this.user.regOptions[0]);
+    
+    if (this.user.regOptions[0] == undefined) {
+      this.errorMesssage = 'Select valid registration option.';
       return false;
     }
-    if (this.user.timeInJob == "") {
-      this.errorMesssage = 'Select One Time in Job Option.';
+
+    if (this.user.roleId == "") {
+      this.errorMesssage = 'Select a valid role.';
       return false;
     }
+
     return true;
   }
   
@@ -125,15 +137,22 @@ export class CreateUserComponent implements OnInit {
     this.errorMesssage = "";
   }
 
-  submitForm() {
+  createUser() {
     if (this.validate()) {
-      this.user.password = "" + CryptoJS.MD5(this.user.password);
+
+      //this.user.password = "" + CryptoJS.MD5(this.user.password);
+
+      this.loading = true;
+
+      console.log("USER SUBMITTED : ", this.user);
       this.adminService.registerNewUser(this.user)
         .subscribe(
           data => {
             if (data == false) {
               this.errorMesssage = 'User Registration Failed.';
             } else {
+              this.loading = false;
+
               this.router.navigate(["/admin/userManagement"]);
             }
           })

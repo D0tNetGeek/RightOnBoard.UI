@@ -39,6 +39,9 @@ export class EditCompanyComponent implements OnInit {
   }
 
   editCompany(company){
+
+    this.loading = true;
+
     this.adminService.saveCompanyInfo(this.companyInfo)
     .subscribe(
       data => {
@@ -49,6 +52,9 @@ export class EditCompanyComponent implements OnInit {
           //this.toastr.success('Hello world!', 'Toastr fun!');
           this.router.navigate(["/admin/company-management"]);
         }
+
+        this.loading = false;
+        
       })
   }
 }

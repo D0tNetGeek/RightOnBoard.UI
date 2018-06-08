@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 /** Guards */
-import { AuthGuard, RoleGuard } from './core/index';
+import { AuthGuard, RoleGuard, AuthGuardPermission } from './core/index';
 import { } from './guards/role.guard';
 
 /** Layout components */
@@ -62,7 +62,11 @@ const appRoutes: Routes = [
     {
         path: 'admin',
         canActivate: [AuthGuard],
-        data: { roles: ['Admin'] },
+        data: {
+            permission: {
+              permittedRoles: ["admin", "user"]
+            } as AuthGuardPermission
+          },
         component: AdminLayoutComponent,
         children: [
             {
@@ -119,7 +123,12 @@ const appRoutes: Routes = [
     },
     {
         path: 'user',
-        canLoad: [AuthGuard],
+        canActivate: [AuthGuard],
+        data: {
+            permission: {
+              permittedRoles: ["admin", "user"]
+            } as AuthGuardPermission
+          },
         loadChildren: 'app/user/user.module#UserModule'
     },
 

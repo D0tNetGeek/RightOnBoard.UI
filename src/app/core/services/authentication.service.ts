@@ -186,13 +186,13 @@ export class AuthenticationService extends BaseService {
       }
 
       if(user.roles.indexOf(this.apiConfigService.configuration.adminRoleName.toLowerCase()) >= 0) {
-        console.info("IsUserAdmin in Role");
+        //console.info("IsUserAdmin in Role : ", user);
         return true; //The 'Admin' role has full access to every pages.
       }
 
       return requiredRoles.some(requiredRole => {
         if(user.roles){
-          console.info("IsUserAdmin in Roles");
+          //console.info("IsUserAdmin in Roles : ",user);
           return user.roles.indexOf(requiredRole.toLowerCase()) >= 0;
         }
         else{

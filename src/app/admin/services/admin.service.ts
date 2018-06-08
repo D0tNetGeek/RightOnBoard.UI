@@ -154,10 +154,13 @@ export class AdminService extends BaseService{
 
     ///////// User Methods Starts Here //////////
     
-    public registerNewUser(user: any): Observable<any> {
+    public registerNewUser(user): Observable<any> {
         const http = this.injector.get<HttpClient>(HttpClient);
-        const url = `${this.appConfig.apiEndPoint}`;
-        return http.post(url + `/userRegisteration`, user)
+        const url = `${this.appConfig.apiEndPoint}/${this.appConfig.apiUserServicePath}/${this.appConfig.apiCreateUserByAdminPath}`;
+
+        console.log("registerNewUser :", url, user);
+
+        return http.post(url, user)
           .map(response => {
             return response;
           })

@@ -8,7 +8,7 @@ export interface IAppConfig {
     apiRegistrationPath: string;
     apiUserServicePath: string;
     apiGetRolesForAdminPath: string;
-    apiCreateUserForAdminPath: string;
+    apiCreateUserByAdminPath: string;
 
     apiGetRegistrationOptionsPath: string;
 
@@ -36,7 +36,8 @@ export const AppConfig: IAppConfig = {
     apiUserServicePath: "user",
 
     apiGetRolesForAdminPath: "getrolesforadmin",
-    apiCreateUserForAdminPath: "createuserbyadmin",
+    apiCreateUserByAdminPath: "createuserbyadmin",
+    
     apiGetRegistrationOptionsPath: "getregistrationoptions",
 
     apiSurveyEndPoint: "http://localhost:59153/api",

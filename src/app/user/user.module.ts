@@ -33,8 +33,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     ],
     providers:[
         AuthGuard,
-        UserService,
-        HealthCheckService
+        //UserService,
+        //HealthCheckService
     ]
 })
 

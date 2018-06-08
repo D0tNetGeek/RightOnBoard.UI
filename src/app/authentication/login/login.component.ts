@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   model: Credentials = { username: "", password: "", rememberMe: false };
   loading = false;
   errors: string;
-  error = "";
+  errorMesssage = "";
   returnUrl: string | null = null;
 
   constructor(
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     console.log(form);
 
-    this.error = "";
+    this.errorMesssage = "";
 
     this.authenticationService.login(this.model)
     .subscribe(isLoggedIn => {
@@ -56,14 +56,19 @@ export class LoginComponent implements OnInit {
       }
       this.loading = false;
     },
-      (error: HttpErrorResponse) => {
-        console.error("Login error : ", error);
+      (errorMesssage: HttpErrorResponse) => {
+        console.error("Login error : ", errorMesssage);
       
-        if(error.status === 401) {
-          this.error = "Invalid Username or Password. Please try again.";
-        }else{
-          this.error = `${error.statusText} : ${error.message}`;
+        if(errorMesssage.status === 400) {
+          this.errorMesssage = "Invalid Username or Password. Please try again.";
+        }else if(errorMesssage.status === 401) {
+          this.errorMesssage = "Invalid Username or Password. Please try again.";
         }
+        else{
+          this.errorMesssage = `${errorMesssage.statusText} : ${errorMesssage.message}`;
+        }
+
+        this.loading = false;
       });
   }
   

@@ -4,6 +4,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 import { Router } from '@angular/router';
 
 import { UserService } from '../services/user.service';
+import { AuthenticationService } from '../../core';
 
 @Component({
   selector: 'app-user-topbar',
@@ -24,11 +25,16 @@ export class TopbarComponent implements OnInit {
     private navRoute: string;
     private companyInfo: string;
 
+    isAdmin = false;
+    isUser = false;
+    result: any;
+
     constructor(
       location: Location,  
       private element: ElementRef, 
       private router: Router,
-      private userService: UserService
+      private userService: UserService,
+      private authService: AuthenticationService,
     ) 
     {
       this.location = location;
@@ -36,13 +42,18 @@ export class TopbarComponent implements OnInit {
     }
 
     ngOnInit(){
-      this.getCompanyInfo();
+        this.isAdmin = this.authService.isAuthUserInRole("Admin");
+        this.isUser = this.authService.isAuthUserInRole("User");
 
-      this.listTitles = ROUTES.filter(listTitle => listTitle);
-      const navbar: HTMLElement = this.element.nativeElement;
-      this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
-      this.router.events.subscribe((event) => {
-      this.sidebarClose();
+        console.log("TOP BAR : ",this.isAdmin, this.isUser);
+
+        this.getCompanyInfo();
+
+        this.listTitles = ROUTES.filter(listTitle => listTitle);
+        const navbar: HTMLElement = this.element.nativeElement;
+        this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
+        this.router.events.subscribe((event) => {
+        this.sidebarClose();
 
       var $layer: any = document.getElementsByClassName('close-layer')[0];
 

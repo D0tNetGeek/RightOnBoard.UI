@@ -6,6 +6,15 @@
       </div>
 
       <form class="login100-form validate-form" name='loginForm' (ngSubmit)='f.form.valid && login()' #f='ngForm' novalidate>
+          <div class="form-group" *ngIf="errorMesssage!=''">
+              <div class="row" style="margin:1%">
+                <div class="col-md-12 alert alert-danger">
+                  <strong>Error! </strong>
+                  {{errorMesssage}}
+                </div>
+              </div>
+            </div>
+    
         <span class="login100-form-title">Member Login</span>
 
         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">

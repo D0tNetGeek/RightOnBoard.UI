@@ -18,7 +18,7 @@
               <form role="form">
                   <div class="form-group">
                       <mat-form-field class="example-full-width">
-                        <mat-select placeholder="Select Company..."  [ngModelOptions]="{standalone: true}" [(ngModel)]="company" (change)="loadRegistrationOptions(company)" required>
+                        <mat-select placeholder="Select Company..."  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.companyId" (change)="loadRegistrationOptions(user.companyId)" required>
                           <mat-option value="{{company.companyId}}" *ngFor="let company of companies">{{company.companyName}}</mat-option>                         
                         </mat-select>
                       </mat-form-field>
@@ -45,43 +45,35 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="form-group" *ngFor="let regOption of regOptions">
+                  <div class="form-group">
                       <mat-form-field class="example-full-width">
-                        <mat-select placeholder="{{regOption.displayLabel}}"  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.timeInJob" (change)="change()" required={{regOption.isRequired}}>
-                          <!--<mat-option value={{regOption.value}} *ngFor="let timeForJob of timeForJobs">{{timeForJob.label}}</mat-option> -->                        
-                        </mat-select>
+                        <input type="text" matInput placeholder="firstName" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.firstName" (change)="change()" required>
                       </mat-form-field>
                   </div>
 
-                    
-                  <!-- <div class="form-group">
-                    <mat-form-field class="example-full-width">
-                      <mat-select placeholder="Department" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.department" (change)="change()" required>
-                        <mat-option value={{department.value}} *ngFor="let department of departments">{{department.label}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                  </div> 
-
                   <div class="form-group">
-                    <mat-form-field class="example-full-width">
-                      <mat-select placeholder="Time in Job"  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.timeInJob" (change)="change()" required>
-                        <mat-option value={{timeForJob.value}} *ngFor="let timeForJob of timeForJobs">{{timeForJob.label}}</mat-option>
-                      
-                      </mat-select>
-                    </mat-form-field>
+                      <mat-form-field class="example-full-width">
+                        <input type="text" matInput placeholder="lastName" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.lastName" (change)="change()" required>
+                      </mat-form-field>
                   </div>
 
                   <div class="form-group">
-                    <mat-form-field class="example-full-width">
-                      <mat-select placeholder="Role"  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.role"  required>
-                        <mat-option value="User" >User</mat-option>
-                        <mat-option value="Admin" >Admin</mat-option>
-                      </mat-select>
-                    </mat-form-field> -->
+                      <mat-form-field class="example-full-width">
+                        <input type="text" matInput placeholder="location" maxlength="100" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.location" (change)="change()" required>
+                      </mat-form-field>
+                  </div>
+
+                  <div class="form-group" *ngFor="let regOption of regOptions; let i = index">
+                      <mat-form-field class="example-full-width">
+                        <mat-select placeholder="{{regOption.regOptLabels.displayLabel}}"  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.regOptions[i]" (change)="change()" required={{regOption.regOptLabels.isRequired}}>
+                          <mat-option value="{{regOptVal.registrationOptionId}}:{{regOptVal.registrationOptionValueId}}" *ngFor="let regOptVal of regOption.regOptLabels.regOptVals">{{regOptVal.displayValue}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </div>
                     
                   <div class="form-group">
                     <mat-form-field class="example-full-width">
-                        <mat-select placeholder="Select Role..."  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.roleName" (change)="change()" required>
+                        <mat-select placeholder="Select Role..."  [ngModelOptions]="{standalone: true}" [(ngModel)]="user.roleId" (change)="change()" required>
                           <mat-option value={{role.roleId}} *ngFor="let role of roles">{{role.roleName}}</mat-option>                         
                         </mat-select>
                       </mat-form-field>
@@ -96,7 +88,7 @@
                     </div>
                   </div>
 
-                  <button type="submit" class="btn btn-info pull-right" (click)="submitForm()">Register</button>
+                  <button type="submit" class="btn btn-info pull-right" (click)="createUser()">Register</button>
               </form>
             </div>
             <div class="col-sm-3 col-sm-offset-3">&nbsp;</div>

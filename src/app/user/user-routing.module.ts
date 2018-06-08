@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { UserComponent } from './user.component';
-import { AuthGuard } from '../core';
+import { AuthGuard, AuthGuardPermission } from '../core';
 import { UserDashboardComponent } from './dashboard/dashboard.component';
 import { HealthCheckComponent } from './health-check/health-check.component';
 import { UserSurveyComponent } from './survey/survey.component';
@@ -19,6 +19,11 @@ const routes: Routes = [
             {
                 path: '',
                 canActivateChild: [AuthGuard],
+                data: {
+                    permission: {
+                      permittedRoles: ["admin", "user"]
+                    } as AuthGuardPermission
+                  },
                 children: [
                     {
                         path: '',

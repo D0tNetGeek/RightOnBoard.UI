@@ -50,6 +50,8 @@ export class CompanyManagementComponent implements OnInit {
   }
 
   editCompany(companyId) {
+    this.loading = true;
+
     this.adminService.getCompanyInfoByCompanyId(companyId)
       .subscribe(
         data => {
@@ -60,6 +62,8 @@ export class CompanyManagementComponent implements OnInit {
             window.sessionStorage.setItem("currentCompany", JSON.stringify(data));
             this.router.navigate(["/admin/edit-company"]);
           }
+
+          this.loading = false;
         })
   }
 

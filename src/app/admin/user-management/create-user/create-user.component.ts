@@ -23,7 +23,7 @@ export class CreateUserComponent implements OnInit {
 
   loading: boolean = false;
 
-  user = { "companyId": "", "email": "", "password": "", "firstName": "", "lastName": "", "location":"", "regOptions": [], "roleId": "" };
+  user = { "companyId": "", "email": "", "password": "", "firstName": "", "lastName": "", "location":"", "regOptions":[{"registrationOptionId":"", "registrationOptionValueId":""}], "roleId": "" };
   company = {"companyId": "", "companyName": ""};
 
   confirmPassword: String = ""
@@ -79,6 +79,8 @@ export class CreateUserComponent implements OnInit {
     .subscribe(
       data => {
         this.regOptions = data;
+
+        //this.user.regOptions = data;
         
         this.loading = false;
 
@@ -143,19 +145,22 @@ export class CreateUserComponent implements OnInit {
       //this.user.password = "" + CryptoJS.MD5(this.user.password);
 
       this.loading = true;
-
+      
       console.log("USER SUBMITTED : ", this.user);
+
       this.adminService.registerNewUser(this.user)
         .subscribe(
           data => {
-            if (data == false) {
+              console.log("user created : ", data);
+              this.router.navigate(["/admin/user-management"]);
+          },
+          error=>{
+            console.log("Result from create user :",error);
+            if (error.status == 400) {
               this.errorMesssage = 'User Registration Failed.';
-            } else {
               this.loading = false;
-
-              this.router.navigate(["/admin/userManagement"]);
             }
-          })
+        })
     }
   }
 }

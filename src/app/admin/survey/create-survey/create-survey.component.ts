@@ -166,20 +166,6 @@ export class CreateSurveyComponent implements OnInit {
 
       this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
       this.surveyName = this.survey.surveyInfo.name;
-
-      //window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
-
-      // this.adminService.createSurvey(this.survey)
-      // .subscribe(
-      //   data=>{
-      //     console.log("Survey completed.");
-      //   },
-      //   error=>{
-      //     if(error.status == 400){
-      //       console.log("Error creating survey");
-      //     }
-      //   }
-      // )
     } else {
       alert('Survey Info In-complete');
     }
@@ -203,15 +189,15 @@ export class CreateSurveyComponent implements OnInit {
       return true;
     }
   }
+
   validDate(value){
     return value==null||value==undefined||value.trim()==""||value=="null"
   }
+
   public OnYes(): void{
     this.onClose.next(true);
     this.modalRef.hide();
 
-    //this.survey.surveyInfo.surveyId = "16507b51-c613-4a1a-83e0-b2fbefb084b9";
-    
     if(this.activeTab=="info"){
       this.adminService.createSurvey(this.survey.surveyInfo)
         .subscribe(

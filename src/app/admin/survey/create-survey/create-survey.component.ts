@@ -1,5 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from '../../services/admin.service'
+
+import { Subject } from 'rxjs';
+
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-survey',
@@ -8,9 +15,13 @@ import { AdminService } from '../../services/admin.service'
 })
 export class CreateSurveyComponent implements OnInit {
 
-  constructor(private adminService: AdminService) { }
-  survey: any = JSON.parse(window.sessionStorage.getItem("currentSurvey"))
- 
+  loading: boolean = false;
+
+  public modalRef: BsModalRef;
+  public onClose: Subject<boolean>;
+
+  //survey: any = JSON.parse(window.sessionStorage.getItem("currentSurvey"))  
+
   isEdit: boolean = false;
 
   selectedGroup: any = null;//{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [] };
@@ -18,24 +29,36 @@ export class CreateSurveyComponent implements OnInit {
 
   activeTab: string = 'info';
 
-  ngOnInit() {
-    this.setActiveTab("info");
+  surveyName: string = "";
 
-    if (this.survey.surveyInfo.surveyId == "") {
+  frmSurvey: FormGroup;
+  
+  survey: any = {
+    surveyInfo: { "surveyId":"", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": "", "endDate": "", "publicationDate": "", "expirationDate": "", "companyId": "" },
+    questionGroups: [],
+    surveyIterations:[]
+  };
+
+  constructor(
+    private adminService: AdminService,
+    private modalService: BsModalService,
+    private router: Router) { }
+  
+  ngOnInit() {
+    this.loading = false;
+
+    this.onClose = new Subject();
+
+    this.setActiveTab("info");    
+
+    console.log("OnInit : ",this.survey.surveyInfo);
+
+    if (this.survey.surveyInfo.companyId == "") {
       this.isEdit = false;
     } else {
       this.isEdit = true;
     }
   }
-
-  ngOnDestroy() {
-    let survey: any = {
-      surveyInfo: { "surveyId": "", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": "", "endDate": "", "publicationDate": "", "expirationDate": "" },
-      questionGroups: [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [{ "id": "", "driverName": "", "questions": [{ "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": null, "questionNumber": "", "questionSequence": 0, "questionTypeName": "" }] }] }]
-    };
-    window.sessionStorage.setItem("currentSurvey", JSON.stringify(survey));
-  }
-
   groupSelected(event) {
     this.selectedGroup = event;
     this.selectedDriver=null;
@@ -131,18 +154,38 @@ export class CreateSurveyComponent implements OnInit {
     return returnValue;
   }
 
-  saveSurvey() {
+  saveSurvey(template: TemplateRef<any>) {
     if (this.validate()) {
-      alert('Submit Survey Data');
-      window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
-      alert('xxxxxxxxx')
+
+      this.loading = true;
+      
+      console.log("Create survey : ", this.survey);
+
+      this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+      this.surveyName = this.survey.surveyInfo.name;
+
+      //window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
+
+      // this.adminService.createSurvey(this.survey)
+      // .subscribe(
+      //   data=>{
+      //     console.log("Survey completed.");
+      //   },
+      //   error=>{
+      //     if(error.status == 400){
+      //       console.log("Error creating survey");
+      //     }
+      //   }
+      // )
     } else {
       alert('Survey Info In-complete');
     }
   }
 
   validate() {
-    if (this.survey.surveyInfo.name == ""
+    if (
+      this.survey.surveyInfo.companyId == ""
+      || this.survey.surveyInfo.name == ""
       || this.survey.surveyInfo.description == ""
       || this.survey.surveyInfo.welcomeMessage == ""
       || this.survey.surveyInfo.exitMessage == ""
@@ -150,9 +193,67 @@ export class CreateSurveyComponent implements OnInit {
       || this.survey.surveyInfo.endDate == null
       || this.survey.surveyInfo.publicationDate == null
       || this.survey.surveyInfo.expirationDate == null) {
+
       return false;
-    } else {
+    } else {  
       return true;
     }
+  }
+
+  public OnYes(): void{
+    this.onClose.next(true);
+    this.modalRef.hide();     
+
+    this.adminService.createSurvey(this.survey.surveyInfo)
+    .subscribe(
+      data=>{
+        console.log("Survey completed.");
+
+        this.survey.surveyInfo.surveyId = data.Content.surveyId;
+        
+        window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
+
+        this.router.navigate(["/admin/survey-iteration"]);
+      },
+      error=>{
+        if(error.status == 400){
+          console.log("Error creating survey");
+        }
+      }
+    )
+  }
+
+  public OnNo(): void{
+    this.formReset();
+    this.survey.surveyInfo = null;
+    this.loading = false;
+    this.onClose.next(false);
+    this.modalRef.hide();
+  } 
+
+  private formReset(){    
+    this.survey.surveyInfo.companyId == "";
+    this.survey.surveyInfo.name == "";
+    this.survey.surveyInfo.description == "";
+    this.survey.surveyInfo.welcomeMessage == "";
+    this.survey.surveyInfo.exitMessage == "";
+    this.survey.surveyInfo.startDate == null;
+    this.survey.surveyInfo.endDate == null;
+    this.survey.surveyInfo.publicationDate == null;
+    this.survey.surveyInfo.expirationDate == null;
+  }
+  
+  ngOnDestroy() {
+
+    console.log("ON DESTROY");
+
+    let survey: any = {
+      surveyInfo: { "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": "", "endDate": "", "publicationDate": "", "expirationDate": "", "companyId": "" },
+      questionGroups: [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [{ "id": "", "driverName": "", "questions": [{ "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": null, "questionNumber": "", "questionSequence": 0, "questionTypeName": "" }] }] }]
+    };
+
+    //window.sessionStorage.setItem("currentSurvey", JSON.stringify(survey));
+
+    window.localStorage.setItem("surveyData", null);
   }
 }

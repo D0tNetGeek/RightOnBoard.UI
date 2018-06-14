@@ -51,7 +51,8 @@ export class HealthCheckComponent implements OnInit {
   }
   
   healthCheck:any=null;
-  buttonClick(template: TemplateRef<any>, healthCheck: any) {
+  
+  startHealthCheck(template: TemplateRef<any>, healthCheck: any) {
     this.loading = true;
     this.healthCheck=healthCheck;
     // if (healthCheck.surveyStatus != undefined && healthCheck.surveyStatus.toLowerCase() == 'awaiting start') {      

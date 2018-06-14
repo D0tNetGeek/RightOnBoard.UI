@@ -26,7 +26,7 @@
                   <button mat-raised-button type="submit" class="btn btn-sm btn-info" style="width:140px;background-color: grey;">Review Status</button>
                 </ng-container>
                 <ng-container *ngIf="checkActive(iteration)=='Pending'">
-                  <button mat-raised-button type="submit" class="btn btn-sm btn-info" style="width:140px;background-color: grey;" (click)="buttonClick(template, iteration)">Pending</button>
+                  <button mat-raised-button type="submit" class="btn btn-sm btn-info" style="width:140px;background-color: grey;" (click)="startHealthCheck(template, iteration)">Pending</button>
                 </ng-container>
               </td>
             </tr>

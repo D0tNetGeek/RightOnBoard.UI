@@ -18,7 +18,7 @@ export class SurveyListComponent implements OnInit, OnDestroy {
     this.loading = false;
 
     let survey: any = {
-      surveyInfo: { "surveyId": "", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": "", "endDate": "", "publicationDate": "", "expirationDate": "" },
+      surveyInfo: { "surveyId": "", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": "", "endDate": "", "publicationDate": "", "expirationDate": "","companyId": "" },
       questionGroups: [],
       surveyIterations:[]
     };

@@ -28,6 +28,7 @@
                         <th>User Name</th>
                         <th>Company Name</th>
                         <th>Role</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -37,9 +38,12 @@
                         <td>{{user.firstName}} {{user.lastName}}</td>
                         <td>{{user.companyName}}</td>
                         <td>{{user.roleName}}</td>
+                        <td>
+                            <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="editUser(user.email)">Edit</button>
+                          </td>
                       </tr>
                       <tr *ngIf="userList.length==0">
-                        <td colspan=100%>No Users Yet</td>
+                        <td colspan=100%>No Users Found</td>
                       </tr>
                     </tbody>
                   </table>

@@ -21,17 +21,24 @@ import { TotalProgressComponent } from './admin/total-progress/total-progress.co
 
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AccessDeniedComponent } from './authentication/access-denied/access-denied.component';
-import { SurveyListComponent } from './admin/survey/survey-list.component';
-import { CreateSurveyComponent } from './admin/survey/create-survey/create-survey.component';
 
 import { UserDashboardComponent } from './user/dashboard/dashboard.component';
 import { UserSurveyComponent } from './user/survey/survey.component';
 import { RegistrationComponent} from './registration/registration.component';
-import { UserManagementComponent } from './admin/user-management/user-management.component';
+
 import { CreateUserComponent } from './admin/user-management/create-user/create-user.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+
 import { CompanyManagementComponent } from './admin/company-management/company-management.component';
-import { EditCompanyComponent } from './admin/company-management/edit-company/edit-company.component';
 import { CreateCompanyComponent } from './admin/company-management/create-company/create-company.component';
+import { EditCompanyComponent } from './admin/company-management/edit-company/edit-company.component';
+
+import { SurveyListComponent } from './admin/survey/survey-list.component';
+import { CreateSurveyComponent } from './admin/survey/create-survey/create-survey.component';
+import { SurveyIterationComponent } from './admin/survey/create-survey/survey-iteration/survey-iteration.component';
+import { QuestionGroupComponent } from './admin/survey/create-survey/question-group/question-group.component';
+import { QuestionDriverComponent } from './admin/survey/create-survey/question-driver/question-driver.component';
+import { QuestionComponent } from './admin/survey/create-survey/question/question.component';
 
 //import { HealthCheckComponent } from './admin/health-check/health-check.component';
 //import { SurveyWelcomeComponent } from './admin/survey-welcome/survey-welcome.component';
@@ -105,6 +112,26 @@ const appRoutes: Routes = [
             {
                 path: 'create-survey',
                 component: CreateSurveyComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'survey-iteration',
+                component: SurveyIterationComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'question-group',
+                component: QuestionGroupComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'question-driver',
+                component: QuestionDriverComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'question',
+                component: QuestionComponent,
                 pathMatch: 'full'
             },
             {

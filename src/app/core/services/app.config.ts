@@ -20,6 +20,7 @@ export interface IAppConfig {
 
     apiSurveyForAdminPath: string;
     apiGetSurveysForAdminPath: string;
+    apiCreateSurveyForAdminPath: string;
 
     apiCompanyPath: string;
     apiGetCompaniesListForAdmin: string;
@@ -48,6 +49,7 @@ export const AppConfig: IAppConfig = {
 
     apiSurveyForAdminPath: "survey",
     apiGetSurveysForAdminPath: "getSurveysListForAdmin",
+    apiCreateSurveyForAdminPath: "createSurvey",
 
     apiCompanyPath: "company",
     apiGetCompaniesListForAdmin: "getcompanieslistforadmin",

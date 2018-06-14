@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { AdminService } from '../../../services/admin.service';
+
 @Component({
   selector: 'app-survey-info',
   templateUrl: './survey-info.component.html',
@@ -7,11 +9,34 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SurveyInfoComponent implements OnInit {
   @Input() surveyObj: any;
-  constructor() { }
+  
+  loading: boolean = false;
+  companies = [];
+  errorMesssage:string="";
+
+  company = {"companyId": "", "companyName": ""};
+  
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
+    this.loading = false;
+
+    this.loadCompanies();
   }
-  errorMesssage:string="";
+
+  loadCompanies(){
+    this.loading = true;
+
+    this.adminService.getCompaniesListForAdmin()
+    .subscribe(
+      data => {
+        this.companies = data;
+
+        this.loading = false;
+      }
+    )
+  }
+  
   validate(){
     this.errorMesssage="";
     if((this.surveyObj.surveyInfo.startDate!=""&& this.surveyObj.surveyInfo.endDate!="") && this.surveyObj.surveyInfo.startDate>this.surveyObj.surveyInfo.endDate ){
@@ -21,8 +46,8 @@ export class SurveyInfoComponent implements OnInit {
     if((this.surveyObj.surveyInfo.publicationDate!=""&& this.surveyObj.surveyInfo.expirationDate!="") &&this.surveyObj.surveyInfo.publicationDate>this.surveyObj.surveyInfo.expirationDate ){
       this.errorMesssage="Expiration Date should be greater than Publication Date";
     }
-
   }
+
   isDisabledInfo() {
     if (this.surveyObj.surveyInfo.name == ""
       || this.surveyObj.surveyInfo.description == ""

@@ -8,81 +8,88 @@
 
     <div class="main-content">
       <div class="container-fluid">
-        <h5 *ngIf="survey.surveyInfo.name==''">Create New Survey</h5>
-        <h5 *ngIf="survey.surveyInfo.name!=''">Edit Survey</h5>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card" id="exTab2">
-              <div class="panel with-nav-tabs panel-info">
-                <div class="panel-heading">
-                  <ul class="nav nav-tabs">
-                    <li [ngClass]="{'active':isTabActive('info'),'':!isTabActive('info')}" style="margin-left:3px;">
-                      <a (click)="setActiveTab('info')" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info"
-                        aria-selected="true">Survey Info</a>
-                    </li>
-                    <li [ngClass]="{'active':isTabActive('iteration'),'':!isTabActive('iteration')}" style="margin-left:3px;">
-                      <a (click)="setActiveTab('iteration')" id="pills-iteration-tab" data-toggle="pill" href="#pills-iteration" role="tab" aria-controls="pills-iteration"
-                        aria-selected="true">Iterations</a>
-                    </li>
-                    <li [ngClass]="{'active':isTabActive('groups'),'disabled':isGroupTabDisabled()}" style="margin-left:3px;">
-                      <ng-container *ngIf="!isGroupTabDisabled()">
-                        <a (click)="setActiveTab('groups')" id="pills-groups-tab" data-toggle="pill" href="#pills-groups" role="tab" aria-controls="pills-groups"
-                          aria-selected="true">Groups</a>
-                      </ng-container>
-                      <ng-container *ngIf="isGroupTabDisabled()">
-                        <a role="tab" aria-controls="pills-groups" aria-selected="true">Groups</a>
-                      </ng-container>
-                    </li>
-                    <li [ngClass]="{'active':isTabActive('drivers'),'disabled':isDriverTabDisabled()}" style="margin-left:3px;">
-                      <ng-container *ngIf="!isDriverTabDisabled()">
-                        <a (click)="setActiveTab('drivers')" id="pills-drivers-tab" data-toggle="pill" href="#pills-drivers" role="tab" aria-controls="pills-drivers"
-                          aria-selected="true">Drivers</a>
-                      </ng-container>
-                      <ng-container *ngIf="isDriverTabDisabled()">
-                        <a role="tab" aria-controls="pills-drivers" aria-selected="true">Drivers</a>
-                      </ng-container>
+        <form #frmSurvey="ngForm">
+          <h5 *ngIf="survey.surveyInfo.name==''">Create New Survey</h5>
+          <h5 *ngIf="survey.surveyInfo.name!=''">Edit Survey</h5>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card" id="exTab2">
+                <div class="panel with-nav-tabs panel-info">
+                  <div class="panel-heading">
+                    <ul class="nav nav-tabs">
+                      <li [ngClass]="{'active':isTabActive('info'),'':!isTabActive('info')}" style="margin-left:3px;">
+                        <a (click)="setActiveTab('info')" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info"
+                          aria-selected="true">Survey Info</a>
+                      </li>
+                      <li [ngClass]="{'active':isTabActive('iteration'),'disabled':isIterationTabDisabled()}" style="margin-left:3px;">
+                        <ng-container *ngIf="!isIterationTabDisabled()">
+                          <a (click)="setActiveTab('iteration')" id="pills-groups-tab" data-toggle="pill" href="#pills-groups" role="tab" aria-controls="pills-groups"
+                            aria-selected="true">Iterations</a>
+                        </ng-container>
+                        <ng-container *ngIf="isIterationTabDisabled()">
+                          <a role="tab" aria-controls="pills-groups" aria-selected="true">Iterations</a>
+                        </ng-container>
+                      </li>
+                      <li [ngClass]="{'active':isTabActive('groups'),'disabled':isGroupTabDisabled()}" style="margin-left:3px;">
+                        <ng-container *ngIf="!isGroupTabDisabled()">
+                          <a (click)="setActiveTab('groups')" id="pills-groups-tab" data-toggle="pill" href="#pills-groups" role="tab" aria-controls="pills-groups"
+                            aria-selected="true">Groups</a>
+                        </ng-container>
+                        <ng-container *ngIf="isGroupTabDisabled()">
+                          <a role="tab" aria-controls="pills-groups" aria-selected="true">Groups</a>
+                        </ng-container>
+                      </li>
+                      <li [ngClass]="{'active':isTabActive('drivers'),'disabled':isDriverTabDisabled()}" style="margin-left:3px;">
+                        <ng-container *ngIf="!isDriverTabDisabled()">
+                          <a (click)="setActiveTab('drivers')" id="pills-drivers-tab" data-toggle="pill" href="#pills-drivers" role="tab" aria-controls="pills-drivers"
+                            aria-selected="true">Drivers</a>
+                        </ng-container>
+                        <ng-container *ngIf="isDriverTabDisabled()">
+                          <a role="tab" aria-controls="pills-drivers" aria-selected="true">Drivers</a>
+                        </ng-container>
 
-                    </li>
-                    <li [ngClass]="{'active':isTabActive('questions'),'disabled':isQuestionTabDisabled()}"  style="margin-left:3px;">
+                      </li>
+                      <li [ngClass]="{'active':isTabActive('questions'),'disabled':isQuestionTabDisabled()}" style="margin-left:3px;">
                         <ng-container *ngIf="!isQuestionTabDisabled()">
-                            <a (click)="setActiveTab('questions')" id="pills-questions-tab" data-toggle="pill" href="#pills-questions" role="tab" aria-controls="pills-questions"
-                              aria-selected="true">Drivers</a>
-                          </ng-container>
-                          <ng-container *ngIf="isQuestionTabDisabled()">
-                            <a role="tab" aria-controls="pills-drivers" aria-selected="true">Questions</a>
-                          </ng-container>                          
-                    </li>
-                  </ul>
-                </div>
-                <div class="panel-body">
-                  <div class="tab-content">
-                    <div class="tab-pane fadein active ">
-                      <ng-container *ngIf="isTabActive('info')">
-                        <app-survey-info [(surveyObj)]="survey"></app-survey-info>
-                      </ng-container>
-                      <ng-container *ngIf="isTabActive('iteration')">
-                        <app-survey-iteration [(surveyObj)]="survey"></app-survey-iteration>
-                      </ng-container>
-                      <ng-container *ngIf="isTabActive('groups')">
-                        <app-question-group [(surveyObj)]="survey" (selectedGroup)="groupSelected($event)"></app-question-group>
-                      </ng-container>
-                      <ng-container *ngIf="isTabActive('drivers')">
-                        <app-question-driver [(surveyObj)]="survey" [group]="selectedGroup" (selectedDriver)="driverSelected($event)"></app-question-driver>
-                      </ng-container>
-                      <ng-container *ngIf="isTabActive('questions')">
-                        <app-question [(surveyObj)]="survey" [group]="selectedGroup" [driver]="selectedDriver"></app-question>
-                      </ng-container>
-                    </div>
+                          <a (click)="setActiveTab('questions')" id="pills-questions-tab" data-toggle="pill" href="#pills-questions" role="tab" aria-controls="pills-questions"
+                            aria-selected="true">Drivers</a>
+                        </ng-container>
+                        <ng-container *ngIf="isQuestionTabDisabled()">
+                          <a role="tab" aria-controls="pills-drivers" aria-selected="true">Questions</a>
+                        </ng-container>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="panel-body">
+                    <div class="tab-content">
+                      <div class="tab-pane fadein active ">
+                        <ng-container *ngIf="isTabActive('info')">
+                          <app-survey-info [(surveyObj)]="survey"></app-survey-info>
+                        </ng-container>
+                        <ng-container *ngIf="isTabActive('iteration')">
+                          <app-survey-iteration [(surveyObj)]="survey"></app-survey-iteration>
+                        </ng-container>
+                        <ng-container *ngIf="isTabActive('groups')">
+                          <app-question-group [(surveyObj)]="survey" (selectedGroup)="groupSelected($event)"></app-question-group>
+                        </ng-container>
+                        <ng-container *ngIf="isTabActive('drivers')">
+                          <app-question-driver [(surveyObj)]="survey" [group]="selectedGroup" (selectedDriver)="driverSelected($event)"></app-question-driver>
+                        </ng-container>
+                        <ng-container *ngIf="isTabActive('questions')">
+                          <app-question [(surveyObj)]="survey" [group]="selectedGroup" [driver]="selectedDriver"></app-question>
+                        </ng-container>
+                      </div>
 
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <button mat-raised-button type="submit" [disabled]="!validate()" class="btn btn-danger pull-right" *ngIf="isEdit" (click)="saveSurvey(template)">Update</button>
+          <button mat-raised-button type="submit" [disabled] = "!validate()" [ngClass]="{'active': !validate(), 'disabled':!validate()}" class="btn btn-danger pull-right" *ngIf="!isEdit" (click)="saveSurvey(template)">Save</button>
 
-        </div>
-        <button mat-raised-button type="submit" class="btn btn-danger pull-right" *ngIf="isEdit" (click)="saveSurvey()">Update</button>
-        <button mat-raised-button type="submit" class="btn btn-danger pull-right" *ngIf="!isEdit" (click)="saveSurvey()">Save</button>
+        </form>
       </div>
     </div>
 
@@ -91,3 +98,27 @@
     </div>
   </div>
 </div>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Create Survey</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-md-12">
+                Are you sue you want to create a Survey : {{surveyName}}
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="OnYes()">Yes</button>
+      <button type="button" class="btn btn-default" (click)="OnNo()">No</button>
+    </div>
+</ng-template>

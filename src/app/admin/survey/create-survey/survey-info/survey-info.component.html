@@ -9,6 +9,14 @@
               <form>
                 <div class="row">
                   <div class="col-md-12">
+                      <mat-form-field class="example-full-width">
+                        <mat-select placeholder="Select Company..."  [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.companyId" required>
+                          <mat-option value="{{company.companyId}}" *ngFor="let company of companies">{{company.companyName}}</mat-option>                         
+                        </mat-select>
+                      </mat-form-field>
+                  </div>
+
+                  <div class="col-md-12">
                     <mat-form-field class="example-full-width">
                       <input matInput placeholder="Survey Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="surveyObj.surveyInfo.name" maxlength="100"
                         required>

@@ -69,6 +69,19 @@ export class AdminService extends BaseService{
         });
     }
 
+    public createSurvey(survey): Observable<any>{
+
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiSurveyForAdminPath}/${this.appConfig.apiCreateSurveyForAdminPath}`;
+
+        console.log("Create Survey", url);
+
+        return http.post(url, survey)
+        .map(response => {
+            return response;
+        });
+    }
+
     //////////////// Survey Methods Ends Here
 
     ///////////////// Company Methods Starts Here

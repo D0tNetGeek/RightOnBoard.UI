@@ -35,6 +35,15 @@ export class UserProgressComponent implements OnInit {
         console.log (err.message);
       }
     );
+    this.http.get('./assets/chartData.json').subscribe(
+      data => {
+        this.lineChartSeries=JSON.parse(JSON.stringify(data)).lineChartData;
+        this.barChart=JSON.parse(JSON.stringify(data)).barChartData;
+      },
+      (err: HttpErrorResponse) => {
+        console.log (err.message);
+      }
+    );
    
   } 
   loadIterationGraph(iteration){
@@ -51,99 +60,15 @@ export class UserProgressComponent implements OnInit {
     this.selectedQuestion=question
   }
 
-  lineChartSeries:any[]=[
-    {
-      "name": "Confidence",
-      "series": [
-        {
-          "name": "H1",
-          "value": 50
-        },
-        {
-          "value": 80,
-          "name": "H2"
-        },
-        {
-          "value": 85,
-          "name": "H3"
-        },
-        {
-          "value": 90,
-          "name": "H4"
-        }
-      ]
-    },
-    {
-      "name": "Connection",
-      "series": [
-        {
-          "name": "H1",
-          "value": 60
-        },
-        {
-          "value": 20,
-          "name": "H2"
-        },
-        {
-          "value": 45,
-          "name": "H3"
-        },
-        {
-          "value": 9,
-          "name": "H4"
-        }
-      ]
-    },
-    {
-      "name": "Culture",
-      "series": [
-        {
-          "name": "H1",
-          "value": 65
-        },
-        {
-          "value": 23,
-          "name": "H2"
-        },
-        {
-          "value": 67,
-          "name": "H3"
-        },
-        {
-          "value": 15,
-          "name": "H4"
-        }
-      ]
-    }
-  ]
+  lineChartSeries:any[]=[];
   animations: boolean = true;
-  barChart: any[] = [
-    {
-      "name": "H1",
-      "value": 75
-    },
-    {
-      "name": "H2",
-      "value": 65
-    },
-    {
-      "name": "H3",
-      "value": 31
-    },
-    {
-      "name": "H4",
-      "value": 85
-    }
-  ];
+  barChart: any[] = [];
 
-  view: any[] = [345, 290];
-
-  // options
-  
+  view: any[] = [345, 290];  
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
-  showLegend = false;
+  gradient = true;
+  showLegend = true;
   showXAxisLabel = true;
   xAxisLabel = "Iterations";
   showYAxisLabel = true;
@@ -165,7 +90,7 @@ export class UserProgressComponent implements OnInit {
     return {min: `${min}`, max: `${max}`};
   }
   yLeftTickFormat(data) {
-    return `${data.toLocaleString()}`;
+    return `${data}%`;
   }
   yRightTickFormat(data) {
     return `${data}%`;

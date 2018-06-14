@@ -15,10 +15,14 @@ import { SurveyWelcomeComponent } from './survey-welcome/survey-welcome.componen
 import { UserService } from './services/user.service';
 import { UserProgressComponent } from './user-progress/user-progress.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { ComboChartComponent } from './combo-chart/combo-chart.component';
+import {  ComboSeriesVerticalComponent} from './combo-chart/combo-series-vertical.component';
+
 @NgModule({
     imports: [
         CommonModule,
-        UserRoutingModule,HttpClientModule
+        UserRoutingModule,HttpClientModule,NgxChartsModule
     ],
     declarations: [
         UserDashboardComponent,
@@ -29,7 +33,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
         UserSurveyComponent,
         HealthCheckComponent,
         SurveyWelcomeComponent,
-        UserProgressComponent
+        UserProgressComponent,
+        ComboChartComponent,ComboSeriesVerticalComponent
     ],
     providers:[
         AuthGuard,

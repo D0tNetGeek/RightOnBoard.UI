@@ -32,7 +32,7 @@ export class CreateSurveyComponent implements OnInit {
   surveyName: string = "";
 
   frmSurvey: FormGroup;
-  
+  infoFormReset:boolean=false;
   survey: any = {
     surveyInfo: { "surveyId":"", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate":null, "endDate": null, "publicationDate": null, "expirationDate": null, "companyId": "" },
     questionGroups: [],
@@ -211,8 +211,7 @@ export class CreateSurveyComponent implements OnInit {
   public OnYes(): void{
     this.onClose.next(true);
     this.modalRef.hide();     
-
-    this.adminService.createSurvey(this.survey.surveyInfo)
+   /*this.adminService.createSurvey(this.survey.surveyInfo)
     .subscribe(
       data=>{
         console.log("Survey completed. ",this.survey);
@@ -228,18 +227,24 @@ export class CreateSurveyComponent implements OnInit {
           console.log("Error creating survey");
         }
       }
-    )
+    )*/
+    alert('Christo On Yes--');//You can move this inside then...
+    this.survey.surveyInfo.surveyId = "16507b51-c613-4a1a-83e0-b2fbefb084b9";
+    if(this.activeTab=="info"){
+      this.activeTab="iteration"
+    }
+    
   }
 
   public OnNo(): void{
     this.formReset();
-    this.survey.surveyInfo = null;
+    this.infoFormReset=!this.infoFormReset;
     this.loading = false;
     this.onClose.next(false);
     this.modalRef.hide();
   } 
 
-  private formReset(){    
+  private formReset(){   
     this.survey.surveyInfo.companyId == "";
     this.survey.surveyInfo.name == "";
     this.survey.surveyInfo.description == "";

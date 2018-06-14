@@ -64,7 +64,7 @@
                     <div class="tab-content">
                       <div class="tab-pane fadein active ">
                         <ng-container *ngIf="isTabActive('info')">
-                          <app-survey-info [(surveyObj)]="survey"></app-survey-info>
+                          <app-survey-info [(surveyObj)]="survey" [(reset)]="infoFormReset"></app-survey-info>
                         </ng-container>
                         <ng-container *ngIf="isTabActive('iteration')">
                           <app-survey-iteration [(surveyObj)]="survey"></app-survey-iteration>

@@ -193,21 +193,19 @@ export class CreateSurveyComponent implements OnInit {
       || this.survey.surveyInfo.description == ""
       || this.survey.surveyInfo.welcomeMessage == ""
       || this.survey.surveyInfo.exitMessage == ""
-      || this.survey.surveyInfo.startDate == null
-      || this.survey.surveyInfo.endDate == null
-      || this.survey.surveyInfo.publicationDate == null
-      || this.survey.surveyInfo.expirationDate == null
-      || this.survey.surveyInfo.startDate == "null"
-      || this.survey.surveyInfo.endDate == "null"
-      || this.survey.surveyInfo.publicationDate == "null"
-      || this.survey.surveyInfo.expirationDate == "null") {
+      || this.validDate(this.survey.surveyInfo.startDate)
+      || this.validDate(this.survey.surveyInfo.endDate )
+      || this.validDate(this.survey.surveyInfo.publicationDate )
+      || this.validDate(this.survey.surveyInfo.expirationDate)) {
 
       return false;
     } else {  
       return true;
     }
   }
-
+  validDate(value){
+    return value==null||value==undefined||value.trim()==""||value=="null"
+  }
   public OnYes(): void{
     this.onClose.next(true);
     this.modalRef.hide();     

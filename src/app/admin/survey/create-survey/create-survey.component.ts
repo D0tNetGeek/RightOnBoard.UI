@@ -186,7 +186,7 @@ export class CreateSurveyComponent implements OnInit {
   }
 
   validate() {
-    console.log("validate : ",this.survey.surveyInfo);
+    //console.log("validate : ",this.survey.surveyInfo);
     if (
       this.survey.surveyInfo.companyId == ""
       || this.survey.surveyInfo.name == ""

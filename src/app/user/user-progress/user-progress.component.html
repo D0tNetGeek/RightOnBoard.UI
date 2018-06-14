@@ -5,7 +5,7 @@
         <img src="/assets/images/ROB_logo.png" style="height:50px!important;background-color:#311a41;" />
       </div>
       <div class="col-md-5" style="background-color:#311a41;">
-        
+
       </div>
       <div class="col-md-3" style="display: inline;background-color:#311a41;">
         <div style="background-color:ivory!important;border-radius: 6px;margin:2%" *ngIf="selectedQuestion!=null">
@@ -19,13 +19,118 @@
       </div>
     </div>
     <div class="row marginBottom" style="margin-top:1px;height:300px;">
-      <div class="col-md-4">
+      <div class="col-md-4" style="border: 1px solid dimgrey;border-radius: 7px;margin-top:1%;">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="dropdown" style="width:100%">
+              <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" style="width:100%">
+                {{selectedIteration.iterationName}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" style="width:100%" role="menu" aria-labelledby="menu1">
+                <li role="presentation" *ngFor="let iteration of iterations" (click)="loadIterationGraph(iteration)">
+                  <a role="menuitem">{{iteration.iterationName}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom:2%;height:60px;">
+          <div class="col-md-4">
+            <label>Department Average</label>
+          </div>
+          <div class="col-md-8">
+            <div class="progress" style="height:45px">
+              <div class="progress-bar progress-bar-info progress-bar-striped progress-bar-animated" [style.width.%]="selectedIteration.data.departmentalAverage"
+                style="height:45px">
+                {{selectedIteration.data.departmentalAverage}}%
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom:2%;height:60px;">
+          <div class="col-md-4">
+            <label>Company Average</label>
+          </div>
+          <div class="col-md-8">
+            <div class="progress" style="height:45px">
+              <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" [style.width.%]="selectedIteration.data.companyAverage"
+                style="height:45px">
+                {{selectedIteration.data.companyAverage}}%
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom:2%;height:60px;">
+          <div class="col-md-4">
+            <label>Your Progress</label>
+          </div>
+          <div class="col-md-8">
+            <div class="progress" style="height:45px">
+              <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" [style.width.%]="selectedIteration.data.totalProgress"
+                style="height:45px">
+                {{selectedIteration.data.totalProgress}}%
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
         <img src="/assets/images/RoB_people_circle.png" style="height:320px;opacity: .1;" />
         <div class="centered">75%</div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" style="border: 1px solid dimgrey;border-radius: 7px;margin-top:1%;">
+        <div style="height: 100px">
+        <!--    <combo-chart-component
+            class="chart-container"
+            [view]="view"
+            [scheme]="comboBarScheme"
+            [colorSchemeLine]="lineChartScheme"
+            [results]="barChart"
+            [animations]="animations"
+            [lineChart]="lineChartSeries"
+            [tooltipDisabled]="true"
+            [yAxisTickFormatting]="yLeftTickFormat"
+            [yLeftAxisScaleFactor]="yLeftAxisScale"
+            [yRightAxisScaleFactor]="yRightAxisScale"
+            [yRightAxisTickFormatting]="yRightTickFormat"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [legendTitle]="legendTitle"
+            [showGridLines]="showGridLines"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [showRightYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [yAxisLabelRight]="yAxisLabelRight"
+            (select)="onSelect($event)">
+          </combo-chart-component>-->
+      <!-- <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="barChartValue" [gradient]="gradient" [xAxis]="showXAxis"
+            [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
+
+         <ngx-charts-line-chart
+          [view]="view"
+          [scheme]="colorSchemeLine"
+          [results]="lineChartData"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [autoScale]="autoScale"
+          [timeline]="timeline"
+          (select)="onSelect($event)">
+        </ngx-charts-line-chart>-->
+        </div>
       </div>
     </div>
     <div class="row marginBottom" style="margin-top:25px">

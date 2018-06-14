@@ -207,10 +207,10 @@ export class CreateSurveyComponent implements OnInit {
     this.adminService.createSurvey(this.survey.surveyInfo)
     .subscribe(
       data=>{
-        console.log("Survey completed.");
+        console.log("Survey completed. ",this.survey);
 
-        this.survey.surveyInfo.surveyId = data.Content.surveyId;
-        
+        //this.survey.surveyInfo.surveyId = data.Content.surveyId;
+
         window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
 
         this.router.navigate(["/admin/survey-iteration"]);

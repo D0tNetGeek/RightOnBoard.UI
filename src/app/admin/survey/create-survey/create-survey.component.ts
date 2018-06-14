@@ -210,28 +210,28 @@ export class CreateSurveyComponent implements OnInit {
 
   public OnYes(): void{
     this.onClose.next(true);
-    this.modalRef.hide();     
-   /*this.adminService.createSurvey(this.survey.surveyInfo)
-    .subscribe(
-      data=>{
-        console.log("Survey completed. ",this.survey);
+    this.modalRef.hide();
 
-        //this.survey.surveyInfo.surveyId = data.Content.surveyId;
-
-        window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
-
-        this.router.navigate(["/admin/survey-iteration"]);
-      },
-      error=>{
-        if(error.status == 400){
-          console.log("Error creating survey");
-        }
-      }
-    )*/
-    alert('Christo On Yes--');//You can move this inside then...
-    this.survey.surveyInfo.surveyId = "16507b51-c613-4a1a-83e0-b2fbefb084b9";
+    //this.survey.surveyInfo.surveyId = "16507b51-c613-4a1a-83e0-b2fbefb084b9";
+    
     if(this.activeTab=="info"){
-      this.activeTab="iteration"
+      this.adminService.createSurvey(this.survey.surveyInfo)
+        .subscribe(
+          data=>{
+            console.log("Survey completed. ",data);
+
+            this.survey.surveyInfo = data;
+
+            window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
+
+            this.activeTab="iteration"
+          },
+          error=>{
+            if(error.status == 400){
+              console.log("Error creating survey");
+            }
+          }
+        )      
     }
     
   }

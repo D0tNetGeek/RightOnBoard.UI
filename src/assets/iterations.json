@@ -1,0 +1,17 @@
+   [
+       {
+           "iterationId":101,
+           "iterationName":"Health Check 1",
+           "data":{"departmentalAverage":45,"companyAverage":62,"totalProgress":75}
+       },
+       {
+           "iterationId":102,
+           "iterationName":"Health Check 2",
+           "data":{"departmentalAverage":55,"companyAverage":42,"totalProgress":32}
+       },
+       {
+           "iterationId":103,
+           "iterationName":"Health Check 31",
+           "data":{"departmentalAverage":95,"companyAverage":12,"totalProgress":67}
+       }
+   ]

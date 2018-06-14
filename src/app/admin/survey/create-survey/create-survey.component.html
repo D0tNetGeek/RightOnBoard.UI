@@ -22,14 +22,14 @@
                           aria-selected="true">Survey Info</a>
                       </li>
                       <li [ngClass]="{'active':isTabActive('iteration'),'disabled':isIterationTabDisabled()}" style="margin-left:3px;">
-                        <ng-container *ngIf="!isIterationTabDisabled()">
-                          <a (click)="setActiveTab('iteration')" id="pills-groups-tab" data-toggle="pill" href="#pills-groups" role="tab" aria-controls="pills-groups"
-                            aria-selected="true">Iterations</a>
-                        </ng-container>
-                        <ng-container *ngIf="isIterationTabDisabled()">
-                          <a role="tab" aria-controls="pills-groups" aria-selected="true">Iterations</a>
-                        </ng-container>
-                      </li>
+                          <ng-container *ngIf="!isIterationTabDisabled()">
+                            <a (click)="setActiveTab('iteration')" id="pills-groups-tab" data-toggle="pill" href="#pills-groups" role="tab" aria-controls="pills-groups"
+                              aria-selected="true">Iterations</a>
+                          </ng-container>
+                          <ng-container *ngIf="isIterationTabDisabled()">
+                            <a role="tab" aria-controls="pills-groups" aria-selected="true">Iterations</a>
+                          </ng-container>
+                        </li>
                       <li [ngClass]="{'active':isTabActive('groups'),'disabled':isGroupTabDisabled()}" style="margin-left:3px;">
                         <ng-container *ngIf="!isGroupTabDisabled()">
                           <a (click)="setActiveTab('groups')" id="pills-groups-tab" data-toggle="pill" href="#pills-groups" role="tab" aria-controls="pills-groups"
@@ -52,7 +52,7 @@
                       <li [ngClass]="{'active':isTabActive('questions'),'disabled':isQuestionTabDisabled()}" style="margin-left:3px;">
                         <ng-container *ngIf="!isQuestionTabDisabled()">
                           <a (click)="setActiveTab('questions')" id="pills-questions-tab" data-toggle="pill" href="#pills-questions" role="tab" aria-controls="pills-questions"
-                            aria-selected="true">Drivers</a>
+                            aria-selected="true">Questions</a>
                         </ng-container>
                         <ng-container *ngIf="isQuestionTabDisabled()">
                           <a role="tab" aria-controls="pills-drivers" aria-selected="true">Questions</a>

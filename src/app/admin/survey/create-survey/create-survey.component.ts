@@ -34,7 +34,7 @@ export class CreateSurveyComponent implements OnInit {
   frmSurvey: FormGroup;
   
   survey: any = {
-    surveyInfo: { "surveyId":"", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": "", "endDate": "", "publicationDate": "", "expirationDate": "", "companyId": "" },
+    surveyInfo: { "surveyId":"", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate":null, "endDate": null, "publicationDate": null, "expirationDate": null, "companyId": "" },
     questionGroups: [],
     surveyIterations:[]
   };
@@ -110,8 +110,11 @@ export class CreateSurveyComponent implements OnInit {
   isGroupTabDisabled(){
     let returnValue:boolean=false;
 
-    if(this.activeTab=="info" || this.activeTab=="iteration"){
-      return !this.validate();
+    if(this.activeTab=="info" ){
+      return true;
+    }
+    if(this.activeTab=="iteration"){
+      return this.survey.surveyIterations==null||this.survey.surveyIterations==undefined||this.survey.surveyIterations.length==0;
     }
     return returnValue;
   }
@@ -183,6 +186,7 @@ export class CreateSurveyComponent implements OnInit {
   }
 
   validate() {
+    console.log("validate : ",this.survey.surveyInfo);
     if (
       this.survey.surveyInfo.companyId == ""
       || this.survey.surveyInfo.name == ""
@@ -192,7 +196,11 @@ export class CreateSurveyComponent implements OnInit {
       || this.survey.surveyInfo.startDate == null
       || this.survey.surveyInfo.endDate == null
       || this.survey.surveyInfo.publicationDate == null
-      || this.survey.surveyInfo.expirationDate == null) {
+      || this.survey.surveyInfo.expirationDate == null
+      || this.survey.surveyInfo.startDate == "null"
+      || this.survey.surveyInfo.endDate == "null"
+      || this.survey.surveyInfo.publicationDate == "null"
+      || this.survey.surveyInfo.expirationDate == "null") {
 
       return false;
     } else {  
@@ -248,7 +256,7 @@ export class CreateSurveyComponent implements OnInit {
     console.log("ON DESTROY");
 
     let survey: any = {
-      surveyInfo: { "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": "", "endDate": "", "publicationDate": "", "expirationDate": "", "companyId": "" },
+      surveyInfo: { "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": null, "endDate":null, "publicationDate": null, "expirationDate": null, "companyId": "" },
       questionGroups: [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [{ "id": "", "driverName": "", "questions": [{ "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": null, "questionNumber": "", "questionSequence": 0, "questionTypeName": "" }] }] }]
     };
 

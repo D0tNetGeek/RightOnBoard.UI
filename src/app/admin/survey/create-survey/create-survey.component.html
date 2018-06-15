@@ -99,6 +99,12 @@
   </div>
 </div>
 
+<div class="overlay-box" *ngIf="loading"><div class="loader" ></div></div>
+
+<div class="loader-wrapper" id="loader-1" *ngIf="loading">
+    <div id="loader"></div>
+</div>
+
 <ng-template #template>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Create Survey</h4>
@@ -111,7 +117,7 @@
         <div class="container-fluid">
             <div class="row">
             <div class="col-md-12">
-                Are you sue you want to create a Survey : {{surveyName}}
+                {{surveyName}}
             </div>
             </div>
         </div>

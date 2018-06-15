@@ -11,7 +11,7 @@ export class SurveyIterationComponent implements OnInit {
 
   @Input() surveyObj: any;
   
-  iteration = { "id": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" };
+  iteration = { "id": "", "surveyId": "", "iterationName": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" };
   modalRef: BsModalRef;
   
   private surveyData: any = [];
@@ -27,7 +27,7 @@ export class SurveyIterationComponent implements OnInit {
   }
 
   addNewTrigger(template: TemplateRef<any>) {
-    this.iteration = { "id": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" };
+    this.iteration = { "id": "", "iterationName": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" };
     this.modalRef = this.modalService.show(template);
   }
 
@@ -39,7 +39,7 @@ export class SurveyIterationComponent implements OnInit {
   addIteration() {
     this.surveyObj.surveyIterations.push(this.iteration);
 
-    this.iteration = { "id": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" };
+    this.iteration = { "id": "", "surveyId": "", "iterationName": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" };
     this.modalRef.hide();
     this.modalRef = null;
   }
@@ -66,6 +66,7 @@ export class SurveyIterationComponent implements OnInit {
       return;
     }
   }
+  
   isDisabledInfo() {
     if (this.iteration.openDateTime == ""
       || this.iteration.closeDateTime == ""

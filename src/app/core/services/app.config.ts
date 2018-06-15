@@ -21,6 +21,7 @@ export interface IAppConfig {
     apiSurveyForAdminPath: string;
     apiGetSurveysForAdminPath: string;
     apiCreateSurveyForAdminPath: string;
+    apiCreateSurveyIterationForAdminPath: string;
 
     apiCompanyPath: string;
     apiGetCompaniesListForAdmin: string;
@@ -50,6 +51,7 @@ export const AppConfig: IAppConfig = {
     apiSurveyForAdminPath: "survey",
     apiGetSurveysForAdminPath: "getSurveysListForAdmin",
     apiCreateSurveyForAdminPath: "createSurvey",
+    apiCreateSurveyIterationForAdminPath: "createIteration",
 
     apiCompanyPath: "company",
     apiGetCompaniesListForAdmin: "getcompanieslistforadmin",

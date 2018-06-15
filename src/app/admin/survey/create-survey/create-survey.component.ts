@@ -35,8 +35,10 @@ export class CreateSurveyComponent implements OnInit {
   infoFormReset:boolean=false;
   survey: any = {
     surveyInfo: { "surveyId":"", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate":null, "endDate": null, "publicationDate": null, "expirationDate": null, "companyId": "" },
+    surveyIterations:[{ "id": "", "iterationName": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" }],
     questionGroups: [],
-    surveyIterations:[]
+    drivers:[],
+    questions:[]
   };
 
   constructor(
@@ -59,6 +61,7 @@ export class CreateSurveyComponent implements OnInit {
       this.isEdit = true;
     }
   }
+
   groupSelected(event) {
     this.selectedGroup = event;
     this.selectedDriver=null;
@@ -100,8 +103,10 @@ export class CreateSurveyComponent implements OnInit {
   isIterationTabDisabled(){
     let returnValue:boolean=false;
 
-    if(this.activeTab=="info"){
-      return !this.validate();
+    //console.log(this.survey.surveyInfo.surveyId);
+
+    if(this.activeTab=="info" && this.survey.surveyInfo.surveyId == ""){
+      return true;//!this.validate();
     }
     
     return returnValue;
@@ -158,17 +163,29 @@ export class CreateSurveyComponent implements OnInit {
   }
 
   saveSurvey(template: TemplateRef<any>) {
-    if (this.validate()) {
+    if(this.activeTab=="info"){
+      if (this.validate()) {
 
+        this.loading = true;
+        
+        console.log("Create survey : ", this.survey);
+
+        this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+        this.surveyName = this.survey.surveyInfo.name;
+      } else {
+        alert('Survey Info In-complete');
+      }
+    }
+    else if(this.activeTab=="iteration"){
       this.loading = true;
-      
-      console.log("Create survey : ", this.survey);
+
+      console.log("Create iteration", this.survey);
 
       this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
-      this.surveyName = this.survey.surveyInfo.name;
-    } else {
-      alert('Survey Info In-complete');
-    }
+        //this.surveyName = this.survey.surveyIterations.name;
+      } else {
+        alert('Iteration Info In-complete');
+      }
   }
 
   validate() {
@@ -217,6 +234,25 @@ export class CreateSurveyComponent implements OnInit {
           }
         )      
     }
+    else if(this.activeTab=="iteration"){
+      this.adminService.createIteration(this.survey.surveyIterations)
+        .subscribe(
+          data=>{
+            console.log("Survey Iteration completed. ",data);
+
+            this.survey.surveyIterations = data;
+
+            window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
+
+            this.activeTab="groups"
+          },
+          error=>{
+            if(error.status == 400){
+              console.log("Error creating survey iteration");
+            }
+          }
+        )      
+    }
     
   }
 
@@ -246,7 +282,10 @@ export class CreateSurveyComponent implements OnInit {
 
     let survey: any = {
       surveyInfo: { "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": null, "endDate":null, "publicationDate": null, "expirationDate": null, "companyId": "" },
-      questionGroups: [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [{ "id": "", "driverName": "", "questions": [{ "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": null, "questionNumber": "", "questionSequence": 0, "questionTypeName": "" }] }] }]
+      surveyIterations:[{ "id": "", "iterationName": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" }],
+      questionGroups: [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [{ "id": "", "driverName": "", "questions": [{ "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": null, "questionNumber": "", "questionSequence": 0, "questionTypeName": "" }] }] }],
+      drivers:[],
+      questions:[]
     };
 
     //window.sessionStorage.setItem("currentSurvey", JSON.stringify(survey));

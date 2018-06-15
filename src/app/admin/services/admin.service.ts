@@ -82,6 +82,19 @@ export class AdminService extends BaseService{
         });
     }
 
+    public createIteration(iteration): Observable<any>{
+
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiSurveyForAdminPath}/${this.appConfig.apiCreateSurveyIterationForAdminPath}`;
+
+        console.log("Create Iteration", url);
+
+        return http.post(url, iteration)
+        .map(response => {
+            return response;
+        });
+    }
+
     //////////////// Survey Methods Ends Here
 
     ///////////////// Company Methods Starts Here

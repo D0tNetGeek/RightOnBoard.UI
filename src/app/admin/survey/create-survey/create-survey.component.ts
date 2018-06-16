@@ -32,28 +32,28 @@ export class CreateSurveyComponent implements OnInit {
   surveyName: string = "";
 
   frmSurvey: FormGroup;
-  infoFormReset:boolean=false;
+  infoFormReset: boolean = false;
   survey: any = {
-    surveyInfo: { "surveyId":"", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate":null, "endDate": null, "publicationDate": null, "expirationDate": null, "companyId": "" },
-    surveyIterations:[{ "id": "", "iterationName": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" }],
+    surveyInfo: { "surveyId": "", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": null, "endDate": null, "publicationDate": null, "expirationDate": null, "companyId": "" },
+    surveyIterations: [],
     questionGroups: [],
-    drivers:[],
-    questions:[]
+    drivers: [],
+    questions: []
   };
 
   constructor(
     private adminService: AdminService,
     private modalService: BsModalService,
     private router: Router) { }
-  
+
   ngOnInit() {
     this.loading = false;
 
     this.onClose = new Subject();
 
-    this.setActiveTab("info");    
+    this.setActiveTab("info");
 
-    console.log("OnInit : ",this.survey.surveyInfo);
+    console.log("OnInit : ", this.survey.surveyInfo);
 
     if (this.survey.surveyInfo.companyId == "") {
       this.isEdit = false;
@@ -64,7 +64,7 @@ export class CreateSurveyComponent implements OnInit {
 
   groupSelected(event) {
     this.selectedGroup = event;
-    this.selectedDriver=null;
+    this.selectedDriver = null;
     this.activeTab = 'drivers';
   }
 
@@ -80,13 +80,13 @@ export class CreateSurveyComponent implements OnInit {
   setActiveTab(tab) {
     console.log("Active Tab : ", tab);
 
-    if(this.activeTab=="info" || this.activeTab=="iteration" || this.activeTab=="groups"){
+    if (this.activeTab == "info" || this.activeTab == "iteration" || this.activeTab == "groups") {
       this.selectedGroup = null;
-      this.selectedDriver =null;
+      this.selectedDriver = null;
     }
 
-    if(this.activeTab=="driver"){
-      this.selectedDriver=null;
+    if (this.activeTab == "driver") {
+      this.selectedDriver = null;
     }
 
     this.activeTab = tab;
@@ -94,48 +94,48 @@ export class CreateSurveyComponent implements OnInit {
 
   isDisabledTab(tab) {
     this.activeTab == tab;
-    if(tab=="info"){
+    if (tab == "info") {
 
     }
     return false;
   }
 
-  isIterationTabDisabled(){
-    let returnValue:boolean=false;
+  isIterationTabDisabled() {
+    let returnValue: boolean = false;
 
     //console.log(this.survey.surveyInfo.surveyId);
 
-    if(this.activeTab=="info" && this.survey.surveyInfo.surveyId == ""){
+    if (this.activeTab == "info" && this.survey.surveyInfo.surveyId == "") {
       return true;//!this.validate();
     }
-    
+
     return returnValue;
   }
 
-  isGroupTabDisabled(){
-    let returnValue:boolean=false;
+  isGroupTabDisabled() {
+    let returnValue: boolean = false;
 
-    if(this.activeTab=="info" ){
+    if (this.activeTab == "info") {
       return true;
     }
-    if(this.activeTab=="iteration"){
-      return this.survey.surveyIterations==null||this.survey.surveyIterations==undefined||this.survey.surveyIterations.length==0;
+    if (this.activeTab == "iteration") {
+      return this.survey.surveyIterations == null || this.survey.surveyIterations == undefined || this.survey.surveyIterations.length == 0;
     }
     return returnValue;
   }
 
-  isDriverTabDisabled(){
-    let returnValue:boolean=false;
+  isDriverTabDisabled() {
+    let returnValue: boolean = false;
 
-    if(this.activeTab=="info"|| this.activeTab=="iteration"){
+    if (this.activeTab == "info" || this.activeTab == "iteration") {
       return true;
     }
 
-    if(this.activeTab=="groups"){
-      if(this.selectedGroup==null){
+    if (this.activeTab == "groups") {
+      if (this.selectedGroup == null) {
         return true;
       }
-      else{
+      else {
         return false;
       }
     }
@@ -143,53 +143,51 @@ export class CreateSurveyComponent implements OnInit {
     return returnValue;
   }
 
-  isQuestionTabDisabled(){
-    let returnValue:boolean=false;
+  isQuestionTabDisabled() {
+    let returnValue: boolean = false;
 
-    if(this.activeTab=="info" || this.activeTab=="iteration" || this.activeTab=="groups"){
+    if (this.activeTab == "info" || this.activeTab == "iteration" || this.activeTab == "groups") {
       return true;
     }
 
-    if(this.activeTab=="drivers"){
-      if(this.selectedDriver==null){
+    if (this.activeTab == "drivers") {
+      if (this.selectedDriver == null) {
         return true;
       }
-      else{
+      else {
         return false;
       }
     }
 
     return returnValue;
   }
-
+  templateHeader: string = "";
+  templateMessage: string = "";
   saveSurvey(template: TemplateRef<any>) {
-    if(this.activeTab=="info"){
+    if (this.activeTab == "info") {
       if (this.validate()) {
-
         this.loading = true;
-        
         console.log("Create survey : ", this.survey);
-
-        this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+        this.templateHeader = "Create Survey";
+        this.templateMessage = `Are you sue you want to create a Survey : ${this.survey.surveyInfo.name}`;
+        this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
         this.surveyName = this.survey.surveyInfo.name;
       } else {
         alert('Survey Info In-complete');
       }
     }
-    else if(this.activeTab=="iteration"){
+    else if (this.activeTab == "iteration") {
       this.loading = true;
-
       console.log("Create iteration", this.survey);
-
-      this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
-        //this.surveyName = this.survey.surveyIterations.name;
-      } else {
-        alert('Iteration Info In-complete');
-      }
+      this.templateHeader = "Create Iterations";
+      this.templateMessage = `Are you sue you want to save iterations`;
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    } else {
+      alert('Iteration Info In-complete');
+    }
   }
 
   validate() {
-    //console.log("validate : ",this.survey.surveyInfo);
     if (
       this.survey.surveyInfo.companyId == ""
       || this.survey.surveyInfo.name == ""
@@ -197,26 +195,27 @@ export class CreateSurveyComponent implements OnInit {
       || this.survey.surveyInfo.welcomeMessage == ""
       || this.survey.surveyInfo.exitMessage == ""
       || this.validDate(this.survey.surveyInfo.startDate)
-      || this.validDate(this.survey.surveyInfo.endDate )
-      || this.validDate(this.survey.surveyInfo.publicationDate )
+      || this.validDate(this.survey.surveyInfo.endDate)
+      || this.validDate(this.survey.surveyInfo.publicationDate)
       || this.validDate(this.survey.surveyInfo.expirationDate)) {
 
       return false;
-    } else {  
+    } else {
       return true;
     }
   }
 
-  validDate(value){
-    return value==null||value==undefined||value.trim()==""||value=="null"
+  validDate(value) {
+    return value == null || value == undefined || value.trim() == "" || value == "null"
   }
 
-  public OnYes(): void{
+  public OnYes(): void {
     this.onClose.next(true);
     this.modalRef.hide();
 
-    if(this.activeTab=="info"){
-      this.adminService.createSurvey(this.survey.surveyInfo)
+    if (this.activeTab == "info") {
+      this.activeTab = "iteration"
+      /*this.adminService.createSurvey(this.survey.surveyInfo)
         .subscribe(
           data=>{
             console.log("Survey completed. ",data);
@@ -232,10 +231,11 @@ export class CreateSurveyComponent implements OnInit {
               console.log("Error creating survey");
             }
           }
-        )      
+        ) */
     }
-    else if(this.activeTab=="iteration"){
-      this.adminService.createIteration(this.survey.surveyIterations)
+    else if (this.activeTab == "iteration") {
+      this.activeTab = "groups"
+      /*this.adminService.createIteration(this.survey.surveyIterations)
         .subscribe(
           data=>{
             console.log("Survey Iteration completed. ",data);
@@ -251,20 +251,22 @@ export class CreateSurveyComponent implements OnInit {
               console.log("Error creating survey iteration");
             }
           }
-        )      
+        )  */
     }
-    
+
   }
 
-  public OnNo(): void{
-    this.formReset();
-    this.infoFormReset=!this.infoFormReset;
+  public OnNo(): void {
+    if (this.activeTab == "info") {
+      this.formReset();
+    }
+    this.infoFormReset = !this.infoFormReset;
     this.loading = false;
     this.onClose.next(false);
     this.modalRef.hide();
-  } 
+  }
 
-  private formReset(){   
+  private formReset() {
     this.survey.surveyInfo.companyId == "";
     this.survey.surveyInfo.name == "";
     this.survey.surveyInfo.description == "";
@@ -275,17 +277,17 @@ export class CreateSurveyComponent implements OnInit {
     this.survey.surveyInfo.publicationDate == null;
     this.survey.surveyInfo.expirationDate == null;
   }
-  
+
   ngOnDestroy() {
 
     console.log("ON DESTROY");
 
     let survey: any = {
-      surveyInfo: { "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": null, "endDate":null, "publicationDate": null, "expirationDate": null, "companyId": "" },
-      surveyIterations:[{ "id": "", "iterationName": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" }],
+      surveyInfo: { "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": null, "endDate": null, "publicationDate": null, "expirationDate": null, "companyId": "" },
+      surveyIterations: [{ "id": "", "iterationName": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" }],
       questionGroups: [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [{ "id": "", "driverName": "", "questions": [{ "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": null, "questionNumber": "", "questionSequence": 0, "questionTypeName": "" }] }] }],
-      drivers:[],
-      questions:[]
+      drivers: [],
+      questions: []
     };
 
     //window.sessionStorage.setItem("currentSurvey", JSON.stringify(survey));

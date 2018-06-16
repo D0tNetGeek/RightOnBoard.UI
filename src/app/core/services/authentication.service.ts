@@ -102,18 +102,18 @@ export class AuthenticationService extends BaseService {
               this.authStatusSource.next(true);
               
               console.info("User Info : ", this.getAuthUser());
-              console.info("User Role : ", this.getAuthUser().roles[0]);
+              //console.info("User Role : ", this.getAuthUser().roles[0]);
 
               //return true;
-
-              if(this.getAuthUser().roles[0] === "admin")
+              return "/admin";
+              /*if(this.getAuthUser().roles[0] === "admin")
               {
                 return "/admin";
               }
               else if(this.getAuthUser().roles[0] === "user")
               {
                 return "/user";
-              }
+              }*/
             }),
             catchError((error: HttpErrorResponse) => ErrorObservable.create(error))
           );
@@ -159,7 +159,8 @@ export class AuthenticationService extends BaseService {
     // }
 
     isAuthUserLoggedIn(): boolean {
-      return this.tokenStoreService.hasStoredAccessAndRefreshTokens() && !this.tokenStoreService.isAccessTokenExpired();
+      return false;
+      //return this.tokenStoreService.hasStoredAccessAndRefreshTokens() && !this.tokenStoreService.isAccessTokenExpired();
     }
 
     getAuthUser(): AuthUser | null {

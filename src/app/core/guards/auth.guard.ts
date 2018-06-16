@@ -48,21 +48,21 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         const permissionData = childRoute.data[this.permissionObjectKey] as AuthGuardPermission;
         const returnUrl = state.url;
-        return this.hasAuthUserAccessToThisRoute(permissionData, returnUrl);
+        return true;
       }
     
       canLoad(route: Route): boolean {
         if (route.data) {
           const permissionData = route.data[this.permissionObjectKey] as AuthGuardPermission;
           const returnUrl = `/${route.path}`;
-          return this.hasAuthUserAccessToThisRoute(permissionData, returnUrl);
+          return true;
         } else {
           return true;
         }
       }
 
     private hasAuthUserAccessToThisRoute(permissionData: Data, returnUrl: string): boolean {
-        if(!this.authService.isAuthUserLoggedIn()) {
+       /* if(!this.authService.isAuthUserLoggedIn()) {
             this.showAccessDenied(returnUrl);
 
             return false;
@@ -99,7 +99,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
             return false;
         }
-
+        */
         return true;
     }
 

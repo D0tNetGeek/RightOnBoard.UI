@@ -248,6 +248,7 @@ export class CreateSurveyComponent implements OnInit {
       
       
       this.survey.surveyIterations.forEach(function(x){
+        console.log(x, x.iterationName, this.survey.surveyInfo.surveyId);
         x.surveyId = this.survey.surveyInfo.surveyId;
       });
 

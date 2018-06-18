@@ -11,6 +11,14 @@
         <form #frmSurvey="ngForm">
           <h5 *ngIf="survey.surveyInfo.surveyId==''">Create New Survey</h5>
           <h5 *ngIf="survey.surveyInfo.surveyId!=''">Edit Survey</h5>
+          
+          <div class="row">
+              <div class="col-md-12 alert alert-danger" *ngIf="errorMessage!=''">
+                <strong>Error! </strong>
+                {{errorMessage}}
+              </div>
+            </div>
+
           <div class="row">
             <div class="col-md-12">
               <div class="card" id="exTab2">

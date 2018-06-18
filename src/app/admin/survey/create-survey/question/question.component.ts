@@ -9,45 +9,60 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 export class QuestionComponent implements OnInit {
 
-
-  question = { "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": true, "questionNumber": "", "questionSequence": -1, "questionTypeName": "yes/no", "choices": [] };
   @Input() surveyObj: any;
   @Input() group: any;
   @Input() driver: any;
+  
   isEdit: boolean = false;
   modalRef: BsModalRef;
+
+  question = { "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": true, "questionNumber": "", "questionSequence": -1, "questionTypeName": "yes/no", "choices": [], "drivers": [] };
+
+  private surveyData: any = [];
+
+  errorMesssage: string = "";
+
   constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
-
+    this.surveyData = window.localStorage.getItem("surveyData"); 
+	
+    console.log("Survey Data: ", this.surveyData);
   }
 
   addNewTrigger(template: TemplateRef<any>) {
     this.isEdit = false;
-    this.question = { "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": true, "questionNumber": "", "questionSequence": -1, "questionTypeName": "yes/no", "choices": [] };
+    this.question = { "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": true, "questionNumber": "", "questionSequence": -1, "questionTypeName": "yes/no", "choices": [], "drivers": [] };
+
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
   }
+
   editQuestion(ques: any, template) {
     this.isEdit = true;
     this.question = ques;
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
   }
+
   addQuestion() {
     for (let gp of this.surveyObj.questionGroups) {
       if (gp == this.group) {
         for (let dri of gp.drivers) {
           if (dri == this.driver) {
+    
             dri.questions.push(this.question);
-            this.question = { "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": true, "questionNumber": "", "questionSequence": -1, "questionTypeName": "yes/no", "choices": [] };
+    
+            this.question = { "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": true, "questionNumber": "", "questionSequence": -1, "questionTypeName": "yes/no", "choices": [], "drivers": [] };
             this.modalRef.hide();
             this.modalRef = null;
             this.isEdit = false;
+    
             return;
           }
         }
       }
     }
   }
+  
   updateQuestion() {
     for (let gp of this.surveyObj.questionGroups) {
       if (gp == this.group) {
@@ -56,7 +71,7 @@ export class QuestionComponent implements OnInit {
             for (let que of dr.questions) {
               if (que == this.question) {
                 que = this.question;
-                this.question = { "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": true, "questionNumber": "", "questionSequence": -1, "questionTypeName": "yes/no", "choices": [] };
+                this.question = { "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": true, "questionNumber": "", "questionSequence": -1, "questionTypeName": "yes/no", "choices": [], "drivers": [] };
                 this.modalRef.hide();
                 this.modalRef = null;
                 this.isEdit = false;
@@ -68,11 +83,10 @@ export class QuestionComponent implements OnInit {
       }
     }
   }
+  
   deleteQuestion(iter: any) {
     alert('Not Implemented');
   }
-
-  errorMesssage: string = "";
 
   isDisabledInfo() {
     if (this.question.questionName == "" ||
@@ -87,9 +101,11 @@ export class QuestionComponent implements OnInit {
       return false;
     }
   }
+
   addNewOption() {
     this.question.choices.push({ "choiceValue": "", "choiceText": "" })
   }
+
   deleteOption(choice) {
     let index=-1;
     for (let option of this.question.choices) {
@@ -100,5 +116,4 @@ export class QuestionComponent implements OnInit {
     }
 
   }
-
 }

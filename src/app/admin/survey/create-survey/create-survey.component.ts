@@ -29,10 +29,17 @@ export class CreateSurveyComponent implements OnInit {
 
   activeTab: string = 'info';
 
+  surveyId: string = "";
   surveyName: string = "";
 
   frmSurvey: FormGroup;
   infoFormReset: boolean = false;
+
+  templateHeader: string = "";
+  templateMessage: string = "";
+
+  errorMessage: string = "";
+
   survey: any = {
     surveyInfo: { "surveyId": "", "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": null, "endDate": null, "publicationDate": null, "expirationDate": null, "companyId": "" },
     surveyIterations: [],
@@ -48,6 +55,8 @@ export class CreateSurveyComponent implements OnInit {
 
   ngOnInit() {
     this.loading = false;
+
+    this.errorMessage = "";
 
     this.onClose = new Subject();
 
@@ -161,8 +170,7 @@ export class CreateSurveyComponent implements OnInit {
 
     return returnValue;
   }
-  templateHeader: string = "";
-  templateMessage: string = "";
+  
   saveSurvey(template: TemplateRef<any>) {
     if (this.activeTab == "info") {
       if (this.validate()) {
@@ -170,7 +178,8 @@ export class CreateSurveyComponent implements OnInit {
 		
         console.log("Create survey : ", this.survey);
         
-		this.templateHeader = "Create Survey";
+	    	this.templateHeader = "Create Survey";
+
         this.templateMessage = `Are you sue you want to create a Survey : ${this.survey.surveyInfo.name}`;
         this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
         this.surveyName = this.survey.surveyInfo.name;
@@ -230,6 +239,10 @@ export class CreateSurveyComponent implements OnInit {
 
             this.survey.surveyInfo = data;
 
+            this.surveyId = this.survey.surveyInfo.surveyId;
+
+            console.log("ASSIGN SURVEYID1 : ",this.survey.surveyInfo.surveyId);
+
             window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
 
             this.activeTab="iteration"
@@ -238,6 +251,8 @@ export class CreateSurveyComponent implements OnInit {
           },
           error=>{
             if(error.status == 400){
+              this.errorMessage = "Error creating survey";
+
               console.log("Error creating survey");
             }
           }
@@ -245,23 +260,13 @@ export class CreateSurveyComponent implements OnInit {
     }
     else if(this.activeTab=="iteration"){
 
-      //let surveyIndex = this.survey.surveyIterations.findIndex(x=>x.surveyId==1);
+      let surveyId = this.survey.surveyInfo.surveyId;
 
-      //this.survey.surveyIterations[surveyIndex].surveyId = this.survey.surveyInfo.surveyId;
-
-      console.log("Checking survey id : ", this.survey.surveyInfo.surveyId);
-      
+      console.log("Checking survey id : ", surveyId);
       
       this.survey.surveyIterations.forEach(function(x){
-        console.log(x, x.iterationName, this.survey.surveyInfo.surveyId);
-        x.surveyId = this.survey.surveyInfo.surveyId;
+        x.surveyId = surveyId;
       });
-
-      // this.survey.surveyIterations.forEach(x => {
-      //   console.log("before survey id : ", x.surveyId);
-      //   x => x.surveyId = this.survey.surveyInfo.surveyId;
-      //   console.log("after survey id : ", x.surveyId);
-      // });
 
       console.log("Create iteration", this.survey);
 
@@ -275,17 +280,18 @@ export class CreateSurveyComponent implements OnInit {
             window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
 
             this.activeTab="groups";
-
-            this.loading = false;
           },
           error=>{
             if(error.status == 400){
+              this.errorMessage = "Error creating survey iteration";
+
               console.log("Error creating survey iteration");
             }
           }
-        )      
+        )
+
+        this.loading = false;
     }
-    
   }
 
   public OnNo(): void {

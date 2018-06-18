@@ -107,7 +107,7 @@
 
 <ng-template #template>
     <div class="modal-header">
-        <h4 class="modal-title pull-left">Create Survey</h4>
+        <h4 class="modal-title pull-left">{{templateHeader}}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
         </button>
@@ -117,7 +117,7 @@
         <div class="container-fluid">
             <div class="row">
             <div class="col-md-12">
-                {{surveyName}}
+               {{templateMessage}}
             </div>
             </div>
         </div>

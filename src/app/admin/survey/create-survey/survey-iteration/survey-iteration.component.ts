@@ -58,6 +58,7 @@ export class SurveyIterationComponent implements OnInit {
 
   validate() {
     this.errorMesssage = "";
+
     if ((this.iteration.openDateTime != "") && (this.iteration.openDateTime < this.surveyObj.surveyInfo.startDate|| this.iteration.openDateTime > this.surveyObj.surveyInfo.endDate)) {
       this.errorMesssage = "Open Date should be fall between "+this.surveyObj.surveyInfo.startDate +' and '+this.surveyObj.surveyInfo.endDate;
       return false;
@@ -76,16 +77,20 @@ export class SurveyIterationComponent implements OnInit {
     }
     return true;
   }
+
   validDate(value) {
     return value == null || value == undefined || value.trim() == "" || value == "null"
   }
+
   isDisabledInfo() {
     if (this.iteration.iterationName.trim() == "" || this.validDate(this.iteration.openDateTime) || this.validDate(this.iteration.closeDateTime) || this.validDate(this.iteration.reminderDateTime) || this.iteration.reminderFrequency == null|| this.iteration.reminderFrequency == "") {
       return true;
     }
+
     if(!this.validate()){
       return true;
     }
+    
     return false;
   }
 }

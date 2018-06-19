@@ -95,8 +95,8 @@
             </div>
           </div>
           <button mat-raised-button type="submit" [disabled]="!validate()" class="btn btn-danger pull-right" *ngIf="isEdit" (click)="saveSurvey(template)">Update</button>
-          <button mat-raised-button type="submit" [disabled] = "!validate()" [ngClass]="{'active': !validate(), 'disabled':!validate()}" class="btn btn-danger pull-right" *ngIf="!isEdit" (click)="saveSurvey(template)">Save</button>
-
+          <button mat-raised-button type="submit" [ngClass]="{'active': !validate(), 'disabled':!validate()}" class="btn btn-danger pull-right" *ngIf="!isEdit" (click)="saveSurvey(template)">Save</button>
+          <!-- [disabled] = "!validate()" -->
         </form>
       </div>
     </div>

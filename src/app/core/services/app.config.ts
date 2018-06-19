@@ -25,6 +25,10 @@ export interface IAppConfig {
     apiIterationForAdminPath: string;
     apiCreateSurveyIterationForAdminPath: string;
 
+    apiQuestionGroupForAdminPath: string;
+    apiCreateQuestionGroupForAdminPath: string;
+    apiGetQuestionGroupForSurveyPath: string;
+
     apiCompanyPath: string;
     apiGetCompaniesListForAdmin: string;
     apiGetCompanyInfoPath: string;
@@ -56,6 +60,10 @@ export const AppConfig: IAppConfig = {
 
     apiIterationForAdminPath: "iteration",
     apiCreateSurveyIterationForAdminPath: "createIteration",
+
+    apiQuestionGroupForAdminPath: "questiongroup",
+    apiCreateQuestionGroupForAdminPath: "createQuestionGroup",
+    apiGetQuestionGroupForSurveyPath: "getquestiongroupsforsurvey",
 
     apiCompanyPath: "company",
     apiGetCompaniesListForAdmin: "getcompanieslistforadmin",

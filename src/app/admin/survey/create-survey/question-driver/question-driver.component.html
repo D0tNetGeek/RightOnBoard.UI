@@ -66,21 +66,35 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="row" *ngIf="group.questionGroupName==''">
+
+              <div class="form-group">
+                  <!-- {{questionGroups | json}} <br> -->
+                  <mat-form-field class="example-full-width">
+                      <mat-select placeholder="Select Question Group.." [ngModelOptions]="{standalone: true}" [(ngModel)]="driver.groupId" (change)="change()" required>
+                        <mat-option value='{{questionGroup.questionGroupId}}' *ngFor="let questionGroup of questionGroups; let i = index">{{questionGroup.questionGroupName}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+              <!-- 
+              <div class="row" *ngIf="questionGroup.questionGroupName==''">
                   <div class="col-md-12 alert alert-danger">
                     No Group selected
                   </div>
-                </div>
+              </div> -->
+
               <div class="row">
                 <div class="col-md-12 alert alert-danger" *ngIf="errorMesssage!=''">
                   <strong>Error! </strong>
                   {{errorMesssage}}
                 </div>
               </div>
+
               <button mat-raised-button type="submit" class="btn btn-danger pull-right" *ngIf="!isEdit" [disabled]="isDisabledInfo()" [ngClass]="{'btndisabled':isDisabledInfo()}"
                 (click)="addDriver()">Add to Drivers</button>
+
                 <button mat-raised-button type="submit" class="btn btn-danger pull-right" *ngIf="isEdit" [disabled]="isDisabledInfo()" [ngClass]="{'btndisabled':isDisabledInfo()}"
                 (click)="updateDriver()">Update</button>
+                
               <div class="clearfix"></div>
             </form>
 

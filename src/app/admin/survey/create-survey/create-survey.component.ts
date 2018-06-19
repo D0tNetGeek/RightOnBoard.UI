@@ -60,7 +60,7 @@ export class CreateSurveyComponent implements OnInit {
 
     this.onClose = new Subject();
 
-    this.setActiveTab("info");
+    this.setActiveTab("drivers");
 
     console.log("OnInit : ", this.survey.surveyInfo);
 
@@ -171,13 +171,12 @@ export class CreateSurveyComponent implements OnInit {
     return returnValue;
   }
   
-  saveSurvey(template: TemplateRef<any>) {
+  saveSurvey(template: TemplateRef<any>) 
+  {
     if (this.activeTab == "info") {
       if (this.validate()) {
         this.loading = true;
-		
-        console.log("Create survey : ", this.survey);
-        
+
 	    	this.templateHeader = "Create Survey";
 
         this.templateMessage = `Are you sue you want to create a Survey : ${this.survey.surveyInfo.name}`;
@@ -188,20 +187,184 @@ export class CreateSurveyComponent implements OnInit {
         alert('Survey Info In-complete');
       }
     }
-    else if (this.activeTab == "iteration") {
+    else if (this.activeTab == "iteration") 
+    {
       this.loading = true;
 	  
-      console.log("Create iteration", this.survey);
-      
-	  this.templateHeader = "Create Iterations";
+      this.templateHeader = "Create Iterations";
       this.templateMessage = `Are you sue you want to save iterations`;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
 
-    } else {
-      alert('Iteration Info In-complete');
+    }
+    else if (this.activeTab == "groups") 
+    {
+      this.loading = true;
+	       
+	    this.templateHeader = "Create Groups";
+      this.templateMessage = `Are you sue you want to save question groups`;
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+
+    } 
+    else if (this.activeTab == "drivers") 
+    {
+      this.loading = true;
+	       
+	    this.templateHeader = "Create Drivers";
+      this.templateMessage = `Are you sue you want to save drivers`;
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+
+    } 
+    else {
+      alert('groups Info In-complete');
     }
   }
 
+  public OnYes(): void{
+    this.onClose.next(true);
+    this.modalRef.hide();
+
+    if(this.activeTab=="info"){
+
+      console.log("Create survey : ", this.survey);
+
+      this.adminService.createSurvey(this.survey.surveyInfo)
+        .subscribe(
+          data=>{
+            console.log("Survey added succcessfully. ",data);
+
+            this.survey.surveyInfo = data;
+
+            this.surveyId = this.survey.surveyInfo.surveyId;
+
+            window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
+
+            this.activeTab="iteration"
+
+            this.loading = false;
+          },
+          error=>{
+            if(error.status == 400){
+              this.errorMessage = "Error creating survey";
+
+              console.log("Error creating survey");
+            }
+          }
+        )      
+    }
+    else if(this.activeTab=="iteration")
+    {
+      let surveyId = this.survey.surveyInfo.surveyId;
+
+      console.log("Checking survey id : ", surveyId);
+      
+      this.survey.surveyIterations.forEach(function(x){
+        x.surveyId = surveyId;
+      });
+
+      console.log("Create iteration", this.survey);
+
+      this.adminService.createIteration(this.survey.surveyIterations)
+        .subscribe(
+          data=>{
+            console.log("Survey Iteration added succcessfully. ",data);
+
+            this.survey.surveyIterations = data;
+
+            window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
+
+            this.activeTab="groups";
+          },
+          error=>{
+            if(error.status == 400){
+              this.errorMessage = "Error creating survey iteration";
+
+              console.log("Error creating survey iteration");
+            }
+          }
+        )
+
+        this.loading = false;
+    }
+    else if(this.activeTab=="groups")
+    {
+      let surveyId = this.survey.surveyInfo.surveyId;
+
+      console.log("Checking survey id : ", surveyId);
+      
+      this.survey.questionGroups.forEach(function(x){
+        x.surveyId = surveyId;
+      });
+
+      console.log("Create Question Groups", this.survey);
+
+      this.adminService.createQuestionGroup(this.survey.questionGroups)
+        .subscribe(
+          data=>{
+            console.log("Survey Question Groups added succcessfully. ",data);
+
+            this.survey.questionGroups = data;
+
+            window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
+
+            this.activeTab="drivers";
+          },
+          error=>{
+            if(error.status == 400){
+              this.errorMessage = "Error creating survey question groups.";
+
+              console.log("Error creating survey question groups.");
+            }
+          }
+        )
+
+        this.loading = false;
+    }
+    else if(this.activeTab=="drivers")
+    {
+      let groupId = this.survey.surveyInfo.surveyId;
+
+      console.log("Checking survey id : ", groupId);
+      
+      this.survey.questionGroups.forEach(function(x){
+        x.surveyId = groupId;
+      });
+
+      console.log("Create Question Groups", this.survey);
+
+      this.adminService.createQuestionGroup(this.survey.questionGroups)
+        .subscribe(
+          data=>{
+            console.log("Survey Question Groups added succcessfully. ",data);
+
+            this.survey.questionGroups = data;
+
+            window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
+
+            this.activeTab="drivers";
+          },
+          error=>{
+            if(error.status == 400){
+              this.errorMessage = "Error creating survey question groups.";
+
+              console.log("Error creating survey question groups.");
+            }
+          }
+        )
+
+        this.loading = false;
+    }
+  }
+
+  public OnNo(): void {
+    if (this.activeTab == "info") {
+      this.formReset();
+    }
+    this.infoFormReset = !this.infoFormReset;
+    this.loading = false;
+    this.onClose.next(false);
+    this.modalRef.hide();
+  }
+  
   validate() {
     if (
       this.survey.surveyInfo.companyId == ""
@@ -224,86 +387,6 @@ export class CreateSurveyComponent implements OnInit {
     return value == null || value == undefined || value.trim() == "" || value == "null"
   }
 
-  public OnYes(): void{
-    this.onClose.next(true);
-    this.modalRef.hide();
-
-    if(this.activeTab=="info"){
-
-      console.log("Create survey : ", this.survey);
-
-      this.adminService.createSurvey(this.survey.surveyInfo)
-        .subscribe(
-          data=>{
-            console.log("Survey completed. ",data);
-
-            this.survey.surveyInfo = data;
-
-            this.surveyId = this.survey.surveyInfo.surveyId;
-
-            console.log("ASSIGN SURVEYID1 : ",this.survey.surveyInfo.surveyId);
-
-            window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
-
-            this.activeTab="iteration"
-
-            this.loading = false;
-          },
-          error=>{
-            if(error.status == 400){
-              this.errorMessage = "Error creating survey";
-
-              console.log("Error creating survey");
-            }
-          }
-        )      
-    }
-    else if(this.activeTab=="iteration"){
-
-      let surveyId = this.survey.surveyInfo.surveyId;
-
-      console.log("Checking survey id : ", surveyId);
-      
-      this.survey.surveyIterations.forEach(function(x){
-        x.surveyId = surveyId;
-      });
-
-      console.log("Create iteration", this.survey);
-
-      this.adminService.createIteration(this.survey.surveyIterations)
-        .subscribe(
-          data=>{
-            console.log("Survey Iteration completed. ",data);
-
-            this.survey.surveyIterations = data;
-
-            window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
-
-            this.activeTab="groups";
-          },
-          error=>{
-            if(error.status == 400){
-              this.errorMessage = "Error creating survey iteration";
-
-              console.log("Error creating survey iteration");
-            }
-          }
-        )
-
-        this.loading = false;
-    }
-  }
-
-  public OnNo(): void {
-    if (this.activeTab == "info") {
-      this.formReset();
-    }
-    this.infoFormReset = !this.infoFormReset;
-    this.loading = false;
-    this.onClose.next(false);
-    this.modalRef.hide();
-  }
-
   private formReset() {
     this.survey.surveyInfo.companyId == "";
     this.survey.surveyInfo.name == "";
@@ -323,9 +406,9 @@ export class CreateSurveyComponent implements OnInit {
     let survey: any = {
       surveyInfo: { "name": "", "description": "", "welcomeMessage": "", "exitMessage": "", "startDate": null, "endDate": null, "publicationDate": null, "expirationDate": null, "companyId": "" },
       surveyIterations: [{ "id": "", "iterationName": "", "surveyId": "", "openDateTime": "", "closeDateTime": "", "reminderDateTime": "", "reminderFrequency": "" }],
-      questionGroups: [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [{ "id": "", "driverName": "", "questions": [{ "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": null, "questionNumber": "", "questionSequence": 0, "questionTypeName": "" }] }] }],
-      drivers: [],
-      questions: []
+      questionGroups: [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "surveyId": "" }],
+      drivers: [{ "id": "", "driverName": "", "questionGroupId": "" }],
+      questions: [{ "id": "", "questionName": "", "questionText": "", "questionAnswerRequired": null, "questionNumber": "", "questionSequence": 0, "questionTypeName": "", "driverId": "" }]
     };
 
     //window.sessionStorage.setItem("currentSurvey", JSON.stringify(survey));

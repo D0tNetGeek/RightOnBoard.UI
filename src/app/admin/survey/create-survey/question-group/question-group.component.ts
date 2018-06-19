@@ -21,7 +21,7 @@ export class QuestionGroupComponent implements OnInit {
 
   //questionGroup = { "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [] };
 
-  questionGroup = { "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "" };
+  questionGroup = { "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "surveyId": "" };
 
   constructor(private modalService: BsModalService) { }
 
@@ -34,7 +34,7 @@ export class QuestionGroupComponent implements OnInit {
   addNewTrigger(template: TemplateRef<any>) {
     //this.questionGroup = { "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "drivers": [] };
 
-    this.questionGroup = { "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "" };
+    this.questionGroup = { "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "surveyId": "" };
     this.modalRef = this.modalService.show(template);
   }
 
@@ -45,7 +45,7 @@ export class QuestionGroupComponent implements OnInit {
 
   addGroup() {
     this.surveyObj.questionGroups.push(this.questionGroup);
-    this.questionGroup = { "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "" };
+    this.questionGroup = { "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "surveyId": "" };
     this.modalRef.hide();
     this.modalRef = null;
   }
@@ -58,13 +58,34 @@ export class QuestionGroupComponent implements OnInit {
     this.selectedGroup.emit(group);
   }
   
-  isDisabledInfo() {
-    if (this.questionGroup.questionGroupName == ""
-      || this.questionGroup.questionGroupDescription == ""
-    ) {
-      return true;
-    } else {
+  validDate(value) {
+    return value == null || value == undefined || value.trim() == "" || value == "null"
+  }
+
+  validate() {
+    this.errorMesssage = "";
+
+    if (this.questionGroup.questionGroupName == "") {
+      this.errorMesssage = "Question Group Name can't be empty!";
       return false;
     }
+    if (this.questionGroup.questionGroupDescription == "") {
+      this.errorMesssage = "Question Group Description can't be empty!";
+      return false;
+    }
+
+    return true;
+  }
+
+  isDisabledInfo() {
+    if (this.questionGroup.questionGroupName == "" || this.questionGroup.questionGroupDescription == "") {
+      return true;
+    }
+    
+    if(!this.validate()){
+      return true;
+    }
+    
+    return false;
   }
 }

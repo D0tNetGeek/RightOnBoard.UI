@@ -11,7 +11,7 @@
           <th>#</th>
           <th>Group Name</th>
           <th>Descriptions</th>
-          <th>No of Drivers</th>
+          <!-- <th>No of Drivers</th> -->
           <th>Action</th>
         </tr>
       </thead>
@@ -20,15 +20,15 @@
           <td>{{i+1}}</td>
           <td>{{group.questionGroupName}}</td>
           <td>{{group.questionGroupDescription}}</td>
-          <td>{{group.drivers.length}}</td>
+          <!-- <td>{{group.drivers.length}}</td> -->
           <td>
             <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="editGroup(group,template)">Edit</button>
-            <!--<button mat-raised-button type="submit" class="btn btn-sm btn-danger" (click)="deleteGroup(group)">
+            <button mat-raised-button type="submit" class="btn btn-sm btn-danger" (click)="deleteGroup(group)">
               <i class="material-icons">delete</i>
-            </button>-->
-            <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="addDrivers(group)">
-              Add/Edit Drivers
             </button>
+            <!--<button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="addDrivers(group)">
+              Add/Edit Drivers
+            </button>-->  
           </td>
 
         </tr>

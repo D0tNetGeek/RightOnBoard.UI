@@ -95,6 +95,31 @@ export class AdminService extends BaseService{
         });
     }
 
+    public createQuestionGroup(questionGroup) : Observable<any>{
+
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiQuestionGroupForAdminPath}/${this.appConfig.apiCreateQuestionGroupForAdminPath}`;
+
+        console.log("Create QuestionGroup", url);
+
+        return http.post(url, questionGroup)
+        .map(response => {
+            return response;
+        });
+    }
+
+    public getQuestionGroupsForSurvey(surveyId): Observable<any>{
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiQuestionGroupForAdminPath}/${this.appConfig.apiGetQuestionGroupForSurveyPath}`;
+
+        console.log("Load QuestionGroups for Survey", url);
+
+        return http.get(url + `?surveyId=${surveyId}`)
+        .map(response => {
+            return response;
+        })
+    }
+
     //////////////// Survey Methods Ends Here
 
     ///////////////// Company Methods Starts Here

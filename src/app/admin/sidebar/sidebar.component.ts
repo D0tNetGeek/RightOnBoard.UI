@@ -13,7 +13,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '../dashboard', title: 'Admin Dashboard', icon: 'dashboard', class: ' ' },
     { path: '../total-progress', title: 'Total Progress', icon: 'trending_up', class: '' },
     { path: '../company-management', title: 'Company Management', icon: 'domain', class: '' },
-    { path: '../admin-survey', title: 'Survey', icon: 'library_books', class: '' },
+    { path: '../admin-survey', title: 'Restore Program', icon: 'library_books', class: '' },
     { path: '../admin-profile', title: 'Admin Profile', icon: 'person', class: '' },
     { path: '../user-management', title: 'User Management', icon: 'person', class: '' },
     { path: '/logout', title: 'Logout', icon:'exit_to_app', class: ''}

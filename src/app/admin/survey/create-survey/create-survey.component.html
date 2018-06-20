@@ -9,8 +9,8 @@
     <div class="main-content">
       <div class="container-fluid">
         <form #frmSurvey="ngForm">
-          <h5 *ngIf="survey.surveyInfo.surveyId==''">Create New Survey</h5>
-          <h5 *ngIf="survey.surveyInfo.surveyId!=''">Edit Survey</h5>
+          <h5 *ngIf="survey.surveyInfo.surveyId==''">Create New Restore Program</h5>
+          <h5 *ngIf="survey.surveyInfo.surveyId!=''">Edit Restore Program</h5>
           
           <div class="row">
               <div class="col-md-12 alert alert-danger" *ngIf="errorMessage!=''">
@@ -27,15 +27,15 @@
                     <ul class="nav nav-tabs">
                       <li [ngClass]="{'active':isTabActive('info'),'':!isTabActive('info')}" style="margin-left:3px;">
                         <a (click)="setActiveTab('info')" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info"
-                          aria-selected="true">Survey Info</a>
+                          aria-selected="true">Restore Program Info</a>
                       </li>
                       <li [ngClass]="{'active':isTabActive('iteration'),'disabled':isIterationTabDisabled()}" style="margin-left:3px;">
                           <ng-container *ngIf="!isIterationTabDisabled()">
                             <a (click)="setActiveTab('iteration')" id="pills-groups-tab" data-toggle="pill" href="#pills-groups" role="tab" aria-controls="pills-groups"
-                              aria-selected="true">Iterations</a>
+                              aria-selected="true">Healthchecks</a>
                           </ng-container>
                           <ng-container *ngIf="isIterationTabDisabled()">
-                            <a role="tab" aria-controls="pills-groups" aria-selected="true">Iterations</a>
+                            <a role="tab" aria-controls="pills-groups" aria-selected="true">Healthchecks</a>
                           </ng-container>
                         </li>
                       <li [ngClass]="{'active':isTabActive('groups'),'disabled':isGroupTabDisabled()}" style="margin-left:3px;">
@@ -44,7 +44,7 @@
                             aria-selected="true">Groups</a>
                         </ng-container>
                         <ng-container *ngIf="isGroupTabDisabled()">
-                          <a role="tab" aria-controls="pills-groups" aria-selected="true">Groups</a>
+                          <a role="tab" aria-controls="pills-groups" aria-selected="true">Question Groups</a>
                         </ng-container>
                       </li>
                       <li [ngClass]="{'active':isTabActive('drivers'),'disabled':isDriverTabDisabled()}" style="margin-left:3px;">

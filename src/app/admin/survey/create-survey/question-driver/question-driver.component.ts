@@ -22,7 +22,7 @@ export class QuestionDriverComponent implements OnInit {
 
   //driver = { "id": "", "driverName": "", "groups": [] };
 
-  driver = [{ "id": "", "driverName": "", "groupId": "" }];
+  driver = { "id": "", "driverName": "", "groupId": "" };
   
   questionGroups = [{ "questionGroupId": "", "questionGroupName": "", "questionGroupDescription": "", "surveyId": "" }];
 
@@ -62,7 +62,7 @@ export class QuestionDriverComponent implements OnInit {
 
     //this.driver = { "id": "", "driverName": "", "groups": [] };
 
-    this.driver = [{ "id": "", "driverName": "", "groupId": "" }];
+    this.driver = { "id": "", "driverName": "", "groupId": "" };
     
     this.modalRef = this.modalService.show(template);
   }
@@ -73,15 +73,15 @@ export class QuestionDriverComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  addDriver() {
-    for (let gp of this.surveyObj.questionGroups) {
+  addDriver1() {
+    for (let gp of this.surveyObj.drivers) {
       if (gp == this.group) {
         gp.drivers.push(this.driver);
 
         //this.driver = { "id": "", "driverName": "", "groups": [] };
 
-        this.driver = [{ "id": "", "driverName": "", "groupId": "" }];
-        
+        this.driver = { "id": "", "driverName": "", "groupId": "" };
+        console.log(this.driver);
         this.modalRef.hide();
         this.modalRef = null;
         this.isEdit = false;
@@ -91,8 +91,18 @@ export class QuestionDriverComponent implements OnInit {
     }
   }
   
+  addDriver() {
+    this.surveyObj.drivers.push(this.driver);
+    console.log(this.driver);
+    this.driver = { "id": "", "driverName": "", "groupId": "" };
+    this.modalRef.hide();
+    this.modalRef = null;
+
+    this.isEdit = false;
+  }
+
   updateDriver() {
-    for (let gp of this.surveyObj.questionGroups) {
+    for (let gp of this.surveyObj.drivers) {
       if (gp == this.group) {
         for (let dr of gp.drivers) {
           if (dr == this.driver) {
@@ -100,7 +110,7 @@ export class QuestionDriverComponent implements OnInit {
             dr = this.driver;
             
             //this.driver = { "id": "", "driverName": "", "groups": [] };
-            this.driver = [{ "id": "", "driverName": "", "groupId": "" }];
+            this.driver = { "id": "", "driverName": "", "groupId": "" };
             
             this.modalRef.hide();
             this.modalRef = null;
@@ -124,16 +134,16 @@ export class QuestionDriverComponent implements OnInit {
 
     //Fix this
 
-    
-    // if (this.driver.driverName == "") {
-    //   return true;
-    // } 
+
+    if (this.driver.driverName == "") {
+      return true;
+    } 
     // else if (this.driver.groupId == "") {
     //   this.errorMesssage = 'Select a valid group.';
     //   return false;
     // }
-    // else {
-    //   return false;
-    // }
+    else {
+      return false;
+    }
   }
 }

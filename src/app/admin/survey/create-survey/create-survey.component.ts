@@ -60,7 +60,7 @@ export class CreateSurveyComponent implements OnInit {
 
     this.onClose = new Subject();
 
-    //this.setActiveTab("drivers");
+    //nthis.setActiveTab("drivers");
     this.setActiveTab("info");
 
     console.log("OnInit : ", this.survey.surveyInfo);

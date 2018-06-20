@@ -25,9 +25,14 @@ const routes: Routes = [
                     } as AuthGuardPermission
                   },
                 children: [
+                    // {
+                    //     path: '',
+                    //     redirectTo: '/user/dashboard',
+                    //     pathMatch: 'full'
+                    // },
                     {
                         path: '',
-                        redirectTo: '/user/dashboard',
+                        redirectTo: '/user/user-health-check',
                         pathMatch: 'full'
                     },
                     {

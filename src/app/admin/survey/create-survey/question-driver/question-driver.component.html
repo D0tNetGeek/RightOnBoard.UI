@@ -9,28 +9,31 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Group Name</th>
           <th>Driver Name</th>
-          <th>No Questions</th>
+          <th>Group Name</th>
+          <!-- <th>No Questions</th> -->
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let gp of surveyObj.questionGroups ">
-          <ng-container *ngIf="group==gp">
-            <tr *ngFor="let driver of gp.drivers; let i = index; ">
+        <!-- <ng-container *ngFor="let gp of surveyObj.drivers ">
+          <ng-container *ngIf="group==gp"> -->
+            <!-- <tr *ngFor="let driver of gp.drivers; let i = index; "> -->
+        <ng-container>
+          <ng-container>
+            <tr *ngFor="let driver of surveyObj.drivers; let i = index; ">
               <td>{{i+1}}</td>
-              <td>{{gp.questionGroupName}}</td> 
-              <td>{{driver.driverName}}</td>              
-              <td>{{driver.questions.length}}</td>
+              <td>{{driver.driverName}}</td>
+              <td>{{driver.questionGroupName}}</td>
+              <!-- <td>{{driver.questions.length}}</td> -->
               <td>
                 <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="editDriver(driver,template)">Edit</button>
-                <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="addQuestions(driver)">
+                <!-- <button mat-raised-button type="submit" class="btn btn-sm btn-info" (click)="addQuestions(driver)">
                   Add/Edit Questions
-                </button>
+                </button> -->
               </td>
             </tr>
-            <tr *ngIf="gp.drivers.length==0">
+            <tr *ngIf="surveyObj.drivers.length==0">
                 <td colspan=100%>No Drivers Yet</td>
               </tr>
           </ng-container>
@@ -70,8 +73,8 @@
               <div class="form-group">
                   <!-- {{questionGroups | json}} <br> -->
                   <mat-form-field class="example-full-width">
-                      <mat-select placeholder="Select Question Group.." [ngModelOptions]="{standalone: true}" [(ngModel)]="driver.groupId" (change)="change()" required>
-                        <mat-option value='{{questionGroup.questionGroupId}}' *ngFor="let questionGroup of questionGroups; let i = index">{{questionGroup.questionGroupName}}</mat-option>
+                      <mat-select placeholder="Select Question Group.." [ngModelOptions]="{standalone: true}" [(ngModel)]="driver.groupId" (change)="change()">
+                        <mat-option value='{{questionGroup.questionGroupId}}' *ngFor="let questionGroup of questionGroups;">{{questionGroup.questionGroupName}}</mat-option>
                       </mat-select>
                   </mat-form-field>
               </div>

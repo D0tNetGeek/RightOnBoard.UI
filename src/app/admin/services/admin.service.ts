@@ -95,7 +95,7 @@ export class AdminService extends BaseService{
         });
     }
 
-    public createQuestionGroup(questionGroup) : Observable<any>{
+    public createQuestionGroups(questionGroup) : Observable<any>{
 
         const http = this.injector.get<HttpClient>(HttpClient);
         const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiQuestionGroupForAdminPath}/${this.appConfig.apiCreateQuestionGroupForAdminPath}`;
@@ -118,6 +118,19 @@ export class AdminService extends BaseService{
         .map(response => {
             return response;
         })
+    }
+
+    public createDrivers(drivers) : Observable<any>{
+
+        const http = this.injector.get<HttpClient>(HttpClient);
+        const url = `${this.appConfig.apiSurveyEndPoint}/${this.appConfig.apiDriversForAdminPath}/${this.appConfig.apiCreateDriversForAdminPath}`;
+
+        console.log("Create QuestionGroup", url);
+
+        return http.post(url, drivers)
+        .map(response => {
+            return response;
+        });
     }
 
     //////////////// Survey Methods Ends Here

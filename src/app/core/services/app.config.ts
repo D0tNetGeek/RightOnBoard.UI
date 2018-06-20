@@ -29,6 +29,9 @@ export interface IAppConfig {
     apiCreateQuestionGroupForAdminPath: string;
     apiGetQuestionGroupForSurveyPath: string;
 
+    apiDriversForAdminPath: string;
+    apiCreateDriversForAdminPath: string;
+
     apiCompanyPath: string;
     apiGetCompaniesListForAdmin: string;
     apiGetCompanyInfoPath: string;
@@ -64,6 +67,9 @@ export const AppConfig: IAppConfig = {
     apiQuestionGroupForAdminPath: "questiongroup",
     apiCreateQuestionGroupForAdminPath: "createQuestionGroup",
     apiGetQuestionGroupForSurveyPath: "getquestiongroupsforsurvey",
+
+    apiDriversForAdminPath: "driver",
+    apiCreateDriversForAdminPath: "createDrivers",
 
     apiCompanyPath: "company",
     apiGetCompaniesListForAdmin: "getcompanieslistforadmin",

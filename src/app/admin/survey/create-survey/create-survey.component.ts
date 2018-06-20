@@ -60,8 +60,8 @@ export class CreateSurveyComponent implements OnInit {
 
     this.onClose = new Subject();
 
-    //nthis.setActiveTab("drivers");
-    this.setActiveTab("info");
+    this.setActiveTab("drivers");
+    //this.setActiveTab("info");
 
     console.log("OnInit : ", this.survey.surveyInfo);
 
@@ -298,7 +298,7 @@ export class CreateSurveyComponent implements OnInit {
 
       console.log("Create Question Groups", this.survey);
 
-      this.adminService.createQuestionGroup(this.survey.questionGroups)
+      this.adminService.createQuestionGroups(this.survey.questionGroups)
         .subscribe(
           data=>{
             console.log("Survey Question Groups added succcessfully. ",data);
@@ -311,7 +311,7 @@ export class CreateSurveyComponent implements OnInit {
           },
           error=>{
             if(error.status == 400){
-              this.errorMessage = "Error creating survey question groups.";
+              this.errorMessage = "Error creating survey question  groups.";
 
               console.log("Error creating survey question groups.");
             }
@@ -326,28 +326,28 @@ export class CreateSurveyComponent implements OnInit {
 
       console.log("Checking survey id : ", groupId);
       
-      this.survey.questionGroups.forEach(function(x){
-        x.surveyId = groupId;
-      });
+      // this.survey.questionGroups.forEach(function(x){
+      //   x.surveyId = groupId;
+      // });
 
-      console.log("Create Question Groups", this.survey);
+      console.log("Create Drivers", this.survey);
 
-      this.adminService.createQuestionGroup(this.survey.questionGroups)
+      this.adminService.createDrivers(this.survey.drivers)
         .subscribe(
           data=>{
-            console.log("Survey Question Groups added succcessfully. ",data);
+            console.log("Drivers added succcessfully. ",data);
 
-            this.survey.questionGroups = data;
+            this.survey.drivers = data;
 
             window.localStorage.setItem("surveyData",JSON.stringify(this.survey));
 
-            this.activeTab="drivers";
+            this.activeTab="questions";
           },
           error=>{
             if(error.status == 400){
-              this.errorMessage = "Error creating survey question groups.";
+              this.errorMessage = "Error creating drivers.";
 
-              console.log("Error creating survey question groups.");
+              console.log("Error creating drivers.");
             }
           }
         )
